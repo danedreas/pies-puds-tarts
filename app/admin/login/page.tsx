@@ -10,12 +10,14 @@ export const metadata = createMetadata({
 
 export default function AdminLoginPage() {
   return (
-    <div className="mx-auto flex min-h-[60vh] max-w-md flex-col justify-center px-4 py-16">
+    <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-[50vh] max-w-md flex-col justify-center">
       <h1 className="font-heading text-3xl font-bold">Admin login</h1>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
         Manage market dates and the pre-order menu. Changes go live as soon as you save.
       </p>
       <AdminLoginForm className="mt-8" />
+      </div>
     </div>
   );
 }

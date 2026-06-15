@@ -13,13 +13,15 @@ export const metadata = createMetadata({
 export default async function AdminPage() {
   if (!isAdminConfigured()) {
     return (
-      <div className="mx-auto max-w-xl px-4 py-20 text-center">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-xl text-center">
         <h1 className="font-heading text-2xl font-bold">Admin not configured</h1>
         <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
           Add <code className="rounded bg-muted px-1 py-0.5">ADMIN_PASSWORD</code> in Vercel and
           connect your Blob store to this project (you should see{" "}
           <code className="rounded bg-muted px-1 py-0.5">BLOB_STORE_ID</code>), then redeploy.
         </p>
+        </div>
       </div>
     );
   }

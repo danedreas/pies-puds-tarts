@@ -31,6 +31,8 @@ export async function PUT(request: Request) {
     return NextResponse.json(saved);
   } catch (error) {
     console.error("Admin content save failed:", error);
-    return NextResponse.json({ error: "Unable to save content." }, { status: 400 });
+    const message =
+      error instanceof Error && error.message ? error.message : "Unable to save content.";
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 }

@@ -1,4 +1,5 @@
-import { head, put } from "@vercel/blob";
+import { get, put } from "@vercel/blob";
+import { unstable_cache } from "next/cache";
 import { marketEvents } from "@/config/content/events";
 import { menuItems as defaultMenuItems } from "@/config/content/products";
 import { stripeProducts as defaultBoxes } from "@/config/stripe-products";
@@ -49,26 +50,37 @@ function getBlobCommandOptions() {
   return token ? { token } : {};
 }
 
+async function readSiteContentFromBlob(): Promise<SiteContent> {
+  try {
+    const result = await get(SITE_CONTENT_BLOB_PATH, {
+      access: "private",
+      ...getBlobCommandOptions(),
+    });
+
+    if (!result || result.statusCode !== 200 || !result.stream) {
+      return getDefaultSiteContent();
+    }
+
+    const text = await new Response(result.stream).text();
+    const json: unknown = JSON.parse(text);
+    return siteContentSchema.parse(json);
+  } catch {
+    return getDefaultSiteContent();
+  }
+}
+
+const getCachedSiteContent = unstable_cache(
+  readSiteContentFromBlob,
+  [SITE_CONTENT_CACHE_TAG],
+  { tags: [SITE_CONTENT_CACHE_TAG] },
+);
+
 export async function readSiteContent(): Promise<SiteContent> {
   if (!isBlobConfigured()) {
     return getDefaultSiteContent();
   }
 
-  try {
-    const blob = await head(SITE_CONTENT_BLOB_PATH, getBlobCommandOptions());
-    const response = await fetch(blob.url, {
-      next: { tags: [SITE_CONTENT_CACHE_TAG] },
-    });
-
-    if (!response.ok) {
-      return getDefaultSiteContent();
-    }
-
-    const json: unknown = await response.json();
-    return siteContentSchema.parse(json);
-  } catch {
-    return getDefaultSiteContent();
-  }
+  return getCachedSiteContent();
 }
 
 export async function writeSiteContent(content: SiteContent): Promise<SiteContent> {
@@ -82,7 +94,7 @@ export async function writeSiteContent(content: SiteContent): Promise<SiteConten
   });
 
   await put(SITE_CONTENT_BLOB_PATH, JSON.stringify(payload, null, 2), {
-    access: "public",
+    access: "private",
     contentType: "application/json",
     addRandomSuffix: false,
     allowOverwrite: true,

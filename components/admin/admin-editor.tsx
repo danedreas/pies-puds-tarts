@@ -11,6 +11,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
+const adminShellClassName = "mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8";
+
+function AdminShell({ children }: { children: React.ReactNode }) {
+  return <div className={adminShellClassName}>{children}</div>;
+}
+
 function emptyEvent(): SiteContent["events"][number] {
   return {
     id: "",
@@ -97,7 +103,8 @@ export function AdminEditor() {
       }
 
       if (!response.ok) {
-        throw new Error("Unable to save content.");
+        const data = (await response.json()) as { error?: string };
+        throw new Error(data.error ?? "Unable to save content.");
       }
 
       const saved = (await response.json()) as SiteContent;
@@ -118,19 +125,26 @@ export function AdminEditor() {
 
   if (loading) {
     return (
-      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Loader2 className="size-4 animate-spin" aria-hidden />
-        Loading content…
-      </div>
+      <AdminShell>
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Loader2 className="size-4 animate-spin" aria-hidden />
+          Loading content…
+        </div>
+      </AdminShell>
     );
   }
 
   if (!content) {
-    return <p className="text-sm text-destructive">{error ?? "Unable to load content."}</p>;
+    return (
+      <AdminShell>
+        <p className="text-sm text-destructive">{error ?? "Unable to load content."}</p>
+      </AdminShell>
+    );
   }
 
   return (
-    <div className="space-y-10">
+    <AdminShell>
+      <div className="space-y-10">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h1 className="font-heading text-3xl font-bold">Site admin</h1>
@@ -505,7 +519,8 @@ export function AdminEditor() {
           ))}
         </div>
       </section>
-    </div>
+      </div>
+    </AdminShell>
   );
 }
 
