@@ -1,43 +1,37 @@
 /**
- * Example products for the optional pricing module.
- * Replace names, prices, and features per client. Add Stripe price IDs when checkout is live.
+ * Default mixed-box offers for pre-order. Live content is edited in /admin and stored in Vercel Blob.
  */
 
-export type StripeProduct = {
+export type PreorderBoxDefaults = {
   id: string;
   name: string;
   description: string;
-  /** Stripe Price ID - price_xxx. Leave as placeholder until Stripe is configured. */
-  priceId: string;
-  /** Display price for the site (actual charge comes from Stripe) */
   displayPrice: string;
   features: string[];
   highlighted?: boolean;
 };
 
-export const stripeProducts: StripeProduct[] = [
+export const stripeProducts: PreorderBoxDefaults[] = [
   {
-    id: "standard",
-    name: "Standard service",
-    description: "A single clear offer - ideal for consultations, call-outs, or fixed packages.",
-    priceId: process.env.STRIPE_PRICE_STANDARD ?? "price_REPLACE_ME",
-    displayPrice: "£149",
+    id: "savoury-box",
+    name: "Savoury pie box",
+    description: "Four mixed savoury pies - good for lunch or taking home to share.",
+    displayPrice: "£20",
     features: [
-      "One focused service or package",
-      "Clear scope and turnaround",
-      "Easy for customers to book or buy",
+      "Four assorted savoury pies",
+      "Collect from your chosen market",
+      "Order at least 48 hours ahead",
     ],
   },
   {
-    id: "premium",
-    name: "Premium package",
-    description: "A higher-value offer with more included - perfect as your recommended option.",
-    priceId: process.env.STRIPE_PRICE_PREMIUM ?? "price_REPLACE_ME",
-    displayPrice: "£349",
+    id: "mixed-box",
+    name: "Mixed box",
+    description: "A pie, a pud and a tart - a bit of everything from the stall.",
+    displayPrice: "£18",
     features: [
-      "Everything in Standard",
-      "Extended scope or add-ons",
-      "Priority scheduling where applicable",
+      "Two savoury pies, one pud and one tart",
+      "A good way to try the stall",
+      "Collect from your chosen market",
     ],
     highlighted: true,
   },

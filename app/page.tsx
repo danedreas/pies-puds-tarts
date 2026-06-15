@@ -1,16 +1,14 @@
-import { modules } from "@/config/modules";
-import { catalogProducts } from "@/config/content/products";
-import { stripeProducts } from "@/config/stripe-products";
 import { siteConfig } from "@/config/site";
 import {
   AboutSection,
-  CtaSection,
+  EventsTeaserSection,
   HeroSection,
   ServicesSection,
 } from "@/components/home/sections";
-import { CommerceSection } from "@/components/optional/commerce-section";
+import { OrderCta } from "@/components/layout/order-cta";
 import { JsonLd } from "@/components/seo/json-ld";
 import { webPageJsonLd } from "@/lib/json-ld";
+import { getUpcomingMarketEvents } from "@/lib/content-data";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
@@ -19,7 +17,9 @@ export const metadata = createMetadata({
   path: "/",
 });
 
-export default function HomePage() {
+export default async function HomePage() {
+  const events = await getUpcomingMarketEvents();
+
   return (
     <>
       <JsonLd
@@ -32,10 +32,8 @@ export default function HomePage() {
       <HeroSection />
       <AboutSection />
       <ServicesSection />
-      {modules.pricing && (
-        <CommerceSection offers={stripeProducts} products={catalogProducts} />
-      )}
-      <CtaSection />
+      <EventsTeaserSection events={events} />
+      <OrderCta />
     </>
   );
 }

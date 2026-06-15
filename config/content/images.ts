@@ -1,6 +1,8 @@
 /**
- * Placeholder images - swap paths per client build.
- * SVGs ship with the boilerplate; replace with real photography when ready.
+ * Site images - swap paths per client build.
+ *
+ * Photos are optimised JPEGs in public/images/ (resized on import).
+ * Next.js Image serves modern formats (WebP/AVIF) automatically in production.
  */
 
 export type SiteImage = {
@@ -12,34 +14,39 @@ export type SiteImage = {
 
 export const siteImages = {
   hero: {
-    src: "/images/hero.svg",
-    alt: "Professional service in a welcoming workspace",
-    caption: "Replace with your own photography",
+    src: "/images/hero.jpg",
+    alt: "Gourmet savoury tart topped with smoked salmon, dill and fresh salad",
   },
 
+  /** Home page - proper baking section */
+  homeAbout: {
+    src: "/images/proper-baking-star-pies.jpg",
+    alt: "Wooden crate of golden star-topped savoury pies lined with parchment",
+  },
+
+  /** About Paul page */
   about: {
-    src: "/images/about.svg",
-    alt: "Team member providing friendly, reliable service",
+    src: "/images/about-paul-catering.jpg",
+    alt: "Three-tier pork pie display for a Norfolk catering event",
   },
 
   services: [
     {
-      src: "/images/service-1.svg",
-      alt: "Quality craftsmanship and attention to detail",
+      src: "/images/market-catering-crates.jpg",
+      alt: "Crates of pasties, mini quiches and sausage rolls ready for a market day",
     },
     {
-      src: "/images/service-2.svg",
-      alt: "Clear communication and reliable scheduling",
+      src: "/images/seasonal-mini-tarts.jpg",
+      alt: "Mini savoury tarts with herb glaze and fresh parsley",
     },
     {
-      src: "/images/service-3.svg",
-      alt: "Long-term support you can count on",
+      src: "/images/preorder-pie-crates.jpg",
+      alt: "Stacked wooden crates of individual savoury pies ready to collect",
     },
   ] satisfies SiteImage[],
 
-  /** Open Graph / social share - replace with 1200×630 PNG for production */
   og: {
-    src: "/images/og.svg",
-    alt: "Example Business - professional local services",
+    src: "/images/og.jpg",
+    alt: "Pies, Puds & Tarts - handmade savoury baking in Norfolk",
   },
 } as const;

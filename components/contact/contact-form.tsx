@@ -26,8 +26,8 @@ const contactSchema = z.object({
   email: z.string().email("Please enter a valid email"),
   company: z.string().optional(),
   phone: z.string().optional(),
-  projectType: z.string().min(1, "Please select a project type"),
-  message: z.string().min(10, "Please tell us a bit more about your project"),
+  projectType: z.string().min(1, "Please choose what your message is about"),
+  message: z.string().min(10, "Please add a few more details"),
   consent: z.literal(true, {
     message: "Consent is required to send your message",
   }),
@@ -91,7 +91,7 @@ export function ContactForm({ className }: { className?: string }) {
       <div className={cn("surface-soft p-6 sm:p-8", className)}>
         <h2 className="font-heading text-xl font-semibold">Message sent</h2>
         <p className="mt-2 text-muted-foreground">
-          Thanks for getting in touch. We will respond as soon as we can.
+          Thanks for your message. Paul will get back to you as soon as he can.
         </p>
         <Button className="mt-6" variant="outline" onClick={() => setStatus("idle")}>
           Send another message
@@ -135,10 +135,10 @@ export function ContactForm({ className }: { className?: string }) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="projectType">Project type *</Label>
+        <Label htmlFor="projectType">What is it about? *</Label>
         <Select onValueChange={(value) => setValue("projectType", value, { shouldValidate: true })}>
           <SelectTrigger id="projectType" className="w-full">
-            <SelectValue placeholder="Select a project type" />
+            <SelectValue placeholder="Choose a topic" />
           </SelectTrigger>
           <SelectContent>
             {siteConfig.projectTypes.map((type) => (
@@ -154,11 +154,11 @@ export function ContactForm({ className }: { className?: string }) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="message">Project details *</Label>
+        <Label htmlFor="message">Your message *</Label>
         <Textarea
           id="message"
           rows={5}
-          placeholder="What does your business do, and what do you need online?"
+          placeholder="Which market you're collecting from, what you'd like to order, or anything else Paul should know."
           {...register("message")}
         />
         {errors.message && (

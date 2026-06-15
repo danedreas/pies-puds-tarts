@@ -1,3 +1,4 @@
+import { InlineText } from "@/components/content/inline-text";
 import { cn } from "@/lib/utils";
 
 type SectionShellProps = {
@@ -60,7 +61,10 @@ export function SectionHeading({
         {title}
       </h2>
       {description && (
-        <p className="text-lg leading-relaxed text-muted-foreground text-pretty">{description}</p>
+        <InlineText
+          text={description}
+          className="text-lg leading-relaxed text-muted-foreground text-pretty"
+        />
       )}
     </div>
   );

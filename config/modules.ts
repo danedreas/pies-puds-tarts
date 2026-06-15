@@ -16,6 +16,16 @@ export const modules = {
     Boolean(process.env.STRIPE_SECRET_KEY),
 
   /**
+   * Google Sheets as product/event data source.
+   * When enabled, lib/google-sheets.ts fetches rows at build time.
+   * Falls back to config/content/* when unset or fetch fails.
+   */
+  googleSheets:
+    process.env.NEXT_PUBLIC_ENABLE_GOOGLE_SHEETS === "true" &&
+    Boolean(process.env.GOOGLE_SHEETS_API_KEY) &&
+    Boolean(process.env.GOOGLE_SHEETS_SPREADSHEET_ID),
+
+  /**
    * Cookie consent banner + preference storage.
    * On by default - set NEXT_PUBLIC_ENABLE_COOKIE_CONSENT=false to disable.
    */

@@ -9,26 +9,30 @@
 import type { CSSProperties } from "react";
 
 export const themeTokens = {
-  /** Brand accent - buttons, links, highlights */
-  primary: "oklch(0.42 0.09 240)",
+  /** Brand accent - warm orange from the logo */
+  primary: "oklch(0.68 0.19 45)",
   primaryForeground: "oklch(0.99 0 0)",
 
-  /** Page background and body text */
-  background: "oklch(0.985 0.006 85)",
-  foreground: "oklch(0.22 0.02 260)",
+  /** Page background and body text - warm cream and soft charcoal */
+  background: "oklch(0.985 0.012 85)",
+  foreground: "oklch(0.24 0.02 50)",
 
   /** Cards and elevated surfaces */
-  card: "oklch(0.995 0.004 85)",
-  cardForeground: "oklch(0.22 0.02 260)",
+  card: "oklch(0.995 0.008 85)",
+  cardForeground: "oklch(0.24 0.02 50)",
 
   /** Secondary UI - badges, subtle backgrounds */
-  muted: "oklch(0.96 0.008 85)",
-  mutedForeground: "oklch(0.48 0.02 260)",
+  muted: "oklch(0.955 0.015 85)",
+  mutedForeground: "oklch(0.48 0.03 50)",
 
   /** Borders and form inputs */
-  border: "oklch(0.91 0.008 85)",
-  input: "oklch(0.93 0.008 85)",
-  ring: "oklch(0.42 0.09 240)",
+  border: "oklch(0.90 0.015 85)",
+  input: "oklch(0.93 0.012 85)",
+  ring: "oklch(0.68 0.19 45)",
+
+  /** Footer - a touch deeper than the page, same warm cream family as everything else */
+  footer: "oklch(0.968 0.014 85)",
+  footerForeground: "oklch(0.24 0.02 50)",
 
   /** Corner radius base - sm/md/lg derive from this in globals.css */
   radius: "1.125rem",
@@ -51,5 +55,7 @@ export function themeTokensToCssVars(tokens: ThemeTokens): CSSProperties {
     "--input": tokens.input,
     "--ring": tokens.ring,
     "--radius": tokens.radius,
+    "--footer": tokens.footer,
+    "--footer-foreground": tokens.footerForeground,
   } as CSSProperties;
 }

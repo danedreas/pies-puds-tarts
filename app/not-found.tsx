@@ -36,7 +36,7 @@ export default function NotFound() {
         <Button asChild variant="outline" size="lg" className="rounded-full px-6">
           <Link href="/contact">
             <Mail className="size-4" aria-hidden />
-            Contact us
+            Message Paul
           </Link>
         </Button>
       </div>

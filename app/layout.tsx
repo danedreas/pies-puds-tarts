@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Fraunces, Source_Sans_3 } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { themeTokens, themeTokensToCssVars } from "@/config/theme";
 import { SiteShell } from "@/components/layout/site-shell";
@@ -8,8 +8,14 @@ import { organizationJsonLd, websiteJsonLd } from "@/lib/json-ld";
 import { createMetadata } from "@/lib/seo";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const sourceSans = Source_Sans_3({
   variable: "--font-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
 });
@@ -34,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang={siteConfig.locale}
-      className={`${spaceGrotesk.variable} h-full antialiased`}
+      className={`${sourceSans.variable} ${fraunces.variable} h-full antialiased`}
       style={themeTokensToCssVars(themeTokens)}
     >
       <body className="min-h-full flex flex-col font-sans">

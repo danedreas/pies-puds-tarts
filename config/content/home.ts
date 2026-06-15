@@ -1,81 +1,81 @@
 /**
  * Home page content - edit per client build.
- * Copy is intentionally neutral so it works across trades, retail, and services.
+ *
+ * Inline links use `[label](/path)` in strings - rendered by InlineText.
  */
 
 export const homeContent = {
   hero: {
-    eyebrow: "Local & trusted",
-    headline: "Quality work, clearly communicated",
+    eyebrow: "Norfolk farmers markets",
+    headline: "Handmade pies, puds & tarts",
     subheadline:
-      "Whether you run a trade, a shop, or a service business - customers should understand what you do, trust your expertise, and know how to reach you.",
-    primaryCta: { label: "Get in touch", href: "/contact" },
-    secondaryCta: { label: "About us", href: "/about" },
-    highlights: ["Free quotes", "Fully insured", "Local team"],
+      "I'm Paul - I bake savoury pies, proper puds and sweet tarts, and sell them at [markets around Norfolk](/events). [Order ahead online](/order) and pick up from the stall.",
+    primaryCta: { label: "Pre-order for collection", href: "/order" },
+    secondaryCta: { label: "Where to find me", href: "/events" },
+    highlights: ["Baked fresh", "Pre-order & collect", "Seasonal specials"],
   },
 
   about: {
     id: "about",
-    title: "Built around how you work",
+    title: "Proper baking, sold at the market",
     description:
-      "Every business is different. We focus on what matters to your customers - who you are, what you offer, and how to get hold of you - without unnecessary fuss.",
-    fitFor: [
-      "Trades and skilled professionals",
-      "Shops, salons, and local retail",
-      "Consultants and service providers",
-      "New businesses finding their feet",
-    ],
-    notFor: [
-      "Large catalogues you manage day-to-day",
-      "Complex multi-branch operations",
-      "Projects needing months of discovery",
-    ],
+      "Everything on the stall is made by hand in small batches - the sort of food you'd be pleased to take home from a good market. [More about Paul](/about).",
+    positivePanel: {
+      title: "What's on the stall",
+      items: [
+        "Savoury pies with classic and seasonal fillings",
+        "Homely puds - sticky toffee, crumble and the rest",
+        "Sweet tarts when the fruit is good",
+        "Limited batches - when it's gone, it's gone",
+      ],
+    },
+    infoPanel: {
+      title: "How to order",
+      items: [
+        "Pick the [market you're collecting from](/events)",
+        "Choose what you want from the [menu](/order)",
+        "Pay online",
+        "Collect from the stall on the day",
+      ],
+    },
   },
 
   services: {
-    id: "services",
-    title: "What customers can expect",
+    id: "highlights",
+    title: "A few good reasons to come back",
     description:
-      "Swap these for your real services. Short, clear descriptions help visitors decide quickly.",
+      "Good ingredients, decent portions, and a bit of chat while you're choosing. Browse the [full menu](/order) or [see where I'm trading](/events).",
     items: [
       {
-        title: "Reliable delivery",
+        title: "At the markets",
         description:
-          "Turn up on time, communicate clearly, and finish the job to a standard you are happy to stand behind.",
+          "I'm at different markets around Norfolk most weeks - worth checking the schedule before you set off.",
+        href: "/events",
         imageIndex: 0,
       },
       {
-        title: "Transparent pricing",
+        title: "Changes with the seasons",
         description:
-          "No surprises - explain your rates or packages so customers know what they are booking.",
+          "Summer fruit tarts, autumn puds, hearty pies when it's cold - the menu never looks quite the same twice.",
+        href: "/order",
         imageIndex: 1,
       },
       {
-        title: "Ongoing support",
+        title: "Order ahead",
         description:
-          "Leave a straightforward way to get back in touch for repeat work, questions, or follow-ups.",
+          "Busy market day? Pre-order online and I'll have your bits ready to pick up.",
+        href: "/order",
         imageIndex: 2,
       },
     ],
   },
 
-  pricingIntro: {
-    title: "Optional: Simple offers",
+  eventsTeaser: {
+    id: "events",
+    title: "Where to find me",
     description:
-      "Fixed packages with secure checkout. Ideal for a few clear offers - not a full shop to manage.",
-  },
-
-  productsIntro: {
-    title: "Optional: Products",
-    description:
-      "Individual items with a price and short description. Swap for real products, vouchers, or add-ons.",
-  },
-
-  cta: {
-    title: "Ready to talk?",
-    description:
-      "Send a message with a few details about your business. No pressure - just a straightforward conversation.",
-    buttonLabel: "Contact us",
-    href: "/contact",
+      "Here's where I'm trading over the next few weeks. [See all market dates](/events) before you set off - they can change, especially in bad weather.",
+    emptyMessage: "Market dates coming soon. [Get in touch](/contact) if you're wondering where I'll be next.",
+    cta: { label: "Market dates", href: "/events" },
   },
 } as const;

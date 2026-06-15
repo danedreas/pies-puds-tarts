@@ -2,17 +2,18 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { aboutContent } from "@/config/content/about";
 import { siteImages } from "@/config/content/images";
-import { siteConfig } from "@/config/site";
 import { PlaceholderImage } from "@/components/ui/placeholder-image";
+import { InlineText } from "@/components/content/inline-text";
 import { SectionHeading, SectionShell, SoftPanel } from "@/components/ui/section-shell";
 import { Button } from "@/components/ui/button";
+import { OrderCta } from "@/components/layout/order-cta";
 import { JsonLd } from "@/components/seo/json-ld";
-import { breadcrumbJsonLd, webPageJsonLd } from "@/lib/json-ld";
+import { aboutPageJsonLd, breadcrumbJsonLd } from "@/lib/json-ld";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
-  title: "About",
-  description: `Learn more about ${siteConfig.name} - ${siteConfig.tagline}`,
+  title: "About Paul Stretton",
+  description: `Paul Stretton bakes pies, puds and tarts for farmers markets across Norfolk. Pre-order online and collect from the stall.`,
   path: "/about",
 });
 
@@ -23,11 +24,7 @@ export default function AboutPage() {
     <>
       <JsonLd
         data={[
-          webPageJsonLd({
-            title: "About",
-            description: intro,
-            path: "/about",
-          }),
+          ...aboutPageJsonLd(intro),
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
             { name: "About", path: "/about" },
@@ -41,9 +38,11 @@ export default function AboutPage() {
             <SectionHeading eyebrow={eyebrow} title={title} description={intro} />
             <div className="mt-8 space-y-4 text-muted-foreground">
               {paragraphs.map((paragraph) => (
-                <p key={paragraph} className="leading-relaxed text-pretty">
-                  {paragraph}
-                </p>
+                <InlineText
+                  key={paragraph}
+                  text={paragraph}
+                  className="leading-relaxed text-pretty"
+                />
               ))}
             </div>
             <Button asChild className="mt-8 rounded-full px-6">
@@ -69,6 +68,8 @@ export default function AboutPage() {
           ))}
         </div>
       </SectionShell>
+
+      <OrderCta />
     </>
   );
 }

@@ -1,39 +1,41 @@
 /**
  * About page content - edit per client build.
+ *
+ * Inline links use `[label](/path)` in strings - rendered by InlineText.
  */
 
 export const aboutContent = {
-  eyebrow: "About us",
-  title: "A local business you can trust",
+  eyebrow: "About Paul",
+  title: "Paul Stretton",
   intro:
-    "We are a small team serving customers across the local area. This page is where you tell your story - who you are, how you work, and why people choose you.",
+    "I run Pies, Puds & Tarts from Norfolk - baking for [farmers markets](/events) and selling straight from the stall.",
 
   paragraphs: [
-    "Replace this with your own background: when you started, what you specialise in, and the kind of customers you work with most.",
-    "Keep it honest and straightforward. Visitors want to know you are real, reliable, and easy to deal with - not read corporate filler.",
-    "A photo of you, your team, or your work helps build trust. Swap the placeholder image in config/content/images.ts when you are ready.",
+    "I've worked in kitchens and hospitality for years. These days I'm out at the markets instead, baking pies, puds and tarts in small batches and serving the people who come back week after week.",
+    "You'll find the usual favourites on the stall, plus whatever fits the season. The [menu](/order) moves through the year - summer tarts, autumn puds, proper hearty pies when the weather turns.",
+    "If you want something waiting for you on market day, you can [pre-order through the site](/order). For wholesale, a big order, or just a question about what's baking this week, [drop me a line](/contact).",
   ],
 
   values: {
-    title: "What we stand for",
+    title: "How I work",
     items: [
       {
-        title: "Clear communication",
-        description: "We explain what we do, what it costs, and when you can expect us.",
+        title: "Made by hand",
+        description: "Small batches, baked properly. Nothing factory-made or rushed out the door.",
       },
       {
-        title: "Quality work",
-        description: "We take pride in doing the job properly - the first time where we can.",
+        title: "Seasonal",
+        description: "What's on the stall depends on the time of year and what's worth baking with.",
       },
       {
-        title: "Local focus",
-        description: "We know the area and build long-term relationships with customers.",
+        title: "Generous portions",
+        description: "Nobody should walk away from a market stall still hungry.",
       },
     ],
   },
 
   cta: {
-    label: "Get in touch",
+    label: "Send a message",
     href: "/contact",
   },
 } as const;
