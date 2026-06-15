@@ -2,7 +2,7 @@ import Link from "next/link";
 import { parseInlineContent } from "@/lib/inline-content";
 import { cn } from "@/lib/utils";
 
-const linkClassName = "text-foreground underline-offset-4 hover:underline";
+const linkClassName = "font-medium text-primary underline-offset-4 hover:underline";
 
 type InlineTextProps = {
   text: string;

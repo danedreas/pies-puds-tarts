@@ -107,7 +107,7 @@ export function AboutSection() {
               <h3 className="font-heading text-lg font-semibold">{about.infoPanel.title}</h3>
               <ul className="mt-4 space-y-3">
                 {about.infoPanel.items.map((item) => (
-                  <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
+                  <li key={item} className="flex gap-3 text-sm leading-relaxed">
                     <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
                       <Check className="size-3" aria-hidden />
                     </span>
