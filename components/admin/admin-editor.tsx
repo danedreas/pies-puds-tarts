@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronDown, Loader2, Plus, Trash2 } from "lucide-react";
-import { menuCategories } from "@/config/content/products";
+import { menuCategories, formatDisplayPrice } from "@/config/content/products";
 import type { SiteContent } from "@/lib/site-content-shared";
 import {
   formatMarketDateDisplay,
@@ -105,7 +105,7 @@ function emptyMenuItem(): SiteContent["menuItems"][number] {
     category: "pies",
     name: "",
     description: "",
-    displayPrice: "£0.00",
+    displayPrice: "",
   };
 }
 
@@ -430,7 +430,12 @@ export function AdminEditor() {
             const key = itemKey("menu", index, item.id);
             const category =
               menuCategories.find((entry) => entry.id === item.category)?.label ?? item.category;
-            const summary = [item.displayPrice, category].filter(Boolean).join(" · ");
+            const summary = [
+              formatDisplayPrice(item.displayPrice) || item.displayPrice,
+              category,
+            ]
+              .filter(Boolean)
+              .join(" · ");
 
             return (
               <AdminItemPanel
@@ -471,13 +476,17 @@ export function AdminEditor() {
                     }
                   />
                 </Field>
-                <Field label="Price">
+                <Field label="Price (GBP)">
                   <Input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    inputMode="decimal"
                     value={item.displayPrice}
                     onChange={(e) =>
                       updateMenuItem(setContent, index, { displayPrice: e.target.value })
                     }
-                    placeholder="£5.50"
+                    placeholder="5.50"
                   />
                 </Field>
                 <Field label="Category">
@@ -538,7 +547,10 @@ export function AdminEditor() {
         <div className="space-y-4">
           {content.boxes.map((box, index) => {
             const key = itemKey("box", index, box.id);
-            const summary = [box.displayPrice, box.highlighted ? "Popular" : ""]
+            const summary = [
+              formatDisplayPrice(box.displayPrice) || box.displayPrice,
+              box.highlighted ? "Popular" : "",
+            ]
               .filter(Boolean)
               .join(" · ");
 
@@ -579,13 +591,17 @@ export function AdminEditor() {
                     }
                   />
                 </Field>
-                <Field label="Price">
+                <Field label="Price (GBP)">
                   <Input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    inputMode="decimal"
                     value={box.displayPrice}
                     onChange={(e) =>
                       updateBox(setContent, index, { displayPrice: e.target.value })
                     }
-                    placeholder="£18"
+                    placeholder="18"
                   />
                 </Field>
               </div>

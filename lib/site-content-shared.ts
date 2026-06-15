@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { MarketEvent } from "@/config/content/events";
+import { normalizeStoredPrice, parseDisplayPrice } from "@/config/content/products";
 
 export function isBlobConfigured(): boolean {
   return Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID);
@@ -10,12 +11,17 @@ export const SITE_CONTENT_CACHE_TAG = "site-content";
 
 const menuCategorySchema = z.enum(["pies", "puds", "tarts"]);
 
+const storedPriceSchema = z
+  .string()
+  .min(1)
+  .refine((value) => parseDisplayPrice(value) > 0, "Enter a valid price greater than 0");
+
 const menuItemSchema = z.object({
   id: z.string().min(1),
   category: menuCategorySchema,
   name: z.string().min(1),
   description: z.string(),
-  displayPrice: z.string().min(1),
+  displayPrice: storedPriceSchema,
 });
 
 const marketEventSchema = z.object({
@@ -32,7 +38,7 @@ const preorderBoxSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
   description: z.string(),
-  displayPrice: z.string().min(1),
+  displayPrice: storedPriceSchema,
   features: z
     .preprocess(
       (value) =>
@@ -117,6 +123,7 @@ export function normalizeSiteContent(content: SiteContent): SiteContent {
       .map((item) => ({
         ...item,
         id: item.id || slugifyId(item.name),
+        displayPrice: normalizeStoredPrice(item.displayPrice),
       })),
     boxes: (content.boxes ?? [])
       .filter((box) => !isBlankDraftBox(box))
@@ -126,6 +133,7 @@ export function normalizeSiteContent(content: SiteContent): SiteContent {
         return {
           ...box,
           id: box.id || slugifyId(box.name),
+          displayPrice: normalizeStoredPrice(box.displayPrice),
           features:
             features.length > 0 ? features : ["Collect from your chosen market"],
           highlighted: box.highlighted ? true : undefined,

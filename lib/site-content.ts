@@ -8,6 +8,7 @@ import {
   siteContentSchema,
   type SiteContent,
 } from "@/lib/site-content-shared";
+import { normalizeStoredPrice } from "@/config/content/products";
 
 export {
   SITE_CONTENT_BLOB_PATH,
@@ -51,6 +52,20 @@ function getBlobCommandOptions() {
   return token ? { token } : {};
 }
 
+function normalizeLoadedPrices(content: SiteContent): SiteContent {
+  return {
+    ...content,
+    menuItems: content.menuItems.map((item) => ({
+      ...item,
+      displayPrice: normalizeStoredPrice(item.displayPrice) || item.displayPrice,
+    })),
+    boxes: content.boxes.map((box) => ({
+      ...box,
+      displayPrice: normalizeStoredPrice(box.displayPrice) || box.displayPrice,
+    })),
+  };
+}
+
 export async function readSiteContent(): Promise<SiteContent> {
   if (!isBlobConfigured()) {
     return getDefaultSiteContent();
@@ -69,7 +84,7 @@ export async function readSiteContent(): Promise<SiteContent> {
 
     const text = await new Response(result.stream).text();
     const json: unknown = JSON.parse(text);
-    return siteContentSchema.parse(json);
+    return normalizeLoadedPrices(siteContentSchema.parse(json));
   } catch (error) {
     console.error("Failed to read site content from blob:", error);
     return getDefaultSiteContent();

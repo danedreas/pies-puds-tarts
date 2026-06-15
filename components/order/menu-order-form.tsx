@@ -7,6 +7,7 @@ import { Check, Loader2, Minus, Plus, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
 import type { MarketEvent } from "@/config/content/events";
 import {
+  formatDisplayPrice,
   formatGbp,
   menuCategories,
   parseDisplayPrice,
@@ -365,7 +366,9 @@ function BoxMenuRow({
               Popular
             </span>
           )}
-          <span className="font-heading text-lg font-bold text-primary">{box.displayPrice}</span>
+          <span className="font-heading text-lg font-bold text-primary">
+            {formatDisplayPrice(box.displayPrice)}
+          </span>
         </div>
         <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted-foreground">
           {box.description}
@@ -432,7 +435,9 @@ function MenuRow({
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h3 className="font-heading text-lg font-semibold">{item.name}</h3>
-          <span className="font-heading text-lg font-bold text-primary">{item.displayPrice}</span>
+          <span className="font-heading text-lg font-bold text-primary">
+            {formatDisplayPrice(item.displayPrice)}
+          </span>
         </div>
         <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted-foreground">
           {item.description}
