@@ -1,12 +1,24 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
+import { ZodError } from "zod";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import {
-  readSiteContent,
-  siteContentSchema,
-  writeSiteContent,
-} from "@/lib/site-content";
-import { SITE_CONTENT_CACHE_TAG } from "@/lib/site-content-shared";
+  formatSiteContentValidationError,
+  SITE_CONTENT_CACHE_TAG,
+  type SiteContent,
+  validateSiteContent,
+} from "@/lib/site-content-shared";
+import { readSiteContent, writeSiteContent } from "@/lib/site-content";
+
+const REVALIDATED_PATHS = ["/", "/events", "/order"] as const;
+
+function revalidateSiteContent() {
+  revalidateTag(SITE_CONTENT_CACHE_TAG, "seconds");
+
+  for (const path of REVALIDATED_PATHS) {
+    revalidatePath(path);
+  }
+}
 
 export async function GET() {
   if (!(await isAdminAuthenticated())) {
@@ -24,13 +36,21 @@ export async function PUT(request: Request) {
 
   try {
     const body: unknown = await request.json();
-    const parsed = siteContentSchema.parse(body);
+    const parsed = validateSiteContent(body as SiteContent);
     const saved = await writeSiteContent(parsed);
-    revalidateTag(SITE_CONTENT_CACHE_TAG, "seconds");
+    revalidateSiteContent();
 
     return NextResponse.json(saved);
   } catch (error) {
     console.error("Admin content save failed:", error);
+
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: formatSiteContentValidationError(error) },
+        { status: 400 },
+      );
+    }
+
     const message =
       error instanceof Error && error.message ? error.message : "Unable to save content.";
     return NextResponse.json({ error: message }, { status: 400 });

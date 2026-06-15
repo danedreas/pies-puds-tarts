@@ -2,19 +2,89 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, Plus, Trash2 } from "lucide-react";
+import { ChevronDown, Loader2, Plus, Trash2 } from "lucide-react";
 import { menuCategories } from "@/config/content/products";
 import type { SiteContent } from "@/lib/site-content-shared";
-import { formatMarketDateDisplay, slugifyId } from "@/lib/site-content-shared";
+import {
+  formatMarketDateDisplay,
+  formatSiteContentValidationError,
+  slugifyId,
+  validateSiteContent,
+} from "@/lib/site-content-shared";
+import { ZodError } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
 const adminShellClassName = "mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8";
 
 function AdminShell({ children }: { children: React.ReactNode }) {
   return <div className={adminShellClassName}>{children}</div>;
+}
+
+function itemKey(section: "event" | "menu" | "box", index: number, id?: string) {
+  return `${section}-${id || index}`;
+}
+
+function AdminItemPanel({
+  title,
+  summary,
+  expanded,
+  onToggle,
+  onRemove,
+  children,
+}: {
+  title: string;
+  summary?: string;
+  expanded: boolean;
+  onToggle: () => void;
+  onRemove: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="surface-soft overflow-hidden">
+      <div className="flex items-start gap-2 p-4 sm:p-5">
+        <button
+          type="button"
+          onClick={onToggle}
+          className="flex min-w-0 flex-1 items-start gap-3 rounded-lg text-left transition-colors hover:bg-muted/40"
+          aria-expanded={expanded}
+        >
+          <ChevronDown
+            className={cn(
+              "mt-0.5 size-4 shrink-0 text-muted-foreground transition-transform",
+              !expanded && "-rotate-90",
+            )}
+            aria-hidden
+          />
+          <span className="min-w-0">
+            <span className="block text-sm font-medium">{title}</span>
+            {summary && (
+              <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
+                {summary}
+              </span>
+            )}
+          </span>
+        </button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          className="shrink-0 text-destructive hover:text-destructive"
+          onClick={onRemove}
+        >
+          <Trash2 className="size-4" aria-hidden />
+          Remove
+        </Button>
+      </div>
+
+      {expanded && (
+        <div className="space-y-4 border-t border-border/60 p-4 sm:p-5">{children}</div>
+      )}
+    </div>
+  );
 }
 
 function emptyEvent(): SiteContent["events"][number] {
@@ -44,7 +114,7 @@ function emptyBox(): SiteContent["boxes"][number] {
     id: "",
     name: "",
     description: "",
-    displayPrice: "£0.00",
+    displayPrice: "",
     features: ["Collect from your chosen market"],
   };
 }
@@ -56,6 +126,27 @@ export function AdminEditor() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(() => new Set());
+
+  function isExpanded(key: string) {
+    return expandedItems.has(key);
+  }
+
+  function toggleItem(key: string) {
+    setExpandedItems((current) => {
+      const next = new Set(current);
+      if (next.has(key)) {
+        next.delete(key);
+      } else {
+        next.add(key);
+      }
+      return next;
+    });
+  }
+
+  function expandItem(key: string) {
+    setExpandedItems((current) => new Set(current).add(key));
+  }
 
   useEffect(() => {
     async function loadContent() {
@@ -91,10 +182,21 @@ export function AdminEditor() {
     setMessage(null);
 
     try {
+      let payload: SiteContent;
+
+      try {
+        payload = validateSiteContent(content);
+      } catch (err) {
+        if (err instanceof ZodError) {
+          throw new Error(formatSiteContentValidationError(err));
+        }
+        throw err;
+      }
+
       const response = await fetch("/api/admin/content", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(content),
+        body: JSON.stringify(payload),
       });
 
       if (response.status === 401) {
@@ -109,7 +211,8 @@ export function AdminEditor() {
 
       const saved = (await response.json()) as SiteContent;
       setContent(saved);
-      setMessage("Saved. The site will show your changes on the next page load.");
+      router.refresh();
+      setMessage("Saved. The live site has been updated.");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to save content.");
     } finally {
@@ -191,13 +294,15 @@ export function AdminEditor() {
             variant="outline"
             size="sm"
             className="rounded-full"
-            onClick={() =>
+            onClick={() => {
+              const nextIndex = content.events.length;
+              expandItem(itemKey("event", nextIndex));
               setContent((current) =>
                 current
                   ? { ...current, events: [...current.events, emptyEvent()] }
                   : current,
-              )
-            }
+              );
+            }}
           >
             <Plus className="size-4" aria-hidden />
             Add market
@@ -205,31 +310,30 @@ export function AdminEditor() {
         </div>
 
         <div className="space-y-4">
-          {content.events.map((event, index) => (
-            <div key={`event-${index}`} className="surface-soft space-y-4 p-5 sm:p-6">
-              <div className="flex items-center justify-between gap-3">
-                <p className="text-sm font-medium">Market {index + 1}</p>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="text-destructive hover:text-destructive"
-                  onClick={() =>
-                    setContent((current) =>
-                      current
-                        ? {
-                            ...current,
-                            events: current.events.filter((_, itemIndex) => itemIndex !== index),
-                          }
-                        : current,
-                    )
-                  }
-                >
-                  <Trash2 className="size-4" aria-hidden />
-                  Remove
-                </Button>
-              </div>
+          {content.events.map((event, index) => {
+            const key = itemKey("event", index, event.id);
+            const summary = [event.dateDisplay || event.date, event.location, event.time]
+              .filter(Boolean)
+              .join(" · ");
 
+            return (
+              <AdminItemPanel
+                key={key}
+                title={event.name || `Market ${index + 1}`}
+                summary={summary || "New market — add details below"}
+                expanded={isExpanded(key)}
+                onToggle={() => toggleItem(key)}
+                onRemove={() =>
+                  setContent((current) =>
+                    current
+                      ? {
+                          ...current,
+                          events: current.events.filter((_, itemIndex) => itemIndex !== index),
+                        }
+                      : current,
+                  )
+                }
+              >
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Market name">
                   <Input
@@ -288,8 +392,9 @@ export function AdminEditor() {
                   }
                 />
               </Field>
-            </div>
-          ))}
+              </AdminItemPanel>
+            );
+          })}
 
           {content.events.length === 0 && (
             <p className="text-sm text-muted-foreground">No markets yet. Add one above.</p>
@@ -305,13 +410,15 @@ export function AdminEditor() {
             variant="outline"
             size="sm"
             className="rounded-full"
-            onClick={() =>
+            onClick={() => {
+              const nextIndex = content.menuItems.length;
+              expandItem(itemKey("menu", nextIndex));
               setContent((current) =>
                 current
                   ? { ...current, menuItems: [...current.menuItems, emptyMenuItem()] }
                   : current,
-              )
-            }
+              );
+            }}
           >
             <Plus className="size-4" aria-hidden />
             Add item
@@ -319,33 +426,32 @@ export function AdminEditor() {
         </div>
 
         <div className="space-y-4">
-          {content.menuItems.map((item, index) => (
-            <div key={`menu-${index}`} className="surface-soft space-y-4 p-5 sm:p-6">
-              <div className="flex items-center justify-between gap-3">
-                <p className="text-sm font-medium">{item.name || `Menu item ${index + 1}`}</p>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="text-destructive hover:text-destructive"
-                  onClick={() =>
-                    setContent((current) =>
-                      current
-                        ? {
-                            ...current,
-                            menuItems: current.menuItems.filter(
-                              (_, itemIndex) => itemIndex !== index,
-                            ),
-                          }
-                        : current,
-                    )
-                  }
-                >
-                  <Trash2 className="size-4" aria-hidden />
-                  Remove
-                </Button>
-              </div>
+          {content.menuItems.map((item, index) => {
+            const key = itemKey("menu", index, item.id);
+            const category =
+              menuCategories.find((entry) => entry.id === item.category)?.label ?? item.category;
+            const summary = [item.displayPrice, category].filter(Boolean).join(" · ");
 
+            return (
+              <AdminItemPanel
+                key={key}
+                title={item.name || `Menu item ${index + 1}`}
+                summary={summary || "New menu item — add details below"}
+                expanded={isExpanded(key)}
+                onToggle={() => toggleItem(key)}
+                onRemove={() =>
+                  setContent((current) =>
+                    current
+                      ? {
+                          ...current,
+                          menuItems: current.menuItems.filter(
+                            (_, itemIndex) => itemIndex !== index,
+                          ),
+                        }
+                      : current,
+                  )
+                }
+              >
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Name">
                   <Input
@@ -402,8 +508,9 @@ export function AdminEditor() {
                   }
                 />
               </Field>
-            </div>
-          ))}
+              </AdminItemPanel>
+            );
+          })}
         </div>
       </section>
 
@@ -415,11 +522,13 @@ export function AdminEditor() {
             variant="outline"
             size="sm"
             className="rounded-full"
-            onClick={() =>
+            onClick={() => {
+              const nextIndex = content.boxes.length;
+              expandItem(itemKey("box", nextIndex));
               setContent((current) =>
                 current ? { ...current, boxes: [...current.boxes, emptyBox()] } : current,
-              )
-            }
+              );
+            }}
           >
             <Plus className="size-4" aria-hidden />
             Add box
@@ -427,31 +536,30 @@ export function AdminEditor() {
         </div>
 
         <div className="space-y-4">
-          {content.boxes.map((box, index) => (
-            <div key={`box-${index}`} className="surface-soft space-y-4 p-5 sm:p-6">
-              <div className="flex items-center justify-between gap-3">
-                <p className="text-sm font-medium">{box.name || `Box ${index + 1}`}</p>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="text-destructive hover:text-destructive"
-                  onClick={() =>
-                    setContent((current) =>
-                      current
-                        ? {
-                            ...current,
-                            boxes: current.boxes.filter((_, itemIndex) => itemIndex !== index),
-                          }
-                        : current,
-                    )
-                  }
-                >
-                  <Trash2 className="size-4" aria-hidden />
-                  Remove
-                </Button>
-              </div>
+          {content.boxes.map((box, index) => {
+            const key = itemKey("box", index, box.id);
+            const summary = [box.displayPrice, box.highlighted ? "Popular" : ""]
+              .filter(Boolean)
+              .join(" · ");
 
+            return (
+              <AdminItemPanel
+                key={key}
+                title={box.name || `Box ${index + 1}`}
+                summary={summary || "New mixed box — add details below"}
+                expanded={isExpanded(key)}
+                onToggle={() => toggleItem(key)}
+                onRemove={() =>
+                  setContent((current) =>
+                    current
+                      ? {
+                          ...current,
+                          boxes: current.boxes.filter((_, itemIndex) => itemIndex !== index),
+                        }
+                      : current,
+                  )
+                }
+              >
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Name">
                   <Input
@@ -496,10 +604,7 @@ export function AdminEditor() {
                   value={box.features.join("\n")}
                   onChange={(e) =>
                     updateBox(setContent, index, {
-                      features: e.target.value
-                        .split("\n")
-                        .map((line) => line.trim())
-                        .filter(Boolean),
+                      features: e.target.value.split("\n"),
                     })
                   }
                 />
@@ -515,8 +620,9 @@ export function AdminEditor() {
                 />
                 Mark as popular
               </label>
-            </div>
-          ))}
+              </AdminItemPanel>
+            );
+          })}
         </div>
       </section>
       </div>

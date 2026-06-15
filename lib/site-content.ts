@@ -1,12 +1,10 @@
 import { get, put } from "@vercel/blob";
-import { unstable_cache } from "next/cache";
 import { marketEvents } from "@/config/content/events";
 import { menuItems as defaultMenuItems } from "@/config/content/products";
 import { stripeProducts as defaultBoxes } from "@/config/stripe-products";
 import {
   isBlobConfigured,
   SITE_CONTENT_BLOB_PATH,
-  SITE_CONTENT_CACHE_TAG,
   siteContentSchema,
   type SiteContent,
 } from "@/lib/site-content-shared";
@@ -16,6 +14,9 @@ export {
   SITE_CONTENT_CACHE_TAG,
   siteContentSchema,
   isBlobConfigured,
+  normalizeSiteContent,
+  validateSiteContent,
+  formatSiteContentValidationError,
   type PreorderBox,
   type SiteContent,
   getUpcomingEventsFromList,
@@ -50,10 +51,15 @@ function getBlobCommandOptions() {
   return token ? { token } : {};
 }
 
-async function readSiteContentFromBlob(): Promise<SiteContent> {
+export async function readSiteContent(): Promise<SiteContent> {
+  if (!isBlobConfigured()) {
+    return getDefaultSiteContent();
+  }
+
   try {
     const result = await get(SITE_CONTENT_BLOB_PATH, {
       access: "private",
+      useCache: false,
       ...getBlobCommandOptions(),
     });
 
@@ -64,23 +70,10 @@ async function readSiteContentFromBlob(): Promise<SiteContent> {
     const text = await new Response(result.stream).text();
     const json: unknown = JSON.parse(text);
     return siteContentSchema.parse(json);
-  } catch {
+  } catch (error) {
+    console.error("Failed to read site content from blob:", error);
     return getDefaultSiteContent();
   }
-}
-
-const getCachedSiteContent = unstable_cache(
-  readSiteContentFromBlob,
-  [SITE_CONTENT_CACHE_TAG],
-  { tags: [SITE_CONTENT_CACHE_TAG] },
-);
-
-export async function readSiteContent(): Promise<SiteContent> {
-  if (!isBlobConfigured()) {
-    return getDefaultSiteContent();
-  }
-
-  return getCachedSiteContent();
 }
 
 export async function writeSiteContent(content: SiteContent): Promise<SiteContent> {
