@@ -8,7 +8,6 @@ import type { SiteContent } from "@/lib/site-content-shared";
 import {
   formatMarketDateDisplay,
   formatSiteContentValidationError,
-  slugifyId,
   validateSiteContent,
 } from "@/lib/site-content-shared";
 import { ZodError } from "zod";
@@ -24,8 +23,12 @@ function AdminShell({ children }: { children: React.ReactNode }) {
   return <div className={adminShellClassName}>{children}</div>;
 }
 
-function itemKey(section: "event" | "menu" | "box", index: number, id?: string) {
+function itemKey(section: "event" | "menu" | "box", id: string, index: number) {
   return `${section}-${id || index}`;
+}
+
+function createDraftId(): string {
+  return `draft-${crypto.randomUUID()}`;
 }
 
 function AdminItemPanel({
@@ -89,7 +92,7 @@ function AdminItemPanel({
 
 function emptyEvent(): SiteContent["events"][number] {
   return {
-    id: "",
+    id: createDraftId(),
     name: "",
     location: "",
     date: "",
@@ -101,7 +104,7 @@ function emptyEvent(): SiteContent["events"][number] {
 
 function emptyMenuItem(): SiteContent["menuItems"][number] {
   return {
-    id: "",
+    id: createDraftId(),
     category: "pies",
     name: "",
     description: "",
@@ -111,7 +114,7 @@ function emptyMenuItem(): SiteContent["menuItems"][number] {
 
 function emptyBox(): SiteContent["boxes"][number] {
   return {
-    id: "",
+    id: createDraftId(),
     name: "",
     description: "",
     displayPrice: "",
@@ -295,12 +298,10 @@ export function AdminEditor() {
             size="sm"
             className="rounded-full"
             onClick={() => {
-              const nextIndex = content.events.length;
-              expandItem(itemKey("event", nextIndex));
+              const draft = emptyEvent();
+              expandItem(itemKey("event", draft.id, content.events.length));
               setContent((current) =>
-                current
-                  ? { ...current, events: [...current.events, emptyEvent()] }
-                  : current,
+                current ? { ...current, events: [...current.events, draft] } : current,
               );
             }}
           >
@@ -311,7 +312,7 @@ export function AdminEditor() {
 
         <div className="space-y-4">
           {content.events.map((event, index) => {
-            const key = itemKey("event", index, event.id);
+            const key = itemKey("event", event.id, index);
             const summary = [event.dateDisplay || event.date, event.location, event.time]
               .filter(Boolean)
               .join(" · ");
@@ -346,7 +347,6 @@ export function AdminEditor() {
                         events[index] = {
                           ...events[index],
                           name,
-                          id: events[index].id || slugifyId(name),
                         };
                         return { ...current, events };
                       })
@@ -411,11 +411,11 @@ export function AdminEditor() {
             size="sm"
             className="rounded-full"
             onClick={() => {
-              const nextIndex = content.menuItems.length;
-              expandItem(itemKey("menu", nextIndex));
+              const draft = emptyMenuItem();
+              expandItem(itemKey("menu", draft.id, content.menuItems.length));
               setContent((current) =>
                 current
-                  ? { ...current, menuItems: [...current.menuItems, emptyMenuItem()] }
+                  ? { ...current, menuItems: [...current.menuItems, draft] }
                   : current,
               );
             }}
@@ -427,7 +427,7 @@ export function AdminEditor() {
 
         <div className="space-y-4">
           {content.menuItems.map((item, index) => {
-            const key = itemKey("menu", index, item.id);
+            const key = itemKey("menu", item.id, index);
             const category =
               menuCategories.find((entry) => entry.id === item.category)?.label ?? item.category;
             const summary = [
@@ -469,7 +469,6 @@ export function AdminEditor() {
                         menuItems[index] = {
                           ...menuItems[index],
                           name,
-                          id: menuItems[index].id || slugifyId(name),
                         };
                         return { ...current, menuItems };
                       })
@@ -532,10 +531,10 @@ export function AdminEditor() {
             size="sm"
             className="rounded-full"
             onClick={() => {
-              const nextIndex = content.boxes.length;
-              expandItem(itemKey("box", nextIndex));
+              const draft = emptyBox();
+              expandItem(itemKey("box", draft.id, content.boxes.length));
               setContent((current) =>
-                current ? { ...current, boxes: [...current.boxes, emptyBox()] } : current,
+                current ? { ...current, boxes: [...current.boxes, draft] } : current,
               );
             }}
           >
@@ -546,7 +545,7 @@ export function AdminEditor() {
 
         <div className="space-y-4">
           {content.boxes.map((box, index) => {
-            const key = itemKey("box", index, box.id);
+            const key = itemKey("box", box.id, index);
             const summary = [
               formatDisplayPrice(box.displayPrice) || box.displayPrice,
               box.highlighted ? "Popular" : "",
@@ -584,7 +583,6 @@ export function AdminEditor() {
                         boxes[index] = {
                           ...boxes[index],
                           name,
-                          id: boxes[index].id || slugifyId(name),
                         };
                         return { ...current, boxes };
                       })

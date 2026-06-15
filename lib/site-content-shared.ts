@@ -93,6 +93,14 @@ export function slugifyId(value: string): string {
     .slice(0, 48);
 }
 
+function resolveStoredId(currentId: string, name: string): string {
+  if (!currentId || currentId.startsWith("draft-")) {
+    return slugifyId(name) || currentId;
+  }
+
+  return currentId;
+}
+
 function isBlankDraftEvent(event: SiteContent["events"][number]): boolean {
   return !event.name.trim() && !event.date.trim() && !event.location.trim() && !event.time.trim();
 }
@@ -112,7 +120,7 @@ export function normalizeSiteContent(content: SiteContent): SiteContent {
       .filter((event) => !isBlankDraftEvent(event))
       .map((event) => ({
         ...event,
-        id: event.id || slugifyId(event.name),
+        id: resolveStoredId(event.id, event.name),
         dateDisplay:
           event.date && !event.dateDisplay
             ? formatMarketDateDisplay(event.date)
@@ -122,7 +130,7 @@ export function normalizeSiteContent(content: SiteContent): SiteContent {
       .filter((item) => !isBlankDraftMenuItem(item))
       .map((item) => ({
         ...item,
-        id: item.id || slugifyId(item.name),
+        id: resolveStoredId(item.id, item.name),
         displayPrice: normalizeStoredPrice(item.displayPrice),
       })),
     boxes: (content.boxes ?? [])
@@ -132,7 +140,7 @@ export function normalizeSiteContent(content: SiteContent): SiteContent {
 
         return {
           ...box,
-          id: box.id || slugifyId(box.name),
+          id: resolveStoredId(box.id, box.name),
           displayPrice: normalizeStoredPrice(box.displayPrice),
           features:
             features.length > 0 ? features : ["Collect from your chosen market"],

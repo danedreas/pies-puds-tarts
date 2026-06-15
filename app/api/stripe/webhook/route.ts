@@ -34,7 +34,12 @@ export async function POST(request: Request) {
       try {
         await sendPaymentNotificationEmail({
           customerEmail: session.customer_details.email,
-          productName: session.metadata?.productName ?? "Purchase",
+          customerName: session.customer_details.name ?? undefined,
+          orderSummary: session.metadata?.orderSummary ?? "Order details unavailable",
+          collectionSummary:
+            session.metadata?.collectionSummary ??
+            session.metadata?.eventName ??
+            "Collection market not recorded",
           amountTotal: session.amount_total ?? 0,
           currency: session.currency ?? "gbp",
         });

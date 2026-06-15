@@ -49,7 +49,9 @@ export async function sendContactEmail(payload: ContactEmailPayload) {
 
 export async function sendPaymentNotificationEmail(payload: {
   customerEmail: string;
-  productName: string;
+  customerName?: string;
+  orderSummary: string;
+  collectionSummary: string;
   amountTotal: number;
   currency: string;
 }) {
@@ -62,11 +64,17 @@ export async function sendPaymentNotificationEmail(payload: {
   return resend.emails.send({
     from,
     to,
-    subject: `[${siteConfig.name}] New payment - ${payload.productName}`,
+    subject: `[${siteConfig.name}] Pre-order for ${payload.collectionSummary}`,
     text: [
-      `Product: ${payload.productName}`,
+      `Collection: ${payload.collectionSummary}`,
+      "",
+      `Order: ${payload.orderSummary}`,
+      "",
       `Amount: ${payload.currency.toUpperCase()} ${amount}`,
+      payload.customerName ? `Customer: ${payload.customerName}` : null,
       `Customer email: ${payload.customerEmail}`,
-    ].join("\n"),
+    ]
+      .filter(Boolean)
+      .join("\n"),
   });
 }
