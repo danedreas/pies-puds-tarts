@@ -81,7 +81,7 @@ export function EventsTravelNotice() {
     <p className="mt-10 max-w-3xl text-sm leading-relaxed text-muted-foreground">
       Dates can change -{" "}
       <Link href="/contact" className="text-foreground underline-offset-4 hover:underline">
-        contact Paul
+        get in touch
       </Link>{" "}
       before travelling, especially in bad weather.
     </p>
