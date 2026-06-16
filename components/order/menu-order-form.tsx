@@ -239,18 +239,6 @@ function MenuOrderForm({
     <SectionShell tone="muted" className={cn("pt-8", showMobileCartBar && "pb-28")}>
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] lg:items-start lg:gap-12">
         <div className="space-y-10">
-          <SoftPanel className="space-y-3 lg:hidden">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {orderContent.collectionMarketDescription}
-            </p>
-            <EventSelector
-              events={events}
-              value={selectedEventId}
-              onChange={onEventChange}
-              invalid={eventError}
-            />
-          </SoftPanel>
-
           {menuCategories.map((category) => (
             <MenuCategorySection
               key={category.id}
@@ -277,14 +265,12 @@ function MenuOrderForm({
               <h2 className="font-heading text-xl font-semibold">{orderContent.summaryTitle}</h2>
             </div>
 
-            <div className="hidden lg:block">
-              <EventSelector
-                events={events}
-                value={selectedEventId}
-                onChange={onEventChange}
-                invalid={eventError}
-              />
-            </div>
+            <EventSelector
+              events={events}
+              value={selectedEventId}
+              onChange={onEventChange}
+              invalid={eventError}
+            />
 
             {lineItems.length > 0 ? (
               <ul className="space-y-3 border-b border-border/60 pb-4 text-sm">
