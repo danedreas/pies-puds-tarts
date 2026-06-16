@@ -14,7 +14,7 @@ export function HeroSection() {
   const image = siteImages.hero;
 
   return (
-    <section className="scroll-mt-20 overflow-hidden bg-gradient-to-b from-muted/40 via-background to-background">
+    <section className="scroll-mt-24 overflow-hidden bg-gradient-to-b from-muted/40 via-background to-background">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-6 pb-10 pt-3 sm:gap-8 sm:pb-12 lg:grid-cols-2 lg:gap-10 lg:py-14">
           <div className="order-2 min-w-0 lg:order-1 lg:pr-6">

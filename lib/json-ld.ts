@@ -109,15 +109,16 @@ export function productJsonLd(product: {
   description: string;
   displayPrice: string;
   image: string;
-  id: string;
 }) {
+  const orderUrl = absoluteUrl("/order");
+
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
     description: product.description,
     image: absoluteUrl(product.image),
-    url: absoluteUrl(`/products/${product.id}`),
+    url: orderUrl,
     brand: {
       "@type": "Brand",
       name: siteConfig.name,
@@ -127,7 +128,7 @@ export function productJsonLd(product: {
       priceCurrency: "GBP",
       price: product.displayPrice.replace(/[^\d.]/g, "") || product.displayPrice,
       availability: "https://schema.org/InStock",
-      url: absoluteUrl(`/products/${product.id}`),
+      url: orderUrl,
       seller: {
         "@type": "Organization",
         name: siteConfig.name,
@@ -185,12 +186,30 @@ export function menuJsonLd(items: MenuItem[]) {
       "@type": "ListItem",
       position: index + 1,
       item: productJsonLd({
-        id: item.id,
         name: item.name,
         description: item.description,
         displayPrice: item.displayPrice,
         image: siteConfig.logo.src,
       }),
+    })),
+  };
+}
+
+export function faqJsonLd(
+  items: { question: string; answer: string }[],
+  url = absoluteUrl("/about#faq"),
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    url,
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
     })),
   };
 }

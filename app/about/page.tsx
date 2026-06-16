@@ -1,24 +1,30 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { aboutContent } from "@/config/content/about";
+import { faqAnswerPlainText, faqContent } from "@/config/content/faq";
 import { siteImages } from "@/config/content/images";
+import { FaqSection } from "@/components/content/faq-section";
 import { PlaceholderImage } from "@/components/ui/placeholder-image";
 import { InlineText } from "@/components/content/inline-text";
 import { SectionHeading, SectionShell, SoftPanel } from "@/components/ui/section-shell";
 import { Button } from "@/components/ui/button";
 import { OrderCta } from "@/components/layout/order-cta";
 import { JsonLd } from "@/components/seo/json-ld";
-import { aboutPageJsonLd, breadcrumbJsonLd } from "@/lib/json-ld";
-import { createMetadata } from "@/lib/seo";
+import { aboutPageJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/json-ld";
+import { absoluteUrl, createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "About Paul Stretton",
-  description: `Paul Stretton bakes pies, puds and tarts for farmers markets across Norfolk. Pre-order online and collect from the stall.`,
+  description: `Paul Stretton bakes pies, puds and tarts for farmers markets across Norfolk. Pre-order online, collect from the stall, and find answers to common ordering questions.`,
   path: "/about",
 });
 
 export default function AboutPage() {
   const { eyebrow, title, intro, paragraphs, values, cta } = aboutContent;
+  const faqSchemaItems = faqContent.items.map((item) => ({
+    question: item.question,
+    answer: faqAnswerPlainText(item.answer),
+  }));
 
   return (
     <>
@@ -29,13 +35,14 @@ export default function AboutPage() {
             { name: "Home", path: "/" },
             { name: "About", path: "/about" },
           ]),
+          faqJsonLd(faqSchemaItems, absoluteUrl("/about#faq")),
         ]}
       />
 
       <SectionShell tone="accent">
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-14">
           <div>
-            <SectionHeading eyebrow={eyebrow} title={title} description={intro} />
+            <SectionHeading as="h1" eyebrow={eyebrow} title={title} description={intro} />
             <div className="mt-8 space-y-4 text-muted-foreground">
               {paragraphs.map((paragraph) => (
                 <InlineText
@@ -68,6 +75,8 @@ export default function AboutPage() {
           ))}
         </div>
       </SectionShell>
+
+      <FaqSection />
 
       <OrderCta />
     </>

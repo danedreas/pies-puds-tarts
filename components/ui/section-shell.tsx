@@ -23,7 +23,7 @@ export function SectionShell({
   tone = "default",
 }: SectionShellProps) {
   return (
-    <section id={id} className={cn("scroll-mt-20 py-16 sm:py-20 lg:py-24", toneClasses[tone], className)}>
+    <section id={id} className={cn("scroll-mt-24 py-16 sm:py-20 lg:py-24", toneClasses[tone], className)}>
       <div className={cn("mx-auto max-w-6xl px-4 sm:px-6 lg:px-8", innerClassName)}>
         {children}
       </div>
@@ -36,18 +36,23 @@ export function SectionHeading({
   title,
   description,
   align = "left",
+  as: Heading = "h2",
+  width = "narrow",
   className,
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   align?: "left" | "center";
+  as?: "h1" | "h2" | "h3";
+  width?: "narrow" | "full";
   className?: string;
 }) {
   return (
     <div
       className={cn(
-        "max-w-2xl space-y-4",
+        "space-y-4",
+        width === "narrow" && "max-w-2xl",
         align === "center" && "mx-auto text-center",
         className,
       )}
@@ -57,9 +62,9 @@ export function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <h2 className="font-heading text-3xl font-bold tracking-tight text-balance sm:text-4xl">
+      <Heading className="font-heading text-3xl font-bold tracking-tight text-balance sm:text-4xl">
         {title}
-      </h2>
+      </Heading>
       {description && (
         <InlineText
           text={description}

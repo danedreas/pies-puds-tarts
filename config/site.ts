@@ -49,8 +49,14 @@ export const siteConfig = {
   },
 
   social: {
-    instagram: { handle: "", url: "" },
-    facebook: { label: "Pies, Puds & Tarts", url: "" },
+    instagram: {
+      handle: "@stretton_paul",
+      url: "https://www.instagram.com/stretton_paul/",
+    },
+    facebook: {
+      label: "Great Walsingham Barns Cafe",
+      url: "https://www.facebook.com/GreatWalsinghamBarnsCafe/",
+    },
   },
 
   /** Primary navigation */

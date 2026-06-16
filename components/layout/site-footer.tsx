@@ -29,6 +29,11 @@ export function SiteFooter() {
           <div className="space-y-3">
             <p className="text-sm font-semibold">Legal &amp; resources</p>
             <ul className="space-y-2 text-sm text-muted-foreground">
+              <li>
+                <Link href="/about#faq" className="hover:text-foreground">
+                  FAQ
+                </Link>
+              </li>
               {legalLinks.map((page) => (
                 <li key={page.href}>
                   <Link href={page.href} className="hover:text-foreground">

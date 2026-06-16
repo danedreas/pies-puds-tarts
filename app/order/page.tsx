@@ -44,6 +44,7 @@ export default async function OrderPage() {
 
       <SectionShell tone="accent">
         <SectionHeading
+          as="h1"
           eyebrow={orderContent.eyebrow}
           title={orderContent.title}
           description={orderContent.description}

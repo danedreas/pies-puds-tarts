@@ -62,7 +62,7 @@ export function EventsPageIntro() {
 
   return (
     <SectionShell tone="accent">
-      <SectionHeading eyebrow={eyebrow} title={title} description={description} />
+      <SectionHeading as="h1" eyebrow={eyebrow} title={title} description={description} />
     </SectionShell>
   );
 }
