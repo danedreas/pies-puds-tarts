@@ -6,9 +6,9 @@ export const orderContent = {
   eyebrow: "Pre-order",
   title: "What would you like?",
   description:
-    "Pick a [market](/events), add your items from the [menu](/order), and pay online. I'll have them ready when you collect.",
+    "Add your items from the [menu](/order), pick a [market](/events) for collection, and pay online. I'll have them ready when you collect.",
   collectionMarketTitle: "Collect from",
-  collectionMarketDescription: "Required before checkout.",
+  collectionMarketDescription: "Choose your collection date when you're ready — you can add items first.",
   eventRequiredMessage: "Please choose which market you're collecting from.",
   noEventsMessage:
     "No market dates open for pre-orders at the moment. Check the events page or get in touch with Paul.",
