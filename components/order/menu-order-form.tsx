@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Check, Loader2, Minus, Plus, ShoppingBag } from "lucide-react";
@@ -16,6 +16,7 @@ import {
 import { orderContent } from "@/config/content/order";
 import { modules } from "@/config/modules";
 import type { PreorderBox } from "@/lib/site-content-shared";
+import { cn } from "@/lib/utils";
 import { EventSelector } from "@/components/order/event-selector";
 import { Button } from "@/components/ui/button";
 import { SectionShell, SoftPanel } from "@/components/ui/section-shell";
@@ -191,6 +192,27 @@ function MenuOrderForm({
 
   const orderTotal = lineItems.reduce((sum, line) => sum + line.lineTotal, 0);
   const itemCount = lineItems.reduce((sum, line) => sum + line.quantity, 0);
+  const summaryRef = useRef<HTMLElement>(null);
+  const [summaryInView, setSummaryInView] = useState(false);
+
+  useEffect(() => {
+    const target = summaryRef.current;
+    if (!target) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setSummaryInView(entry.isIntersecting),
+      { threshold: 0.15, rootMargin: "0px 0px -72px 0px" },
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
+
+  const showMobileCartBar = itemCount > 0 && !summaryInView;
+
+  function scrollToSummary() {
+    summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
   function setQuantity(id: string, next: number) {
     setQuantities((current) => ({
@@ -214,9 +236,21 @@ function MenuOrderForm({
   }
 
   return (
-    <SectionShell tone="muted" className="pt-8">
+    <SectionShell tone="muted" className={cn("pt-8", showMobileCartBar && "pb-28")}>
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] lg:items-start lg:gap-12">
         <div className="space-y-10">
+          <SoftPanel className="space-y-3 lg:hidden">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {orderContent.collectionMarketDescription}
+            </p>
+            <EventSelector
+              events={events}
+              value={selectedEventId}
+              onChange={onEventChange}
+              invalid={eventError}
+            />
+          </SoftPanel>
+
           {menuCategories.map((category) => (
             <MenuCategorySection
               key={category.id}
@@ -236,19 +270,21 @@ function MenuOrderForm({
           )}
         </div>
 
-        <aside className="lg:sticky lg:top-24">
+        <aside ref={summaryRef} className="scroll-mt-24 lg:sticky lg:top-24">
           <SoftPanel className="space-y-5">
             <div className="flex items-center gap-2">
               <ShoppingBag className="size-5 text-primary" aria-hidden />
               <h2 className="font-heading text-xl font-semibold">{orderContent.summaryTitle}</h2>
             </div>
 
-            <EventSelector
-              events={events}
-              value={selectedEventId}
-              onChange={onEventChange}
-              invalid={eventError}
-            />
+            <div className="hidden lg:block">
+              <EventSelector
+                events={events}
+                value={selectedEventId}
+                onChange={onEventChange}
+                invalid={eventError}
+              />
+            </div>
 
             {lineItems.length > 0 ? (
               <ul className="space-y-3 border-b border-border/60 pb-4 text-sm">
@@ -309,7 +345,44 @@ function MenuOrderForm({
           </SoftPanel>
         </aside>
       </div>
+
+      {showMobileCartBar && (
+        <MobileCartBar
+          itemCount={itemCount}
+          orderTotal={orderTotal}
+          onViewOrder={scrollToSummary}
+        />
+      )}
     </SectionShell>
+  );
+}
+
+function MobileCartBar({
+  itemCount,
+  orderTotal,
+  onViewOrder,
+}: {
+  itemCount: number;
+  orderTotal: number;
+  onViewOrder: () => void;
+}) {
+  return (
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center p-4 pb-[max(1rem,env(safe-area-inset-bottom))] lg:hidden">
+      <button
+        type="button"
+        onClick={onViewOrder}
+        className="surface-soft pointer-events-auto flex w-full max-w-md items-center justify-between gap-4 px-5 py-3.5 shadow-lg shadow-foreground/10 transition-transform active:scale-[0.98]"
+        aria-label={`View order: ${itemCount} items, total ${formatGbp(orderTotal)}`}
+      >
+        <div className="flex items-center gap-2.5 text-sm">
+          <ShoppingBag className="size-4 text-primary" aria-hidden />
+          <span className="font-medium">
+            {itemCount} {itemCount === 1 ? "item" : "items"}
+          </span>
+        </div>
+        <span className="font-heading text-xl font-bold tabular-nums">{formatGbp(orderTotal)}</span>
+      </button>
+    </div>
   );
 }
 
