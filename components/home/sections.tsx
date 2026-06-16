@@ -53,12 +53,12 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div className="relative order-1 -mx-4 aspect-[5/4] w-[calc(100%+2rem)] sm:-mx-6 sm:w-[calc(100%+3rem)] lg:order-2 lg:mx-0 lg:aspect-[4/5] lg:w-full lg:max-h-[min(42vh,380px)]">
+          <div className="relative order-1 aspect-[5/4] w-full lg:order-2 lg:aspect-[4/5] lg:max-h-[min(42vh,380px)]">
             <div
               className="pointer-events-none absolute -left-6 top-1/2 hidden h-[115%] w-20 -translate-y-1/2 rounded-full bg-primary/12 blur-2xl lg:block"
               aria-hidden
             />
-            <div className="absolute inset-0 overflow-hidden lg:rounded-l-[999px] lg:rounded-r-2xl lg:shadow-md lg:ring-1 lg:ring-border/50">
+            <div className="absolute inset-0 overflow-hidden rounded-2xl shadow-sm ring-1 ring-border/40 lg:rounded-l-[999px] lg:rounded-r-2xl lg:shadow-md lg:ring-border/50">
               <Image
                 src={image.src}
                 alt={image.alt}
