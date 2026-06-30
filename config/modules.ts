@@ -38,6 +38,12 @@ export const modules = {
 
   /** Full legal page suite beyond minimal privacy/cookie */
   fullLegalSuite: process.env.NEXT_PUBLIC_ENABLE_FULL_LEGAL === "true",
+
+  /**
+   * Admin editor + Blob-backed content. Off by default — edit config/content/* directly.
+   * Set NEXT_PUBLIC_ENABLE_ADMIN=true to re-enable /admin.
+   */
+  admin: process.env.NEXT_PUBLIC_ENABLE_ADMIN === "true",
 } as const;
 
 export type Modules = typeof modules;

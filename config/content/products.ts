@@ -1,5 +1,5 @@
 /**
- * Default menu items for pre-order. Live content is edited in /admin and stored in Vercel Blob.
+ * Default menu items for pre-order. Edit here while admin is disabled.
  */
 
 export type MenuCategoryId = "pies" | "puds" | "tarts";
@@ -22,45 +22,48 @@ export const menuCategories: { id: MenuCategoryId; label: string }[] = [
 
 export const menuItems: MenuItem[] = [
   {
-    id: "steak-kidney-pie",
+    id: "pear-walnut-stilton-honey-pie",
     category: "pies",
-    name: "Steak & kidney pie",
-    description: "Slow-cooked filling, deep shortcrust, baked until golden.",
-    displayPrice: "5.50",
+    name: "Pear, Walnut, Stilton & Honey pie",
+    description:
+      "Sweet pear and toasted walnut against sharp Stilton, finished with honey. Vegetarian.",
+    displayPrice: "6.00",
   },
   {
-    id: "chicken-mushroom-pie",
+    id: "goats-cheese-onion-marmalade-pie",
     category: "pies",
-    name: "Chicken & mushroom pie",
-    description: "Creamy chicken and mushrooms in buttery pastry.",
-    displayPrice: "5.50",
-  },
-  {
-    id: "cheese-onion-pie",
-    category: "pies",
-    name: "Cheese & onion pie",
-    description: "Cheddar and slow-cooked onions. Vegetarian.",
+    name: "Goat's Cheese, Onion & Marmalade pie",
+    description:
+      "Soft goat's cheese, slow-cooked onion, a streak of marmalade through buttery shortcrust. Vegetarian.",
     displayPrice: "5.00",
   },
   {
-    id: "sticky-toffee-pud",
-    category: "puds",
-    name: "Sticky toffee pud",
-    description: "Date sponge with plenty of toffee sauce.",
-    displayPrice: "4.50",
+    id: "chicken-chorizo-chilli-pie",
+    category: "pies",
+    name: "Chicken, Chorizo & Chilli pie",
+    description: "Chicken and chorizo with a chilli kick, topped with crushed nachos.",
+    displayPrice: "5.50",
   },
   {
-    id: "apple-crumble-pud",
+    id: "game-pie",
+    category: "pies",
+    name: "Game pie",
+    description: "A proper hunter's mix - ask on the day what's gone in.",
+    displayPrice: "5.50",
+  },
+  {
+    id: "norfolk-plough-pudding",
     category: "puds",
-    name: "Apple crumble pud",
-    description: "Bramley apples, crumble topping, custard.",
-    displayPrice: "4.50",
+    name: "Norfolk Plough Pudding",
+    description:
+      "Suet pastry wrapped round a savoury filling - our award-winning original. British Pie Awards Class Champion, 2017.",
+    displayPrice: "5.00",
   },
   {
     id: "seasonal-fruit-tart",
     category: "tarts",
     name: "Seasonal fruit tart",
-    description: "Whatever fruit is good that week, on pastry and custard.",
+    description: "Whatever's good that week, on pastry and custard.",
     displayPrice: "4.00",
   },
   {

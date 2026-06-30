@@ -1,4 +1,6 @@
+import { notFound } from "next/navigation";
 import { AdminLoginForm } from "@/components/admin/admin-login-form";
+import { modules } from "@/config/modules";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
@@ -9,6 +11,10 @@ export const metadata = createMetadata({
 });
 
 export default function AdminLoginPage() {
+  if (!modules.admin) {
+    notFound();
+  }
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto flex min-h-[50vh] max-w-md flex-col justify-center">

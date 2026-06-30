@@ -67,6 +67,11 @@ function normalizeLoadedPrices(content: SiteContent): SiteContent {
 }
 
 export async function readSiteContent(): Promise<SiteContent> {
+  // Content is maintained in config/content/* while admin is disabled.
+  if (!process.env.NEXT_PUBLIC_ENABLE_ADMIN) {
+    return getDefaultSiteContent();
+  }
+
   if (!isBlobConfigured()) {
     return getDefaultSiteContent();
   }

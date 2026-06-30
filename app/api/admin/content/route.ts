@@ -1,6 +1,7 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
+import { modules } from "@/config/modules";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import {
   formatSiteContentValidationError,
@@ -21,6 +22,10 @@ function revalidateSiteContent() {
 }
 
 export async function GET() {
+  if (!modules.admin) {
+    return NextResponse.json({ error: "Not found." }, { status: 404 });
+  }
+
   if (!(await isAdminAuthenticated())) {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   }
@@ -30,6 +35,10 @@ export async function GET() {
 }
 
 export async function PUT(request: Request) {
+  if (!modules.admin) {
+    return NextResponse.json({ error: "Not found." }, { status: 404 });
+  }
+
   if (!(await isAdminAuthenticated())) {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   }

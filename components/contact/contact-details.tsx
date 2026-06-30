@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { FacebookIcon, InstagramIcon } from "@/components/icons/social-icons";
 import { siteConfig } from "@/config/site";
 import { whatsappUrl } from "@/lib/contact";
 import { Button } from "@/components/ui/button";
@@ -132,19 +133,25 @@ export function FooterContactList() {
           <OpeningHoursText />
         </span>
       </li>
-      <li>
-        <span className="font-medium text-foreground/80">Markets: </span>
-        {contact.serviceArea}
+      <li className="inline-flex items-start gap-2">
+        <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden />
+        <span>
+          Markets -{" "}
+          <Link href="/events" className="text-foreground underline-offset-4 hover:underline">
+            {contact.serviceArea}
+          </Link>
+        </span>
       </li>
       {social.instagram.url && (
         <li>
           <a
             href={social.instagram.url}
-            className="hover:text-foreground"
+            className="inline-flex items-center gap-2 hover:text-foreground"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Instagram{social.instagram.handle ? `: ${social.instagram.handle}` : ""}
+            <InstagramIcon className="size-4 shrink-0" />
+            {social.instagram.handle ?? "Instagram"}
           </a>
         </li>
       )}
@@ -152,11 +159,12 @@ export function FooterContactList() {
         <li>
           <a
             href={social.facebook.url}
-            className="hover:text-foreground"
+            className="inline-flex items-center gap-2 hover:text-foreground"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Facebook: {social.facebook.label}
+            <FacebookIcon className="size-4 shrink-0" />
+            {social.facebook.label || "Facebook"}
           </a>
         </li>
       )}

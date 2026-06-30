@@ -18,10 +18,7 @@ export function HeroSection() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-6 pt-3 pb-6 sm:gap-8 sm:pb-8 lg:grid-cols-2 lg:gap-10 lg:pt-14 lg:pb-8">
           <div className="order-2 min-w-0 lg:order-1 lg:pr-6">
-            <p className="inline-flex w-fit rounded-full bg-brand-stone/25 px-3 py-1 text-xs font-medium tracking-wide text-brand-pies uppercase">
-              {hero.eyebrow}
-            </p>
-            <h1 className="font-heading mt-4 text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:max-w-xl lg:text-[2.75rem] lg:leading-[1.1]">
+            <h1 className="font-heading text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:max-w-xl lg:text-[2.75rem] lg:leading-[1.1]">
               {hero.headline}
             </h1>
             <InlineText

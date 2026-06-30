@@ -9,7 +9,7 @@ type AwardBadgeBarProps = {
 /** Contained horizontal award badge  -  sits between hero and page content. */
 export function AwardBadgeBar({ className }: AwardBadgeBarProps) {
   return (
-    <div className={cn("mx-auto max-w-6xl px-4 py-5 sm:px-6 sm:py-6 lg:px-8", className)}>
+    <div className={cn("mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8", className)}>
       <div
         className="mx-auto flex w-fit max-w-full flex-col items-center gap-2 rounded-lg border border-brand-stone/50 bg-muted/30 px-5 py-3.5 sm:flex-row sm:gap-x-4 sm:px-6 sm:py-3"
         aria-label={brandAward.claim}

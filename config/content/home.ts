@@ -6,7 +6,6 @@
 
 export const homeContent = {
   hero: {
-    eyebrow: "Norfolk farmers markets",
     headline: "Award-winning pies, puds & tarts",
     subheadline:
       "Savoury bakes, proper puds and sweet tarts from the very best of North Norfolk  -  at [markets around the county](/events). [Order ahead online](/order) for collection, or [get in touch](/contact) about pickup.",

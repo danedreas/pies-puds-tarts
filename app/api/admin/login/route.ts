@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { modules } from "@/config/modules";
 import {
   getAdminCookieName,
   getAdminCookieOptions,
@@ -12,6 +13,10 @@ const loginSchema = z.object({
 });
 
 export async function POST(request: Request) {
+  if (!modules.admin) {
+    return NextResponse.json({ error: "Not found." }, { status: 404 });
+  }
+
   try {
     const body = loginSchema.parse(await request.json());
 

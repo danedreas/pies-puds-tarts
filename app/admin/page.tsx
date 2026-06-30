@@ -1,6 +1,7 @@
-import { redirect } from "next/navigation";
+import { redirect, notFound } from "next/navigation";
 import { AdminEditor } from "@/components/admin/admin-editor";
 import { isAdminAuthenticated, isAdminConfigured } from "@/lib/admin-auth";
+import { modules } from "@/config/modules";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
@@ -11,6 +12,10 @@ export const metadata = createMetadata({
 });
 
 export default async function AdminPage() {
+  if (!modules.admin) {
+    notFound();
+  }
+
   if (!isAdminConfigured()) {
     return (
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">

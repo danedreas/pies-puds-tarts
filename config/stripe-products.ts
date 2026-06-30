@@ -1,5 +1,5 @@
 /**
- * Default mixed-box offers for pre-order. Live content is edited in /admin and stored in Vercel Blob.
+ * Default mixed-box offers for pre-order. Edit here while admin is disabled.
  */
 
 export type PreorderBoxDefaults = {
@@ -13,12 +13,12 @@ export type PreorderBoxDefaults = {
 
 export const stripeProducts: PreorderBoxDefaults[] = [
   {
-    id: "savoury-box",
+    id: "savoury-pie-box",
     name: "Savoury pie box",
-    description: "Four mixed savoury pies - good for lunch or taking home to share.",
-    displayPrice: "20",
+    description: "Four mixed savoury pies.",
+    displayPrice: "20.00",
     features: [
-      "Four assorted savoury pies",
+      "Four mixed savoury pies",
       "Collect from your chosen market",
       "Order at least 48 hours ahead",
     ],
@@ -26,12 +26,13 @@ export const stripeProducts: PreorderBoxDefaults[] = [
   {
     id: "mixed-box",
     name: "Mixed box",
-    description: "A pie, a pud and a tart - a bit of everything from the stall.",
-    displayPrice: "18",
+    description:
+      "Two savoury pies, the Plough Pudding, and a tart - a proper sample of the stall.",
+    displayPrice: "18.00",
     features: [
-      "Two savoury pies, one pud and one tart",
-      "A good way to try the stall",
+      "Two savoury pies, Norfolk Plough Pudding, and a tart",
       "Collect from your chosen market",
+      "Order at least 48 hours ahead",
     ],
     highlighted: true,
   },

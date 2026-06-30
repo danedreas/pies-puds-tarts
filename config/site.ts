@@ -54,8 +54,8 @@ export const siteConfig = {
       url: "https://www.instagram.com/stretton_paul/",
     },
     facebook: {
-      label: "",
-      url: "",
+      label: "Pies, Puds & Tarts",
+      url: "https://www.facebook.com/GreatWalsinghamBarnsCafe",
     },
   },
 
