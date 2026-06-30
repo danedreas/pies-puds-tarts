@@ -12,6 +12,9 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: import.meta.dirname,
+  },
   async headers() {
     return [
       {

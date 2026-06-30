@@ -8,7 +8,6 @@ export function FaqSection() {
   return (
     <SectionShell id="faq" tone="muted">
       <SectionHeading
-        width="full"
         eyebrow={faqContent.eyebrow}
         title={faqContent.title}
         description={faqContent.description}

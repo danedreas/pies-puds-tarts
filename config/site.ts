@@ -6,44 +6,44 @@
 export const siteConfig = {
   name: "Pies, Puds & Tarts",
   legalName: "Pies, Puds & Tarts",
-  tagline: "Pies, puds and tarts from Paul's stall at Norfolk farmers markets.",
+  tagline: "Award-winning pies, savoury bakes, sweet tarts and more.",
   description:
-    "Paul Stretton bakes pies, puds and tarts for farmers markets across Norfolk. Pre-order online and collect from the stall on market day.",
+    "Award-winning pies, savoury bakes, sweet tarts and more from Norfolk farmers markets. Pre-order online for collection, or contact us about pickup.",
 
   /** Production URL - set NEXT_PUBLIC_SITE_URL in env for deploys */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   locale: "en-GB" as const,
 
   logo: {
-    src: "/images/logo.png",
+    src: "/images/brand-logo.png",
     alt: "Pies, Puds & Tarts logo",
-    width: 200,
-    height: 72,
+    width: 578,
+    height: 300,
   },
 
   owner: {
     name: "Paul Stretton",
     role: "Baker",
-    /** Helps search engines associate Paul with this venture, not previous businesses */
-    bio: "Paul Stretton bakes pies, puds and tarts for farmers markets across Norfolk.",
+    /** Structured data only  -  kept minimal on public pages */
+    bio: "Pies, Puds & Tarts  -  award-winning bakery at Norfolk farmers markets.",
   },
 
   contact: {
     email: "hello@piespudstarts.co.uk",
-    phone: "",
+    phone: "07595 953542",
     whatsapp: "",
     /** Human-readable - shown on contact page and footer */
     openingHours: {
-      prefix: "Market days vary -",
-      link: { label: "see our events schedule", href: "/events" },
+      prefix: "Pickup available  - ",
+      link: { label: "contact us for details", href: "/contact" },
     },
     /** Human-readable - helps local customers and SEO */
     serviceArea: "Farmers markets around Norfolk",
     address: {
-      line1: "",
-      city: "",
+      line1: "Unit 2B, Orchard Park, Dereham Road",
+      city: "Colkirk",
       region: "Norfolk",
-      postcode: "",
+      postcode: "NR21 7JQ",
       country: "United Kingdom",
     },
   },
@@ -54,8 +54,8 @@ export const siteConfig = {
       url: "https://www.instagram.com/stretton_paul/",
     },
     facebook: {
-      label: "Great Walsingham Barns Cafe",
-      url: "https://www.facebook.com/GreatWalsinghamBarnsCafe/",
+      label: "",
+      url: "",
     },
   },
 
@@ -80,7 +80,7 @@ export const siteConfig = {
 
   /** Legal entity details for policy templates */
   legal: {
-    registeredOffice: "Norfolk, United Kingdom",
+    registeredOffice: "Colkirk, Norfolk, United Kingdom",
     companyNumber: "",
     dataController: "Pies, Puds & Tarts",
     dpoEmail: "hello@piespudstarts.co.uk",
@@ -88,11 +88,10 @@ export const siteConfig = {
   },
 
   seo: {
-    defaultTitle: "Pies, Puds & Tarts - Paul's market bakery in Norfolk",
+    defaultTitle: "Pies, Puds & Tarts - Award-winning bakery in Norfolk",
     titleTemplate: "%s | Pies, Puds & Tarts",
     keywords: [
       "Pies Puds and Tarts",
-      "Paul Stretton",
       "Norfolk farmers market",
       "handmade pies Norfolk",
       "farmers market bakery",
@@ -100,6 +99,8 @@ export const siteConfig = {
       "Norfolk bakery",
       "artisan pies",
       "market stall Norfolk",
+      "savoury bakes Norfolk",
+      "sweet tarts Norfolk",
     ],
     ogImage: "/images/og.jpg",
   },
@@ -108,6 +109,7 @@ export const siteConfig = {
   projectTypes: [
     "General question",
     "Pre-order help",
+    "Pickup enquiry",
     "Wholesale or catering",
     "Something else",
   ] as const,

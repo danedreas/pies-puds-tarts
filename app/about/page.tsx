@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { aboutContent } from "@/config/content/about";
 import { faqAnswerPlainText, faqContent } from "@/config/content/faq";
 import { siteImages } from "@/config/content/images";
+import { AwardCredential } from "@/components/brand/award-credential";
 import { FaqSection } from "@/components/content/faq-section";
 import { PlaceholderImage } from "@/components/ui/placeholder-image";
 import { InlineText } from "@/components/content/inline-text";
@@ -14,8 +15,8 @@ import { aboutPageJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/json-ld";
 import { absoluteUrl, createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
-  title: "About Paul Stretton",
-  description: `Paul Stretton bakes pies, puds and tarts for farmers markets across Norfolk. Pre-order online, collect from the stall, and find answers to common ordering questions.`,
+  title: "About",
+  description: `Award-winning pies, savoury bakes and sweet tarts from Norfolk farmers markets. Pre-order online, collect from the stall, or contact us about pickup.`,
   path: "/about",
 });
 
@@ -43,6 +44,7 @@ export default function AboutPage() {
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-14">
           <div>
             <SectionHeading as="h1" eyebrow={eyebrow} title={title} description={intro} />
+            <AwardCredential className="mt-8" />
             <div className="mt-8 space-y-4 text-muted-foreground">
               {paragraphs.map((paragraph) => (
                 <InlineText

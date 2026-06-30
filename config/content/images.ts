@@ -24,7 +24,7 @@ export const siteImages = {
     alt: "Wooden crate of golden star-topped savoury pies lined with parchment",
   },
 
-  /** About Paul page */
+  /** About page */
   about: {
     src: "/images/about-paul-catering.jpg",
     alt: "Three-tier pork pie display for a Norfolk catering event",

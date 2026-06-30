@@ -37,7 +37,7 @@ export function SectionHeading({
   description,
   align = "left",
   as: Heading = "h2",
-  width = "narrow",
+  width = "full",
   className,
 }: {
   eyebrow?: string;
@@ -58,7 +58,7 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <p className="inline-flex rounded-full bg-primary/8 px-3 py-1 text-xs font-medium tracking-wide text-primary uppercase">
+        <p className="inline-flex rounded-full bg-brand-stone/25 px-3 py-1 text-xs font-medium tracking-wide text-brand-pies uppercase">
           {eyebrow}
         </p>
       )}

@@ -78,7 +78,7 @@ export function EventsPageList({ events }: EventsListProps) {
 
 export function EventsTravelNotice() {
   return (
-    <p className="mt-10 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+    <p className="mt-10 text-sm leading-relaxed text-muted-foreground">
       Dates can change -{" "}
       <Link href="/contact" className="text-foreground underline-offset-4 hover:underline">
         get in touch

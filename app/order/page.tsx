@@ -14,7 +14,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Pre-order menu",
-  description: `Order pies, puds and tarts from Paul Stretton for collection at a Norfolk farmers market.`,
+  description: `Order award-winning pies, puds and tarts for collection at a Norfolk farmers market.`,
   path: "/order",
 });
 

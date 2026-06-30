@@ -2,7 +2,7 @@
  * Farmers market events - edit per client build.
  *
  * When Google Sheets is enabled (see lib/google-sheets.ts), this list can be
- * replaced at build time from a shared spreadsheet Paul can update himself.
+ * replaced at build time from a shared spreadsheet.
  */
 
 export type MarketEvent = {
@@ -19,13 +19,13 @@ export type MarketEvent = {
 
 export const eventsContent = {
   eyebrow: "Farmers markets",
-  title: "Where to find me",
+  title: "Where to find us",
   description:
-    "These are the markets I'm booked in for over the coming weeks. Dates can shift, especially if the weather's awful - worth [getting in touch](/contact) before you travel.",
+    "These are the markets we're booked in for over the coming weeks. Dates can shift, especially if the weather's awful  -  worth [getting in touch](/contact) before you travel.",
   emptyMessage:
-    "Nothing coming up just now. Check back soon, or [send a message](/contact) if you're wondering where I'll be next.",
+    "Nothing coming up just now. Check back soon, or [send a message](/contact) for more information.",
   cta: {
-    label: "Ask Paul",
+    label: "Get in touch",
     href: "/contact",
   },
 };
@@ -40,22 +40,6 @@ export const marketEvents: MarketEvent[] = [
   //   dateDisplay: "Saturday 21 June 2026",
   //   time: "9am - 3pm",
   //   notes: "On the market square. Pre-orders welcome.",
-  // },
-  // {
-  //   id: "aylsham-market-june",
-  //   name: "Aylsham Market",
-  //   location: "Aylsham town centre, NR11",
-  //   date: "2026-06-28",
-  //   dateDisplay: "Saturday 28 June 2026",
-  //   time: "8:30am - 1pm",
-  // },
-  // {
-  //   id: "diss-market-july",
-  //   name: "Diss Market",
-  //   location: "Diss, IP22",
-  //   date: "2026-07-05",
-  //   dateDisplay: "Saturday 5 July 2026",
-  //   time: "9am - 2pm",
   // },
 ];
 

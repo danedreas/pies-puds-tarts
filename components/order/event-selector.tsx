@@ -2,7 +2,12 @@
 
 import Link from "next/link";
 import type { MarketEvent } from "@/config/content/events";
-import { orderContent } from "@/config/content/order";
+import {
+  isUnitCollection,
+  orderContent,
+  unitCollection,
+} from "@/config/content/order";
+import { InlineText } from "@/components/content/inline-text";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
@@ -18,26 +23,12 @@ function formatEventLabel(event: MarketEvent): string {
 }
 
 export function EventSelector({ events, value, onChange, invalid = false }: EventSelectorProps) {
-  if (events.length === 0) {
-    return (
-      <div className="space-y-2">
-        <Label className="text-sm font-medium">{orderContent.collectionMarketTitle}</Label>
-        <p className="text-sm leading-relaxed text-muted-foreground">{orderContent.noEventsMessage}</p>
-        <Link
-          href="/events"
-          className="inline-block text-sm font-medium text-foreground underline-offset-4 hover:underline"
-        >
-          View market schedule
-        </Link>
-      </div>
-    );
-  }
-
   const selectedEvent = events.find((event) => event.id === value);
+  const unitSelected = isUnitCollection(value);
 
   return (
     <div className="space-y-2">
-      <Label htmlFor="collection-market" className="text-sm font-medium">
+      <Label htmlFor="collection-location" className="text-sm font-medium">
         {orderContent.collectionMarketTitle}
         <span className="text-primary" aria-hidden>
           {" "}
@@ -45,7 +36,7 @@ export function EventSelector({ events, value, onChange, invalid = false }: Even
         </span>
       </Label>
       <select
-        id="collection-market"
+        id="collection-location"
         value={value}
         onChange={(event) => onChange(event.target.value)}
         required
@@ -57,22 +48,52 @@ export function EventSelector({ events, value, onChange, invalid = false }: Even
         )}
       >
         <option value="" disabled>
-          Choose a market date...
+          Choose a collection option...
         </option>
+        <option value={unitCollection.id}>{unitCollection.label}</option>
         {events.map((event) => (
           <option key={event.id} value={event.id}>
             {formatEventLabel(event)}
           </option>
         ))}
       </select>
+
+      {unitSelected && (
+        <div className="space-y-1.5 rounded-lg border border-border/60 bg-muted/20 p-3">
+          <p className="text-xs font-medium text-foreground">{unitCollection.location}</p>
+          <InlineText
+            text={unitCollection.notice}
+            as="span"
+            className="block text-xs leading-relaxed text-muted-foreground"
+          />
+        </div>
+      )}
+
       {selectedEvent && (
         <p className="text-xs text-muted-foreground">
           {selectedEvent.location} · {selectedEvent.time}
         </p>
       )}
+
+      {events.length === 0 && !unitSelected && (
+        <InlineText
+          text={orderContent.noEventsMessage}
+          className="text-xs leading-relaxed text-muted-foreground"
+        />
+      )}
+
+      {events.length === 0 && (
+        <Link
+          href="/events"
+          className="inline-block text-xs font-medium text-foreground underline-offset-4 hover:underline"
+        >
+          View market schedule
+        </Link>
+      )}
+
       {invalid && (
         <p className="text-sm text-destructive" role="alert">
-          {orderContent.eventRequiredMessage}
+          {orderContent.collectionRequiredMessage}
         </p>
       )}
     </div>

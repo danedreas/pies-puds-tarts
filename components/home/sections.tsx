@@ -16,9 +16,9 @@ export function HeroSection() {
   return (
     <section className="scroll-mt-24 overflow-hidden bg-gradient-to-b from-muted/40 via-background to-background">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-6 pb-10 pt-3 sm:gap-8 sm:pb-12 lg:grid-cols-2 lg:gap-10 lg:py-14">
+        <div className="grid items-center gap-6 pt-3 pb-6 sm:gap-8 sm:pb-8 lg:grid-cols-2 lg:gap-10 lg:pt-14 lg:pb-8">
           <div className="order-2 min-w-0 lg:order-1 lg:pr-6">
-            <p className="inline-flex w-fit rounded-full bg-primary/8 px-3 py-1 text-xs font-medium tracking-wide text-primary uppercase">
+            <p className="inline-flex w-fit rounded-full bg-brand-stone/25 px-3 py-1 text-xs font-medium tracking-wide text-brand-pies uppercase">
               {hero.eyebrow}
             </p>
             <h1 className="font-heading mt-4 text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:max-w-xl lg:text-[2.75rem] lg:leading-[1.1]">
@@ -55,7 +55,7 @@ export function HeroSection() {
 
           <div className="relative order-1 aspect-[5/4] w-full lg:order-2 lg:aspect-[4/5] lg:max-h-[min(42vh,380px)]">
             <div
-              className="pointer-events-none absolute -left-6 top-1/2 hidden h-[115%] w-20 -translate-y-1/2 rounded-full bg-primary/12 blur-2xl lg:block"
+              className="pointer-events-none absolute -left-6 top-1/2 hidden h-[115%] w-20 -translate-y-1/2 rounded-full bg-brand-puds/12 blur-2xl lg:block"
               aria-hidden
             />
             <div className="absolute inset-0 overflow-hidden rounded-2xl shadow-sm ring-1 ring-border/40 lg:rounded-l-[999px] lg:rounded-r-2xl lg:shadow-md lg:ring-border/50">
@@ -79,7 +79,7 @@ export function AboutSection() {
   const { about } = homeContent;
 
   return (
-    <SectionShell id={about.id}>
+    <SectionShell id={about.id} className="pt-6 pb-16 sm:pt-8 sm:pb-20 lg:pt-8 lg:pb-24">
       <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
         <PlaceholderImage image={siteImages.homeAbout} aspect="portrait" className="mx-auto w-full max-w-md lg:max-w-none" />
 
@@ -92,7 +92,7 @@ export function AboutSection() {
               <ul className="mt-4 space-y-3">
                 {about.positivePanel.items.map((item) => (
                   <li key={item} className="flex gap-3 text-sm leading-relaxed">
-                    <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-puds/15 text-brand-pies">
                       <Check className="size-3" aria-hidden />
                     </span>
                     <span>
@@ -108,7 +108,7 @@ export function AboutSection() {
               <ul className="mt-4 space-y-3">
                 {about.infoPanel.items.map((item) => (
                   <li key={item} className="flex gap-3 text-sm leading-relaxed">
-                    <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-puds/15 text-brand-pies">
                       <Check className="size-3" aria-hidden />
                     </span>
                     <span>
@@ -178,13 +178,13 @@ export function EventsTeaserSection({ events }: { events: MarketEvent[] }) {
                   <div>
                     <h3 className="font-heading text-lg font-semibold">{event.name}</h3>
                     <p className="mt-1 flex items-start gap-2 text-sm text-muted-foreground">
-                      <MapPin className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+                      <MapPin className="mt-0.5 size-4 shrink-0 text-brand-puds" aria-hidden />
                       <span>{event.location}</span>
                     </p>
                   </div>
                   <div className="shrink-0 text-sm sm:text-right">
                     <p className="flex items-center gap-2 font-medium sm:justify-end">
-                      <CalendarDays className="size-4 shrink-0 text-primary" aria-hidden />
+                      <CalendarDays className="size-4 shrink-0 text-brand-puds" aria-hidden />
                       {event.dateDisplay}
                     </p>
                     <p className="mt-1 text-muted-foreground">{event.time}</p>

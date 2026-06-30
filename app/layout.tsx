@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Source_Sans_3 } from "next/font/google";
+import { Libre_Bodoni, Source_Sans_3 } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { themeTokens, themeTokensToCssVars } from "@/config/theme";
 import { SiteShell } from "@/components/layout/site-shell";
@@ -14,7 +14,7 @@ const sourceSans = Source_Sans_3({
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const libreBodoni = Libre_Bodoni({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
@@ -47,7 +47,7 @@ export default function RootLayout({
   return (
     <html
       lang={siteConfig.locale}
-      className={`${sourceSans.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${sourceSans.variable} ${libreBodoni.variable} h-full antialiased`}
       style={themeTokensToCssVars(themeTokens)}
     >
       <body className="min-h-full flex flex-col font-sans">

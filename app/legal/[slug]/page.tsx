@@ -37,7 +37,7 @@ export default async function LegalSlugPage({
 
   if (!pageKey) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-16 text-center">
+      <div className="mx-auto max-w-6xl px-4 py-16 text-center">
         <p>Page not found.</p>
         <Link href="/" className="mt-4 inline-block underline">
           Back to home

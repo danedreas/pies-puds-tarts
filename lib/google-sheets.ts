@@ -1,7 +1,7 @@
 /**
  * Google Sheets integration scaffold.
  *
- * Planned use: Paul maintains menu items and market dates in a shared spreadsheet.
+ * Planned use: menu items and market dates maintained in a shared spreadsheet.
  * Enable with NEXT_PUBLIC_ENABLE_GOOGLE_SHEETS=true and the API credentials below.
  *
  * Products tab - columns: id, category, name, description, displayPrice, priceId

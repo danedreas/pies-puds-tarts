@@ -18,7 +18,7 @@ export function OrderCta(props: OrderCtaProps = {}) {
 
   return (
     <SectionShell>
-      <div className="relative isolate overflow-hidden rounded-[1.75rem] shadow-lg shadow-primary/15">
+      <div className="relative isolate overflow-hidden rounded-[1.75rem] shadow-lg shadow-royal/20">
         <div className="absolute inset-0" aria-hidden>
           <Image
             src={image.src}
@@ -28,7 +28,7 @@ export function OrderCta(props: OrderCtaProps = {}) {
             className="scale-105 object-cover object-center opacity-35"
           />
         </div>
-        <div className="absolute inset-0 bg-primary/84" aria-hidden />
+        <div className="absolute inset-0 bg-royal/88" aria-hidden />
         <div className="relative z-10 px-6 py-10 text-primary-foreground sm:px-10 sm:py-12 lg:flex lg:items-center lg:justify-between lg:gap-10">
           <div className="max-w-2xl">
             <h2 className="font-heading text-3xl font-bold tracking-tight text-balance sm:text-4xl">

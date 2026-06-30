@@ -4,7 +4,7 @@
 
 export const orderCtaContent = {
   title: "Ready to order?",
-  description: "Pick your market, choose your bakes, and I'll see you at the stall.",
+  description: "Pick your market, choose your bakes, and we'll see you at the stall.",
   buttonLabel: "View the menu",
   href: "/order",
 } as const;

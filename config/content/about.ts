@@ -5,19 +5,19 @@
  */
 
 export const aboutContent = {
-  eyebrow: "About Paul",
-  title: "Paul Stretton",
+  eyebrow: "About us",
+  title: "Pies, Puds & Tarts",
   intro:
-    "I run Pies, Puds & Tarts from Norfolk - baking for [farmers markets](/events) and selling straight from the stall.",
+    "Award-winning pies, savoury bakes, sweet tarts and more  -  baked in Norfolk for [farmers markets](/events) across the county.",
 
   paragraphs: [
-    "I've worked in kitchens and hospitality for years. These days I'm out at the markets instead, baking pies, puds and tarts in small batches and serving the people who come back week after week.",
-    "You'll find the usual favourites on the stall, plus whatever fits the season. The [menu](/order) moves through the year - summer tarts, autumn puds, proper hearty pies when the weather turns.",
-    "If you want something waiting for you on market day, you can [pre-order through the site](/order). For wholesale, a big order, or just a question about what's baking this week, [drop me a line](/contact).",
+    "Everything is made by hand in small batches, using the very best of North Norfolk produce where the season allows. The sort of baking people come back for week after week.",
+    "On the stall you'll find savoury pies, proper puds and sweet tarts, plus whatever fits the season. The [menu](/order) moves through the year  -  summer tarts, autumn puds, hearty pies when the weather turns.",
+    "Pre-order for [market collection](/order), or [get in touch](/contact) about pickup, wholesale, or a larger order. Please contact for more information  -  we're happy to help.",
   ],
 
   values: {
-    title: "How I work",
+    title: "How we bake",
     items: [
       {
         title: "Made by hand",

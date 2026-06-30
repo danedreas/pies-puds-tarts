@@ -1,4 +1,5 @@
 import { siteConfig } from "@/config/site";
+import { AwardBadgeBar } from "@/components/brand/award-badge-bar";
 import {
   AboutSection,
   EventsTeaserSection,
@@ -30,6 +31,7 @@ export default async function HomePage() {
         })}
       />
       <HeroSection />
+      <AwardBadgeBar />
       <AboutSection />
       <ServicesSection />
       <EventsTeaserSection events={events} />

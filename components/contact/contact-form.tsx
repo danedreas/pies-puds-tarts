@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -35,7 +36,18 @@ const contactSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactSchema>;
 
+function readContactPrefill(searchParams: URLSearchParams): Pick<ContactFormValues, "projectType" | "message"> {
+  const type = searchParams.get("type");
+  const message = searchParams.get("message") ?? "";
+  const projectType =
+    type && (siteConfig.projectTypes as readonly string[]).includes(type) ? type : "";
+
+  return { projectType, message };
+}
+
 export function ContactForm({ className }: { className?: string }) {
+  const searchParams = useSearchParams();
+  const prefill = readContactPrefill(searchParams);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -53,13 +65,14 @@ export function ContactForm({ className }: { className?: string }) {
       email: "",
       company: "",
       phone: "",
-      projectType: "",
-      message: "",
+      projectType: prefill.projectType,
+      message: prefill.message,
       consent: undefined,
     },
   });
 
   const consent = watch("consent");
+  const projectType = watch("projectType");
 
   async function onSubmit(values: ContactFormValues) {
     setStatus("loading");
@@ -91,7 +104,7 @@ export function ContactForm({ className }: { className?: string }) {
       <div className={cn("surface-soft p-6 sm:p-8", className)}>
         <h2 className="font-heading text-xl font-semibold">Message sent</h2>
         <p className="mt-2 text-muted-foreground">
-          Thanks for your message. Paul will get back to you as soon as he can.
+          Thanks for your message. We'll get back to you as soon as we can.
         </p>
         <Button className="mt-6" variant="outline" onClick={() => setStatus("idle")}>
           Send another message
@@ -136,7 +149,10 @@ export function ContactForm({ className }: { className?: string }) {
 
       <div className="space-y-2">
         <Label htmlFor="projectType">What is it about? *</Label>
-        <Select onValueChange={(value) => setValue("projectType", value, { shouldValidate: true })}>
+        <Select
+          value={projectType || undefined}
+          onValueChange={(value) => setValue("projectType", value, { shouldValidate: true })}
+        >
           <SelectTrigger id="projectType" className="w-full">
             <SelectValue placeholder="Choose a topic" />
           </SelectTrigger>
@@ -158,7 +174,7 @@ export function ContactForm({ className }: { className?: string }) {
         <Textarea
           id="message"
           rows={5}
-          placeholder="Which market you're collecting from, what you'd like to order, or anything else Paul should know."
+          placeholder="Which market you're collecting from, what you'd like to order, or anything else we should know."
           {...register("message")}
         />
         {errors.message && (

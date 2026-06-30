@@ -321,7 +321,7 @@ export function AdminEditor() {
               <AdminItemPanel
                 key={key}
                 title={event.name || `Market ${index + 1}`}
-                summary={summary || "New market — add details below"}
+                summary={summary || "New market - add details below"}
                 expanded={isExpanded(key)}
                 onToggle={() => toggleItem(key)}
                 onRemove={() =>
@@ -441,7 +441,7 @@ export function AdminEditor() {
               <AdminItemPanel
                 key={key}
                 title={item.name || `Menu item ${index + 1}`}
-                summary={summary || "New menu item — add details below"}
+                summary={summary || "New menu item - add details below"}
                 expanded={isExpanded(key)}
                 onToggle={() => toggleItem(key)}
                 onRemove={() =>
@@ -557,7 +557,7 @@ export function AdminEditor() {
               <AdminItemPanel
                 key={key}
                 title={box.name || `Box ${index + 1}`}
-                summary={summary || "New mixed box — add details below"}
+                summary={summary || "New mixed box - add details below"}
                 expanded={isExpanded(key)}
                 onToggle={() => toggleItem(key)}
                 onRemove={() =>

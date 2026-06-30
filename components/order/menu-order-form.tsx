@@ -13,7 +13,7 @@ import {
   parseDisplayPrice,
   type MenuItem,
 } from "@/config/content/products";
-import { orderContent } from "@/config/content/order";
+import { orderContent, isUnitCollection, buildUnitCollectionContactHref, unitCollection } from "@/config/content/order";
 import { modules } from "@/config/modules";
 import type { PreorderBox } from "@/lib/site-content-shared";
 import { cn } from "@/lib/utils";
@@ -95,9 +95,19 @@ function useCheckout({ selectedEventId, selectedEvent, onEventError }: CheckoutP
   const [error, setError] = useState<string | null>(null);
 
   async function startCheckout(body: Record<string, unknown>) {
-    if (!selectedEventId || !selectedEvent) {
+    if (!selectedEventId) {
       onEventError();
-      toast.message(orderContent.eventRequiredMessage);
+      toast.message(orderContent.collectionRequiredMessage);
+      return;
+    }
+
+    if (isUnitCollection(selectedEventId)) {
+      return;
+    }
+
+    if (!selectedEvent) {
+      onEventError();
+      toast.message(orderContent.collectionRequiredMessage);
       return;
     }
 
@@ -192,6 +202,7 @@ function MenuOrderForm({
 
   const orderTotal = lineItems.reduce((sum, line) => sum + line.lineTotal, 0);
   const itemCount = lineItems.reduce((sum, line) => sum + line.quantity, 0);
+  const unitSelected = isUnitCollection(selectedEventId);
   const summaryRef = useRef<HTMLElement>(null);
   const [summaryInView, setSummaryInView] = useState(false);
 
@@ -293,7 +304,7 @@ function MenuOrderForm({
             </div>
 
             <p className="text-xs leading-relaxed text-muted-foreground">
-              {orderContent.collectionNote}
+              {unitSelected ? unitCollection.collectionNote : orderContent.collectionNote}
             </p>
 
             {error && (
@@ -302,21 +313,38 @@ function MenuOrderForm({
               </p>
             )}
 
-            <Button
-              onClick={handleCheckout}
-              disabled={loading || itemCount === 0 || !selectedEventId}
-              className="w-full rounded-full"
-              size="lg"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="size-4 animate-spin" aria-hidden />
-                  Redirecting…
-                </>
-              ) : (
-                orderContent.checkoutLabel
-              )}
-            </Button>
+            {unitSelected ? (
+              <Button
+                asChild={itemCount > 0 && Boolean(selectedEventId)}
+                disabled={itemCount === 0 || !selectedEventId}
+                className="w-full rounded-full"
+                size="lg"
+              >
+                {itemCount > 0 && selectedEventId ? (
+                  <Link href={buildUnitCollectionContactHref(lineItems)}>
+                    {unitCollection.contactButtonLabel}
+                  </Link>
+                ) : (
+                  <span>{unitCollection.contactButtonLabel}</span>
+                )}
+              </Button>
+            ) : (
+              <Button
+                onClick={handleCheckout}
+                disabled={loading || itemCount === 0 || !selectedEventId}
+                className="w-full rounded-full"
+                size="lg"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="size-4 animate-spin" aria-hidden />
+                    Redirecting…
+                  </>
+                ) : (
+                  orderContent.checkoutLabel
+                )}
+              </Button>
+            )}
 
             {!modules.stripe && (
               <p className="text-center text-xs text-muted-foreground">
@@ -389,7 +417,7 @@ function BoxesCategorySection({
       >
         {orderContent.boxesTitle}
       </h2>
-      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
         {orderContent.boxesDescription}
       </p>
       <ul className="mt-4 divide-y divide-border/60">
@@ -429,7 +457,7 @@ function BoxMenuRow({
             {formatDisplayPrice(box.displayPrice)}
           </span>
         </div>
-        <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
           {box.description}
         </p>
         <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground">
@@ -498,7 +526,7 @@ function MenuRow({
             {formatDisplayPrice(item.displayPrice)}
           </span>
         </div>
-        <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
           {item.description}
         </p>
       </div>

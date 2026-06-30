@@ -28,7 +28,7 @@ export function SiteHeader() {
             alt={logo.alt}
             width={logo.width}
             height={logo.height}
-            className="h-11 w-auto sm:h-12"
+            className="h-14 w-auto sm:h-[4.25rem]"
             priority
           />
         </Link>
