@@ -10,6 +10,7 @@ export type MenuItem = {
   name: string;
   description: string;
   displayPrice: string;
+  allergens?: string;
 };
 
 /** Stored in admin/Blob as a plain GBP amount, e.g. "5.50" (no £ symbol). */
@@ -28,6 +29,7 @@ export const menuItems: MenuItem[] = [
     description:
       "Sweet pear and toasted walnut against sharp Stilton, finished with honey. Vegetarian.",
     displayPrice: "6.00",
+    allergens: "Gluten, milk, nuts (walnut)",
   },
   {
     id: "goats-cheese-onion-marmalade-pie",
@@ -36,6 +38,7 @@ export const menuItems: MenuItem[] = [
     description:
       "Soft goat's cheese, slow-cooked onion, a streak of marmalade through buttery shortcrust. Vegetarian.",
     displayPrice: "5.00",
+    allergens: "Gluten, milk",
   },
   {
     id: "chicken-chorizo-chilli-pie",
@@ -43,6 +46,7 @@ export const menuItems: MenuItem[] = [
     name: "Chicken, Chorizo & Chilli pie",
     description: "Chicken and chorizo with a chilli kick, topped with crushed nachos.",
     displayPrice: "5.50",
+    allergens: "Gluten, milk",
   },
   {
     id: "game-pie",
@@ -50,6 +54,7 @@ export const menuItems: MenuItem[] = [
     name: "Game pie",
     description: "A proper hunter's mix - ask on the day what's gone in.",
     displayPrice: "5.50",
+    allergens: "Gluten, milk - ask for full details",
   },
   {
     id: "norfolk-plough-pudding",
@@ -58,6 +63,7 @@ export const menuItems: MenuItem[] = [
     description:
       "Suet pastry wrapped round a savoury filling - our award-winning original. British Pie Awards Class Champion, 2017.",
     displayPrice: "5.00",
+    allergens: "Gluten, sulphites",
   },
   {
     id: "seasonal-fruit-tart",
@@ -65,6 +71,7 @@ export const menuItems: MenuItem[] = [
     name: "Seasonal fruit tart",
     description: "Whatever's good that week, on pastry and custard.",
     displayPrice: "4.00",
+    allergens: "Gluten, milk, eggs",
   },
   {
     id: "lemon-tart",
@@ -72,6 +79,7 @@ export const menuItems: MenuItem[] = [
     name: "Lemon tart",
     description: "Sharp lemon curd in a sweet, crisp case.",
     displayPrice: "4.00",
+    allergens: "Gluten, milk, eggs",
   },
 ];
 
