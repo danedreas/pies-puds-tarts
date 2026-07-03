@@ -26,8 +26,8 @@ export const siteImages = {
 
   /** About page */
   about: {
-    src: "/images/about-paul-catering.jpg",
-    alt: "Three-tier pork pie display for a Norfolk catering event",
+    src: "/images/about-paul.jpg",
+    alt: "Paul Stretton, founder of Pies, Puds & Tarts, standing behind trays of freshly baked pies",
   },
 
   services: [

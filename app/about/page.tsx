@@ -16,7 +16,7 @@ import { absoluteUrl, createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "About",
-  description: `Award-winning pies, savoury bakes and sweet tarts from Norfolk farmers markets. Pre-order online, collect from the stall, or contact us about pickup.`,
+  description: `Pies, Puds & Tarts is a family-run business founded by chef Paul Stretton, with 30+ years of kitchen experience and 13 Great British Pie Awards.`,
   path: "/about",
 });
 
@@ -62,7 +62,7 @@ export default function AboutPage() {
             </Button>
           </div>
 
-          <PlaceholderImage image={siteImages.about} aspect="portrait" />
+          <PlaceholderImage image={siteImages.about} aspect="portrait-tall" />
         </div>
       </SectionShell>
 

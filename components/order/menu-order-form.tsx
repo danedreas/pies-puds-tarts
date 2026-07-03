@@ -529,6 +529,11 @@ function MenuRow({
         <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
           {item.description}
         </p>
+        {item.allergens && (
+          <p className="mt-1.5 text-xs text-muted-foreground/80">
+            <span className="font-medium">Allergens:</span> {item.allergens}
+          </p>
+        )}
       </div>
 
       <QuantityControl quantity={quantity} onChange={onQuantityChange} label={item.name} />

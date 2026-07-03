@@ -8,7 +8,7 @@ export const homeContent = {
   hero: {
     headline: "Award-winning pies, puds & tarts",
     subheadline:
-      "Savoury bakes, proper puds and sweet tarts from the very best of North Norfolk  -  at [markets around the county](/events). [Order ahead online](/order) for collection, or [get in touch](/contact) about pickup.",
+      "Award-winning pies, sausage rolls, quiche and more  -  at [markets around Norfolk](/events). [Order ahead online](/order) for collection, or [get in touch](/contact) about pickup.",
     primaryCta: { label: "Pre-order for collection", href: "/order" },
     secondaryCta: { label: "Market dates", href: "/events" },
     highlights: ["Baked fresh", "Pre-order & collect", "Pickup available"],
@@ -22,9 +22,9 @@ export const homeContent = {
     positivePanel: {
       title: "What's on the stall",
       items: [
-        "Award-winning savoury pies with classic and seasonal fillings",
-        "Homely puds  -  sticky toffee, crumble and the rest",
-        "Sweet tarts when the fruit is good",
+        "Award-winning savoury pies",
+        "Sausage rolls and quiche",
+        "Proper portions  -  nothing dainty",
         "Limited batches  -  when it's gone, it's gone",
       ],
     },
@@ -53,9 +53,9 @@ export const homeContent = {
         imageIndex: 0,
       },
       {
-        title: "Changes with the seasons",
+        title: "Local ingredients",
         description:
-          "Summer fruit tarts, autumn puds, hearty pies when it's cold  -  the menu never looks quite the same twice.",
+          "Meat from local butchers, quality produce  -  we use the best of what's around us in Norfolk.",
         href: "/order",
         imageIndex: 1,
       },

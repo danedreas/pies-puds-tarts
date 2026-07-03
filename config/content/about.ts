@@ -8,34 +8,35 @@ export const aboutContent = {
   eyebrow: "About us",
   title: "Pies, Puds & Tarts",
   intro:
-    "Award-winning pies, savoury bakes, sweet tarts and more  -  baked in Norfolk for [farmers markets](/events) across the county.",
+    "A family-run business founded by chef Paul Stretton, with over 30 years working in kitchens across London, Germany, and Norfolk.",
 
   paragraphs: [
-    "Everything is made by hand in small batches, using the very best of North Norfolk produce where the season allows. The sort of baking people come back for week after week.",
-    "On the stall you'll find savoury pies, proper puds and sweet tarts, plus whatever fits the season. The [menu](/order) moves through the year  -  summer tarts, autumn puds, hearty pies when the weather turns.",
-    "Pre-order for [market collection](/order), or [get in touch](/contact) about pickup, wholesale, or a larger order. Please contact for more information  -  we're happy to help.",
+    "After years in restaurants, Paul moved into running his own food business  -  starting with a catering trailer, then a small \"pie shed\" at home. That led to making pies for a local butcher, then selling at markets and supplying farm shops and delis across North Norfolk.",
+    "As demand grew, he moved into a café and production site in Great Walsingham, which he ran for around 12 years before stepping back to focus on [markets](/events), shows, and events.",
+    "Today, Paul runs Pies, Puds & Tarts with his wife Nisa and daughter Esme, keeping it a hands-on family operation. His pies have received 13 Great British Pie Awards over the years.",
+    "At its simplest, it's just food made and sold by family.",
   ],
 
   values: {
-    title: "How we bake",
+    title: "How we work",
     items: [
       {
-        title: "Made by hand",
-        description: "Small batches, baked properly. Nothing factory-made or rushed out the door.",
+        title: "Family-run",
+        description: "A hands-on operation run by Paul, Nisa and Esme. No corporate layers, just family.",
       },
       {
-        title: "Seasonal",
-        description: "What's on the stall depends on the time of year and what's worth baking with.",
+        title: "30+ years experience",
+        description: "Decades of professional kitchen experience across London, Germany, and Norfolk.",
       },
       {
-        title: "Generous portions",
-        description: "Nobody should walk away from a market stall still hungry.",
+        title: "Award-winning",
+        description: "13 Great British Pie Awards and counting. Recognition for doing things properly.",
       },
     ],
   },
 
   cta: {
-    label: "Send a message",
+    label: "Get in touch",
     href: "/contact",
   },
 } as const;
