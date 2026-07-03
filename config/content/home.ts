@@ -53,9 +53,9 @@ export const homeContent = {
         imageIndex: 0,
       },
       {
-        title: "Changes with the seasons",
+        title: "Local ingredients",
         description:
-          "Summer fruit tarts, autumn puds, hearty pies when it's cold  -  the menu never looks quite the same twice.",
+          "Meat from local butchers, seasonal fruit and veg  -  we use the best of what's around us in North Norfolk.",
         href: "/order",
         imageIndex: 1,
       },
