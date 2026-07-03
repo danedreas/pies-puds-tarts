@@ -62,7 +62,7 @@ export default function AboutPage() {
             </Button>
           </div>
 
-          <PlaceholderImage image={siteImages.about} aspect="portrait" />
+          <PlaceholderImage image={siteImages.about} aspect="portrait-tall" />
         </div>
       </SectionShell>
 

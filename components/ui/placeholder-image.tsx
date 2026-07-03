@@ -7,7 +7,7 @@ type PlaceholderImageProps = {
   priority?: boolean;
   className?: string;
   imageClassName?: string;
-  aspect?: "video" | "square" | "portrait" | "wide";
+  aspect?: "video" | "square" | "portrait" | "portrait-tall" | "wide";
   showCaption?: boolean;
   flush?: boolean;
 };
@@ -16,6 +16,7 @@ const aspectClasses = {
   video: "aspect-video",
   square: "aspect-square",
   portrait: "aspect-[4/5]",
+  "portrait-tall": "aspect-[2/3]",
   wide: "aspect-[16/10]",
 };
 
