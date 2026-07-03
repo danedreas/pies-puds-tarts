@@ -22,6 +22,7 @@ const menuItemSchema = z.object({
   name: z.string().min(1),
   description: z.string(),
   displayPrice: storedPriceSchema,
+  allergens: z.string().optional(),
 });
 
 const marketEventSchema = z.object({

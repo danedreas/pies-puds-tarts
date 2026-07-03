@@ -29,12 +29,13 @@ export function getDefaultSiteContent(): SiteContent {
   return {
     updatedAt: undefined,
     events: marketEvents,
-    menuItems: defaultMenuItems.map(({ id, category, name, description, displayPrice }) => ({
+    menuItems: defaultMenuItems.map(({ id, category, name, description, displayPrice, allergens }) => ({
       id,
       category,
       name,
       description,
       displayPrice,
+      allergens,
     })),
     boxes: defaultBoxes.map(({ id, name, description, displayPrice, features, highlighted }) => ({
       id,
