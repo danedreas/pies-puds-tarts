@@ -23,8 +23,8 @@ export const homeContent = {
       title: "What's on the stall",
       items: [
         "Award-winning savoury pies with classic and seasonal fillings",
-        "Homely puds  -  sticky toffee, crumble and the rest",
-        "Sweet tarts when the fruit is good",
+        "Sausage rolls, quiche, and pasties",
+        "Proper portions  -  nothing dainty",
         "Limited batches  -  when it's gone, it's gone",
       ],
     },
@@ -55,7 +55,7 @@ export const homeContent = {
       {
         title: "Local ingredients",
         description:
-          "Meat from local butchers, seasonal fruit and veg  -  we use the best of what's around us in North Norfolk.",
+          "Meat from local butchers, seasonal fruit and veg  -  we use the best of what's around us in Norfolk.",
         href: "/order",
         imageIndex: 1,
       },
