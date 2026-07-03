@@ -14,7 +14,7 @@ export const aboutContent = {
     "After years in restaurants, Paul moved into running his own food business  -  starting with a catering trailer, then a small \"pie shed\" at home. That led to making pies for a local butcher, then selling at markets and supplying farm shops and delis across North Norfolk.",
     "As demand grew, he moved into a café and production site in Great Walsingham, which he ran for around 12 years before stepping back to focus on [markets](/events), shows, and events.",
     "Today, Paul runs Pies, Puds & Tarts with his wife Nisa and daughter Esme, keeping it a hands-on family operation. His pies have received 13 Great British Pie Awards over the years.",
-    "At its simplest, it's just food made and sold by family.",
+    "At its simplest, it's just good food made and sold by family.",
   ],
 
   values: {
