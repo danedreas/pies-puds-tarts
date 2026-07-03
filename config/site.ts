@@ -23,9 +23,9 @@ export const siteConfig = {
 
   owner: {
     name: "Paul Stretton",
-    role: "Baker",
+    role: "Chef & Founder",
     /** Structured data only  -  kept minimal on public pages */
-    bio: "Pies, Puds & Tarts  -  award-winning bakery at Norfolk farmers markets.",
+    bio: "Chef with 30+ years experience, founder of Pies, Puds & Tarts  -  a family-run bakery with 13 Great British Pie Awards.",
   },
 
   contact: {
