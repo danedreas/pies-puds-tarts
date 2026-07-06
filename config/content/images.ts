@@ -24,9 +24,14 @@ export const siteImages = {
     alt: "Wooden crate of golden star-topped savoury pies lined with parchment",
   },
 
-  /** About page */
+  /** About page - swap src with aboutAlt to use the previous photo */
   about: {
     src: "/images/about-paul.jpg",
+    alt: "Paul Stretton, founder of Pies, Puds & Tarts, standing behind trays of freshly baked pies",
+  },
+
+  aboutAlt: {
+    src: "/images/about-paul-alt.jpg",
     alt: "Paul Stretton, founder of Pies, Puds & Tarts, standing behind trays of freshly baked pies",
   },
 
