@@ -115,6 +115,17 @@ export async function POST(request: Request) {
       })),
       success_url: absoluteUrl(`/checkout/success?session_id={CHECKOUT_SESSION_ID}`),
       cancel_url: absoluteUrl("/order"),
+      // Searchable on the Checkout Session in the Stripe Dashboard
+      client_reference_id: collectionCode,
+      payment_intent_data: {
+        // Shows on the Payment in Stripe as the payment description
+        description: `Collection code ${collectionCode} · ${collectionSummary}`.slice(0, 1000),
+        metadata: {
+          [COLLECTION_CODE_METADATA_KEY]: collectionCode,
+          collectionSummary: collectionSummary.slice(0, 500),
+          orderSummary: orderSummary.slice(0, 500),
+        },
+      },
       metadata: {
         eventId: event.id,
         eventName: event.name,
