@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CalendarDays, Check, MapPin } from "lucide-react";
 import type { MarketEvent } from "@/config/content/events";
+import { isEventOpenForPreorder } from "@/config/content/events";
 import { homeContent } from "@/config/content/home";
 import { siteImages } from "@/config/content/images";
 import { PlaceholderImage } from "@/components/ui/placeholder-image";
@@ -184,13 +185,14 @@ export function EventsTeaserSection({ events }: { events: MarketEvent[] }) {
                       <CalendarDays className="size-4 shrink-0 text-brand-puds" aria-hidden />
                       {event.dateDisplay}
                     </p>
-                    <p className="mt-1 text-muted-foreground">{event.time}</p>
-                    <Button asChild variant="outline" size="sm" className="mt-4 rounded-full">
-                      <Link href={`/order?event=${event.id}`}>
-                        Order for this market
-                        <ArrowRight className="size-4" aria-hidden />
-                      </Link>
-                    </Button>
+                    {isEventOpenForPreorder(event) && (
+                      <Button asChild variant="outline" size="sm" className="mt-4 rounded-full">
+                        <Link href={`/order?event=${event.id}`}>
+                          Order for this market
+                          <ArrowRight className="size-4" aria-hidden />
+                        </Link>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </article>

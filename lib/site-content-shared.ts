@@ -64,14 +64,53 @@ export const siteContentSchema = z.object({
 export type PreorderBox = z.infer<typeof preorderBoxSchema>;
 export type SiteContent = z.infer<typeof siteContentSchema>;
 
+function toIsoDate(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
+
+/** Minimum notice before a market day so there is time to bake and pack. */
+export const PREORDER_MIN_LEAD_MS = 48 * 60 * 60 * 1000;
+
+/** Treat market days as starting at 9am UTC for the 48-hour lead check. */
+function getMarketStart(isoDate: string): Date {
+  return new Date(`${isoDate}T09:00:00.000Z`);
+}
+
+/** Earliest instant a market may start and still be open for pre-order. */
+export function getPreorderWindowStart(from = new Date()): Date {
+  return new Date(from.getTime() + PREORDER_MIN_LEAD_MS);
+}
+
+/** End of the rolling pre-order window (one calendar month from `from`). */
+export function getPreorderWindowEnd(from = new Date()): Date {
+  const until = new Date(from);
+  until.setMonth(until.getMonth() + 1);
+  return until;
+}
+
+export function isEventWithinPreorderWindow(event: Pick<MarketEvent, "date">, from = new Date()): boolean {
+  const until = toIsoDate(getPreorderWindowEnd(from));
+  return getMarketStart(event.date).getTime() >= getPreorderWindowStart(from).getTime() && event.date <= until;
+}
+
 export function getUpcomingEventsFromList(
   events: MarketEvent[],
   from = new Date(),
 ): MarketEvent[] {
-  const today = from.toISOString().slice(0, 10);
+  const today = toIsoDate(from);
 
   return events
     .filter((event) => event.date >= today)
+    .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+/** Upcoming markets within the rolling pre-order window (48h lead + 1 month). */
+export function getPreorderEventsFromList(
+  events: MarketEvent[],
+  from = new Date(),
+): MarketEvent[] {
+  return events
+    .filter((event) => isEventWithinPreorderWindow(event, from))
     .sort((a, b) => a.date.localeCompare(b.date));
 }
 

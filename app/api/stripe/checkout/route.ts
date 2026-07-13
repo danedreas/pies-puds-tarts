@@ -2,12 +2,16 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import {
   getMarketEventById,
-  getUpcomingMarketEvents,
+  getPreorderMarketEvents,
   resolveCheckoutProduct,
   type CheckoutLineItem,
 } from "@/lib/content-data";
 import { modules } from "@/config/modules";
 import { siteConfig } from "@/config/site";
+import {
+  COLLECTION_CODE_METADATA_KEY,
+  generateCollectionCode,
+} from "@/lib/collection-code";
 import { absoluteUrl } from "@/lib/seo";
 import { getStripe } from "@/lib/stripe";
 
@@ -55,8 +59,8 @@ async function validateCollectionEvent(eventId: string) {
     return null;
   }
 
-  const isUpcoming = (await getUpcomingMarketEvents()).some((item) => item.id === eventId);
-  if (!isUpcoming) {
+  const isPreorderOpen = (await getPreorderMarketEvents()).some((item) => item.id === eventId);
+  if (!isPreorderOpen) {
     return null;
   }
 
@@ -94,10 +98,12 @@ export async function POST(request: Request) {
     const orderSummary = lineItems
       .map((item) => `${item.quantity}x ${item.name}`)
       .join(", ");
-    const collectionSummary = `${event.name} on ${event.dateDisplay} (${event.time})`;
+    const collectionSummary = `${event.name} on ${event.dateDisplay}`;
+    const collectionCode = generateCollectionCode();
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
+      ui_mode: "embedded_page",
       line_items: lineItems.map((item) => ({
         quantity: item.quantity,
         price_data: {
@@ -108,25 +114,36 @@ export async function POST(request: Request) {
           },
         },
       })),
-      success_url: absoluteUrl(`/checkout/success?session_id={CHECKOUT_SESSION_ID}`),
-      cancel_url: absoluteUrl("/order"),
+      return_url: absoluteUrl(`/checkout/success?session_id={CHECKOUT_SESSION_ID}`),
+      // Searchable on the Checkout Session in the Stripe Dashboard
+      client_reference_id: collectionCode,
+      payment_intent_data: {
+        // Shows on the Payment in Stripe as the payment description
+        description: `Collection code ${collectionCode} · ${collectionSummary}`.slice(0, 1000),
+        metadata: {
+          [COLLECTION_CODE_METADATA_KEY]: collectionCode,
+          collectionSummary: collectionSummary.slice(0, 500),
+          orderSummary: orderSummary.slice(0, 500),
+        },
+      },
       metadata: {
         eventId: event.id,
         eventName: event.name,
         eventDate: event.dateDisplay,
         eventLocation: event.location,
         collectionSummary: collectionSummary.slice(0, 500),
+        [COLLECTION_CODE_METADATA_KEY]: collectionCode,
         productIds: lineItems.map((item) => item.id).join(","),
         orderSummary: orderSummary.slice(0, 500),
         siteName: siteConfig.name,
       },
     });
 
-    if (!session.url) {
+    if (!session.client_secret) {
       return NextResponse.json({ error: "Unable to create checkout session." }, { status: 500 });
     }
 
-    return NextResponse.json({ url: session.url });
+    return NextResponse.json({ clientSecret: session.client_secret });
   } catch (error) {
     console.error("Stripe checkout error:", error);
     return NextResponse.json({ error: "Unable to start checkout." }, { status: 400 });

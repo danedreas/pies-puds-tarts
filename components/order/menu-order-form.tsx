@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Check, Loader2, Minus, Plus, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
 import type { MarketEvent } from "@/config/content/events";
@@ -16,8 +16,10 @@ import {
 import { orderContent, isUnitCollection, buildUnitCollectionContactHref, unitCollection } from "@/config/content/order";
 import { modules } from "@/config/modules";
 import type { PreorderBox } from "@/lib/site-content-shared";
+import { writePendingPreorder, readPendingPreorder } from "@/lib/pending-preorder";
 import { cn } from "@/lib/utils";
 import { EventSelector } from "@/components/order/event-selector";
+import { InlineText } from "@/components/content/inline-text";
 import { Button } from "@/components/ui/button";
 import { SectionShell, SoftPanel } from "@/components/ui/section-shell";
 
@@ -50,6 +52,10 @@ export function OrderPageClient({ events, menuItems, boxes, showBoxes }: OrderPa
   const searchParams = useSearchParams();
   const [selectedEventId, setSelectedEventId] = useState("");
   const [eventError, setEventError] = useState(false);
+  const [quantities, setQuantities] = useState<Quantities>(() =>
+    emptyQuantities(menuItems, boxes, showBoxes),
+  );
+  const [restored, setRestored] = useState(false);
 
   useEffect(() => {
     const fromQuery = searchParams.get("event");
@@ -58,6 +64,31 @@ export function OrderPageClient({ events, menuItems, boxes, showBoxes }: OrderPa
       setEventError(false);
     }
   }, [searchParams, events]);
+
+  useEffect(() => {
+    if (restored) return;
+    const pending = readPendingPreorder();
+    if (!pending) {
+      setRestored(true);
+      return;
+    }
+
+    if (events.some((event) => event.id === pending.eventId)) {
+      setSelectedEventId(pending.eventId);
+      setEventError(false);
+    }
+
+    setQuantities((current) => {
+      const next = { ...current };
+      for (const item of pending.items) {
+        if (item.productId in next) {
+          next[item.productId] = Math.max(0, Math.min(MAX_QUANTITY, item.quantity));
+        }
+      }
+      return next;
+    });
+    setRestored(true);
+  }, [events, restored]);
 
   const selectedEvent = useMemo(
     () => events.find((event) => event.id === selectedEventId),
@@ -80,6 +111,8 @@ export function OrderPageClient({ events, menuItems, boxes, showBoxes }: OrderPa
       eventError={eventError}
       onEventError={() => setEventError(true)}
       showBoxes={showBoxes}
+      quantities={quantities}
+      onQuantitiesChange={setQuantities}
     />
   );
 }
@@ -91,6 +124,7 @@ type CheckoutProps = {
 };
 
 function useCheckout({ selectedEventId, selectedEvent, onEventError }: CheckoutProps) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -121,23 +155,26 @@ function useCheckout({ selectedEventId, selectedEvent, onEventError }: CheckoutP
       return;
     }
 
+    const items = Array.isArray(body.items)
+      ? (body.items as { productId: string; quantity: number }[])
+      : body.productId
+        ? [{ productId: String(body.productId), quantity: 1 }]
+        : [];
+
+    if (items.length === 0) {
+      toast.message(orderContent.emptyCartMessage);
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch("/api/stripe/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ eventId: selectedEventId, ...body }),
+      writePendingPreorder({
+        eventId: selectedEventId,
+        items,
       });
-
-      const data = (await response.json()) as { url?: string; error?: string };
-
-      if (!response.ok || !data.url) {
-        throw new Error(data.error ?? "Unable to start checkout");
-      }
-
-      window.location.href = data.url;
+      router.push("/checkout");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to start checkout");
       setLoading(false);
@@ -154,6 +191,8 @@ type MenuOrderFormProps = CheckoutProps & {
   onEventChange: (eventId: string) => void;
   eventError: boolean;
   showBoxes: boolean;
+  quantities: Quantities;
+  onQuantitiesChange: (value: Quantities | ((current: Quantities) => Quantities)) => void;
 };
 
 function MenuOrderForm({
@@ -166,10 +205,9 @@ function MenuOrderForm({
   eventError,
   onEventError,
   showBoxes,
+  quantities,
+  onQuantitiesChange,
 }: MenuOrderFormProps) {
-  const [quantities, setQuantities] = useState<Quantities>(() =>
-    emptyQuantities(menuItems, boxes, showBoxes),
-  );
   const { loading, error, startCheckout } = useCheckout({
     selectedEventId,
     selectedEvent,
@@ -226,7 +264,7 @@ function MenuOrderForm({
   }
 
   function setQuantity(id: string, next: number) {
-    setQuantities((current) => ({
+    onQuantitiesChange((current) => ({
       ...current,
       [id]: Math.max(0, Math.min(MAX_QUANTITY, next)),
     }));
@@ -303,9 +341,10 @@ function MenuOrderForm({
               <span className="font-heading text-2xl font-bold">{formatGbp(orderTotal)}</span>
             </div>
 
-            <p className="text-xs leading-relaxed text-muted-foreground">
-              {unitSelected ? unitCollection.collectionNote : orderContent.collectionNote}
-            </p>
+            <InlineText
+              text={unitSelected ? unitCollection.collectionNote : orderContent.collectionNote}
+              className="text-xs leading-relaxed text-muted-foreground"
+            />
 
             {error && (
               <p className="text-sm text-destructive" role="alert">
@@ -338,7 +377,7 @@ function MenuOrderForm({
                 {loading ? (
                   <>
                     <Loader2 className="size-4 animate-spin" aria-hidden />
-                    Redirecting…
+                    Continuing…
                   </>
                 ) : (
                   orderContent.checkoutLabel

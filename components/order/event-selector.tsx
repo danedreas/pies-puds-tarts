@@ -35,6 +35,10 @@ export function EventSelector({ events, value, onChange, invalid = false }: Even
           *
         </span>
       </Label>
+      <InlineText
+        text={orderContent.collectionMarketDescription}
+        className="text-xs leading-relaxed text-muted-foreground"
+      />
       <select
         id="collection-location"
         value={value}
@@ -70,9 +74,7 @@ export function EventSelector({ events, value, onChange, invalid = false }: Even
       )}
 
       {selectedEvent && (
-        <p className="text-xs text-muted-foreground">
-          {selectedEvent.location} · {selectedEvent.time}
-        </p>
+        <p className="text-xs text-muted-foreground">{selectedEvent.location}</p>
       )}
 
       {events.length === 0 && !unitSelected && (

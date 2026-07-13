@@ -25,7 +25,7 @@ Enable via environment variables (see `.env.example`):
 | Module | Env flags |
 |--------|-----------|
 | **Pricing cards** | On by default - `NEXT_PUBLIC_SHOW_PRICING=false` to hide |
-| **Stripe Checkout** | `NEXT_PUBLIC_ENABLE_STRIPE=true` + Stripe keys |
+| **Stripe Embedded Checkout** | `NEXT_PUBLIC_ENABLE_STRIPE=true` + publishable + secret + webhook secret |
 | **Cookie consent + GTM** | On by default - `NEXT_PUBLIC_ENABLE_COOKIE_CONSENT=false` to disable |
 | **Full legal suite** | `NEXT_PUBLIC_ENABLE_FULL_LEGAL=true` |
 
@@ -82,14 +82,26 @@ Requires `RESEND_API_KEY`. Set `CONTACT_TO_EMAIL` and verify your sending domain
 
 Rate limiting: 5 requests/minute per IP. Configure Upstash Redis for production (`UPSTASH_REDIS_REST_*`); falls back to in-memory in development.
 
-## Stripe (optional)
+## Stripe Embedded Checkout
 
-1. Create Products/Prices in Stripe Dashboard
-2. Add price IDs to `config/stripe-products.ts` or env vars
-3. Set `NEXT_PUBLIC_ENABLE_STRIPE=true`
-4. Configure webhook: `POST /api/stripe/webhook` for `checkout.session.completed`
+1. Create a Stripe account (or sandbox) and copy **test** keys while developing
+2. Set in `.env.local`:
+   - `NEXT_PUBLIC_ENABLE_STRIPE=true`
+   - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...`
+   - `STRIPE_SECRET_KEY=sk_test_...` (or a restricted key with Checkout permissions)
+   - `STRIPE_WEBHOOK_SECRET=whsec_...`
+3. Forward webhooks locally:
+   ```bash
+   stripe listen --forward-to localhost:3000/api/stripe/webhook
+   ```
+   Subscribe to `checkout.session.completed`
+4. On Vercel, add the same env vars and create a Dashboard webhook endpoint:
+   `https://your-domain/api/stripe/webhook` for `checkout.session.completed`
+5. Also set `RESEND_API_KEY` + `CONTACT_TO_EMAIL` so customer and owner confirmation emails send with the collection code
 
-Uses Checkout Sessions (hosted checkout) - no shop backend.
+Checkout stays on `/checkout` (embedded Stripe form). Failed/declined cards stay on the page; successful payments return to `/checkout/success` with the collection code.
+
+Payments & refunds policy: `/payments`
 
 ## Deploy on Vercel
 

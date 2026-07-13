@@ -5,6 +5,7 @@ export type LegalPageKey =
   | "privacy"
   | "terms"
   | "cookies"
+  | "payments"
   | "design-process"
   | "intellectual-property"
   | "client-responsibilities"
@@ -39,6 +40,13 @@ export const legalPages: LegalPage[] = [
     title: "Cookie policy",
     href: "/cookies",
     description: "How we use cookies and similar technologies.",
+    minimal: true,
+  },
+  {
+    key: "payments",
+    title: "Payments & refunds",
+    href: "/payments",
+    description: "How pre-order payments, collection, and refunds work.",
     minimal: true,
   },
   {

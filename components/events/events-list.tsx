@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
 import type { MarketEvent } from "@/config/content/events";
-import { eventsContent } from "@/config/content/events";
+import { eventsContent, isEventOpenForPreorder } from "@/config/content/events";
 import { InlineText } from "@/components/content/inline-text";
 import { SectionHeading, SectionShell, SoftPanel } from "@/components/ui/section-shell";
 import { Button } from "@/components/ui/button";
@@ -42,13 +42,14 @@ export function EventsList({ events }: EventsListProps) {
                 <CalendarDays className="size-4 shrink-0 text-primary" aria-hidden />
                 {event.dateDisplay}
               </p>
-              <p className="mt-1 text-muted-foreground">{event.time}</p>
-              <Button asChild variant="outline" size="sm" className="mt-4 rounded-full">
-                <Link href={`/order?event=${event.id}`}>
-                  Order for this market
-                  <ArrowRight className="size-4" aria-hidden />
-                </Link>
-              </Button>
+              {isEventOpenForPreorder(event) && (
+                <Button asChild variant="outline" size="sm" className="mt-4 rounded-full">
+                  <Link href={`/order?event=${event.id}`}>
+                    Order for this market
+                    <ArrowRight className="size-4" aria-hidden />
+                  </Link>
+                </Button>
+              )}
             </div>
           </div>
         </article>

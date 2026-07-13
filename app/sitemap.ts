@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   if (modules.stripe) {
     routes.push(
+      { url: `${base}/checkout`, lastModified: now, changeFrequency: "yearly", priority: 0.1 },
       { url: `${base}/checkout/success`, lastModified: now, changeFrequency: "yearly", priority: 0.1 },
       { url: `${base}/checkout/cancel`, lastModified: now, changeFrequency: "yearly", priority: 0.1 },
     );
