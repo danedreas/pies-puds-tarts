@@ -42,7 +42,6 @@ export function EventsList({ events }: EventsListProps) {
                 <CalendarDays className="size-4 shrink-0 text-primary" aria-hidden />
                 {event.dateDisplay}
               </p>
-              <p className="mt-1 text-muted-foreground">{event.time}</p>
               {isEventOpenForPreorder(event) && (
                 <Button asChild variant="outline" size="sm" className="mt-4 rounded-full">
                   <Link href={`/order?event=${event.id}`}>

@@ -185,7 +185,6 @@ export function EventsTeaserSection({ events }: { events: MarketEvent[] }) {
                       <CalendarDays className="size-4 shrink-0 text-brand-puds" aria-hidden />
                       {event.dateDisplay}
                     </p>
-                    <p className="mt-1 text-muted-foreground">{event.time}</p>
                     {isEventOpenForPreorder(event) && (
                       <Button asChild variant="outline" size="sm" className="mt-4 rounded-full">
                         <Link href={`/order?event=${event.id}`}>

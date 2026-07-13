@@ -36,7 +36,7 @@ export const marketEvents: MarketEvent[] = [
     location: "North Wootton, Norfolk",
     date: "2026-07-18",
     dateDisplay: "Saturday 18 July 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "norwich-foodhall-july",
@@ -44,7 +44,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Norwich",
     date: "2026-07-18",
     dateDisplay: "Saturday 18 July 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "eve-s-hill-farm-july",
@@ -52,7 +52,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Eve's Hill Farm, Norfolk",
     date: "2026-07-19",
     dateDisplay: "Sunday 19 July 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "worstead-festival-2026-07-25",
@@ -60,7 +60,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Worstead, Norfolk",
     date: "2026-07-25",
     dateDisplay: "Saturday 25 July 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "worstead-festival-2026-07-26",
@@ -68,7 +68,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Worstead, Norfolk",
     date: "2026-07-26",
     dateDisplay: "Sunday 26 July 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "north-walsham-july",
@@ -76,7 +76,7 @@ export const marketEvents: MarketEvent[] = [
     location: "North Walsham, Norfolk",
     date: "2026-07-26",
     dateDisplay: "Sunday 26 July 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "daisy-s-milk-shed-july",
@@ -84,7 +84,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Daisy's Milk Shed, Norfolk",
     date: "2026-07-26",
     dateDisplay: "Sunday 26 July 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "creake-abbey-august",
@@ -92,7 +92,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Creake Abbey, Norfolk",
     date: "2026-08-01",
     dateDisplay: "Saturday 1 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "holme-village-hall-august",
@@ -100,7 +100,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Holme, Norfolk",
     date: "2026-08-01",
     dateDisplay: "Saturday 1 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "wroxham-barns-august",
@@ -108,7 +108,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Wroxham Barns, Norfolk",
     date: "2026-08-02",
     dateDisplay: "Sunday 2 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "fakenham-august",
@@ -116,7 +116,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Fakenham, Norfolk",
     date: "2026-08-08",
     dateDisplay: "Saturday 8 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "black-barn-salhouse-august",
@@ -124,7 +124,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Black Barn, Salhouse, Norfolk",
     date: "2026-08-08",
     dateDisplay: "Saturday 8 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "snettisham-summer-fayre-august",
@@ -132,7 +132,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Snettisham, Norfolk",
     date: "2026-08-08",
     dateDisplay: "Saturday 8 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "bury-st-edmunds-august",
@@ -140,7 +140,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Bury St Edmunds, Suffolk",
     date: "2026-08-09",
     dateDisplay: "Sunday 9 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "burnt-house-vineyard-august",
@@ -148,7 +148,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Burnt House Vineyard, Suffolk",
     date: "2026-08-09",
     dateDisplay: "Sunday 9 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "north-wootton-village-hall-august",
@@ -156,7 +156,7 @@ export const marketEvents: MarketEvent[] = [
     location: "North Wootton, Norfolk",
     date: "2026-08-15",
     dateDisplay: "Saturday 15 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "cromer-country-fair-august",
@@ -164,7 +164,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Cromer, Norfolk",
     date: "2026-08-15",
     dateDisplay: "Saturday 15 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "beccles-sunday-market-2026-08-16",
@@ -172,7 +172,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Beccles, Suffolk",
     date: "2026-08-16",
     dateDisplay: "Sunday 16 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "black-barn-salhouse-blossom-fair-2026-08-22",
@@ -180,7 +180,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Black Barn, Salhouse, Norfolk",
     date: "2026-08-22",
     dateDisplay: "Saturday 22 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "pulham-patch-august",
@@ -188,7 +188,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Pulham, Norfolk",
     date: "2026-08-22",
     dateDisplay: "Saturday 22 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "black-barn-salhouse-blossom-fair-2026-08-23",
@@ -196,7 +196,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Black Barn, Salhouse, Norfolk",
     date: "2026-08-23",
     dateDisplay: "Sunday 23 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "beccles-sunday-market-2026-08-23",
@@ -204,7 +204,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Beccles, Suffolk",
     date: "2026-08-23",
     dateDisplay: "Sunday 23 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "creake-abbey-gift-fair-august",
@@ -212,7 +212,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Creake Abbey, Norfolk",
     date: "2026-08-29",
     dateDisplay: "Saturday 29 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "north-walsham-august",
@@ -220,7 +220,7 @@ export const marketEvents: MarketEvent[] = [
     location: "North Walsham, Norfolk",
     date: "2026-08-30",
     dateDisplay: "Sunday 30 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "lavenham-food-festival-august",
@@ -228,7 +228,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Lavenham, Suffolk",
     date: "2026-08-30",
     dateDisplay: "Sunday 30 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "daisy-s-milk-shed-august",
@@ -236,7 +236,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Daisy's Milk Shed, Norfolk",
     date: "2026-08-30",
     dateDisplay: "Sunday 30 August 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "creake-abbey-september",
@@ -244,7 +244,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Creake Abbey, Norfolk",
     date: "2026-09-05",
     dateDisplay: "Saturday 5 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "holkham-food-and-drink-festival-2026-09-05",
@@ -252,7 +252,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Holkham, Norfolk",
     date: "2026-09-05",
     dateDisplay: "Saturday 5 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "holkham-food-and-drink-festival-2026-09-06",
@@ -260,7 +260,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Holkham, Norfolk",
     date: "2026-09-06",
     dateDisplay: "Sunday 6 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "wroxham-barns-september",
@@ -268,7 +268,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Wroxham Barns, Norfolk",
     date: "2026-09-06",
     dateDisplay: "Sunday 6 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "black-barn-salhouse-september",
@@ -276,7 +276,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Black Barn, Salhouse, Norfolk",
     date: "2026-09-12",
     dateDisplay: "Saturday 12 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "bury-st-edmunds-september",
@@ -284,7 +284,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Bury St Edmunds, Suffolk",
     date: "2026-09-13",
     dateDisplay: "Sunday 13 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "beccles-sunday-market-2026-09-13",
@@ -292,7 +292,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Beccles, Suffolk",
     date: "2026-09-13",
     dateDisplay: "Sunday 13 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "coggeshall-barn-september",
@@ -300,7 +300,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Coggeshall, Essex",
     date: "2026-09-19",
     dateDisplay: "Saturday 19 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "north-wootton-village-hall-september",
@@ -308,7 +308,7 @@ export const marketEvents: MarketEvent[] = [
     location: "North Wootton, Norfolk",
     date: "2026-09-19",
     dateDisplay: "Saturday 19 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "cheveley-farmers-market-september",
@@ -316,7 +316,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Cheveley, Cambridgeshire",
     date: "2026-09-20",
     dateDisplay: "Sunday 20 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "beccles-sunday-market-2026-09-20",
@@ -324,7 +324,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Beccles, Suffolk",
     date: "2026-09-20",
     dateDisplay: "Sunday 20 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "goat-s-shed-farmers-market-september",
@@ -332,7 +332,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Goat's Shed, Norfolk",
     date: "2026-09-26",
     dateDisplay: "Saturday 26 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "the-great-feast-suffolk-2026-09-26",
@@ -340,7 +340,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Suffolk",
     date: "2026-09-26",
     dateDisplay: "Saturday 26 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "the-great-feast-suffolk-2026-09-27",
@@ -348,7 +348,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Suffolk",
     date: "2026-09-27",
     dateDisplay: "Sunday 27 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "daisy-s-milk-shed-september",
@@ -356,7 +356,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Daisy's Milk Shed, Norfolk",
     date: "2026-09-27",
     dateDisplay: "Sunday 27 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "north-walsham-september",
@@ -364,7 +364,7 @@ export const marketEvents: MarketEvent[] = [
     location: "North Walsham, Norfolk",
     date: "2026-09-27",
     dateDisplay: "Sunday 27 September 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "creake-abbey-october",
@@ -372,7 +372,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Creake Abbey, Norfolk",
     date: "2026-10-03",
     dateDisplay: "Saturday 3 October 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "wroxham-barns-october",
@@ -380,7 +380,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Wroxham Barns, Norfolk",
     date: "2026-10-04",
     dateDisplay: "Sunday 4 October 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "beccles-sunday-market-2026-10-04",
@@ -388,7 +388,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Beccles, Suffolk",
     date: "2026-10-04",
     dateDisplay: "Sunday 4 October 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "black-barn-salhouse-october",
@@ -396,7 +396,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Black Barn, Salhouse, Norfolk",
     date: "2026-10-10",
     dateDisplay: "Saturday 10 October 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "bury-st-edmunds-october",
@@ -404,7 +404,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Bury St Edmunds, Suffolk",
     date: "2026-10-11",
     dateDisplay: "Sunday 11 October 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "beccles-sunday-market-2026-10-11",
@@ -412,7 +412,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Beccles, Suffolk",
     date: "2026-10-11",
     dateDisplay: "Sunday 11 October 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "north-wootton-village-hall-october",
@@ -420,7 +420,7 @@ export const marketEvents: MarketEvent[] = [
     location: "North Wootton, Norfolk",
     date: "2026-10-17",
     dateDisplay: "Saturday 17 October 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "eve-s-hill-farm-october",
@@ -428,7 +428,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Eve's Hill Farm, Norfolk",
     date: "2026-10-18",
     dateDisplay: "Sunday 18 October 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "beccles-sunday-market-2026-10-18",
@@ -436,7 +436,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Beccles, Suffolk",
     date: "2026-10-18",
     dateDisplay: "Sunday 18 October 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "daisy-s-milk-shed-october",
@@ -444,7 +444,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Daisy's Milk Shed, Norfolk",
     date: "2026-10-25",
     dateDisplay: "Sunday 25 October 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "north-walsham-october",
@@ -452,7 +452,7 @@ export const marketEvents: MarketEvent[] = [
     location: "North Walsham, Norfolk",
     date: "2026-10-25",
     dateDisplay: "Sunday 25 October 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "goat-s-shed-farmers-market-october",
@@ -460,7 +460,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Goat's Shed, Norfolk",
     date: "2026-10-31",
     dateDisplay: "Saturday 31 October 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "wroxham-barns-november",
@@ -468,7 +468,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Wroxham Barns, Norfolk",
     date: "2026-11-01",
     dateDisplay: "Sunday 1 November 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "beccles-sunday-market-2026-11-01",
@@ -476,7 +476,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Beccles, Suffolk",
     date: "2026-11-01",
     dateDisplay: "Sunday 1 November 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "creake-abbey-november",
@@ -484,7 +484,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Creake Abbey, Norfolk",
     date: "2026-11-07",
     dateDisplay: "Saturday 7 November 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "bury-st-edmunds-november",
@@ -492,7 +492,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Bury St Edmunds, Suffolk",
     date: "2026-11-08",
     dateDisplay: "Sunday 8 November 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "beccles-sunday-market-2026-11-08",
@@ -500,7 +500,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Beccles, Suffolk",
     date: "2026-11-08",
     dateDisplay: "Sunday 8 November 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "black-barn-salhouse-november",
@@ -508,7 +508,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Black Barn, Salhouse, Norfolk",
     date: "2026-11-14",
     dateDisplay: "Saturday 14 November 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "beccles-sunday-market-2026-11-15",
@@ -516,7 +516,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Beccles, Suffolk",
     date: "2026-11-15",
     dateDisplay: "Sunday 15 November 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "creake-abbey-christmas-gift-fair-november",
@@ -524,7 +524,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Creake Abbey, Norfolk",
     date: "2026-11-21",
     dateDisplay: "Saturday 21 November 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "eve-s-hill-farm-christmas-market-november",
@@ -532,7 +532,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Eve's Hill Farm, Norfolk",
     date: "2026-11-22",
     dateDisplay: "Sunday 22 November 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "daisy-s-milk-shed-november",
@@ -540,7 +540,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Daisy's Milk Shed, Norfolk",
     date: "2026-11-29",
     dateDisplay: "Sunday 29 November 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "north-walsham-november",
@@ -548,7 +548,7 @@ export const marketEvents: MarketEvent[] = [
     location: "North Walsham, Norfolk",
     date: "2026-11-29",
     dateDisplay: "Sunday 29 November 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "beccles-sunday-market-2026-11-29",
@@ -556,7 +556,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Beccles, Suffolk",
     date: "2026-11-29",
     dateDisplay: "Sunday 29 November 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "kimberley-hall-christmas-fair-2026-12-04",
@@ -564,7 +564,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Kimberley Hall, Norfolk",
     date: "2026-12-04",
     dateDisplay: "Friday 4 December 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "kimberley-hall-christmas-fair-2026-12-05",
@@ -572,7 +572,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Kimberley Hall, Norfolk",
     date: "2026-12-05",
     dateDisplay: "Saturday 5 December 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "creake-abbey-december",
@@ -580,7 +580,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Creake Abbey, Norfolk",
     date: "2026-12-05",
     dateDisplay: "Saturday 5 December 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "kimberley-hall-christmas-fair-2026-12-06",
@@ -588,7 +588,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Kimberley Hall, Norfolk",
     date: "2026-12-06",
     dateDisplay: "Sunday 6 December 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "black-barn-salhouse-december",
@@ -596,7 +596,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Black Barn, Salhouse, Norfolk",
     date: "2026-12-12",
     dateDisplay: "Saturday 12 December 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "bury-st-edmunds-december",
@@ -604,7 +604,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Bury St Edmunds, Suffolk",
     date: "2026-12-13",
     dateDisplay: "Sunday 13 December 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "cheveley-christmas-farmers-market-december",
@@ -612,7 +612,7 @@ export const marketEvents: MarketEvent[] = [
     location: "Cheveley, Cambridgeshire",
     date: "2026-12-13",
     dateDisplay: "Sunday 13 December 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "north-wootton-christmas-market-december",
@@ -620,7 +620,7 @@ export const marketEvents: MarketEvent[] = [
     location: "North Wootton, Norfolk",
     date: "2026-12-19",
     dateDisplay: "Saturday 19 December 2026",
-    time: "9am - 2pm",
+    time: "",
   },
   {
     id: "north-walsham-christmas-farmers-market-december",
@@ -628,7 +628,7 @@ export const marketEvents: MarketEvent[] = [
     location: "North Walsham, Norfolk",
     date: "2026-12-20",
     dateDisplay: "Sunday 20 December 2026",
-    time: "9am - 2pm",
+    time: "",
   },
 ];
 

@@ -94,7 +94,7 @@ export async function POST(request: Request) {
     const orderSummary = lineItems
       .map((item) => `${item.quantity}x ${item.name}`)
       .join(", ");
-    const collectionSummary = `${event.name} on ${event.dateDisplay} (${event.time})`;
+    const collectionSummary = `${event.name} on ${event.dateDisplay}`;
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
