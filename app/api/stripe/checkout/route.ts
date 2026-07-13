@@ -103,6 +103,7 @@ export async function POST(request: Request) {
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
+      ui_mode: "embedded_page",
       line_items: lineItems.map((item) => ({
         quantity: item.quantity,
         price_data: {
@@ -113,8 +114,7 @@ export async function POST(request: Request) {
           },
         },
       })),
-      success_url: absoluteUrl(`/checkout/success?session_id={CHECKOUT_SESSION_ID}`),
-      cancel_url: absoluteUrl("/order"),
+      return_url: absoluteUrl(`/checkout/success?session_id={CHECKOUT_SESSION_ID}`),
       // Searchable on the Checkout Session in the Stripe Dashboard
       client_reference_id: collectionCode,
       payment_intent_data: {
@@ -139,11 +139,11 @@ export async function POST(request: Request) {
       },
     });
 
-    if (!session.url) {
+    if (!session.client_secret) {
       return NextResponse.json({ error: "Unable to create checkout session." }, { status: 500 });
     }
 
-    return NextResponse.json({ url: session.url });
+    return NextResponse.json({ clientSecret: session.client_secret });
   } catch (error) {
     console.error("Stripe checkout error:", error);
     return NextResponse.json({ error: "Unable to start checkout." }, { status: 400 });

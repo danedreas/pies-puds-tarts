@@ -10,10 +10,11 @@ export const modules = {
    */
   pricing: process.env.NEXT_PUBLIC_SHOW_PRICING !== "false",
 
-  /** Stripe Checkout - requires keys; pricing cards still show without it */
+  /** Stripe Embedded Checkout - requires secret + publishable keys */
   stripe:
     process.env.NEXT_PUBLIC_ENABLE_STRIPE === "true" &&
-    Boolean(process.env.STRIPE_SECRET_KEY),
+    Boolean(process.env.STRIPE_SECRET_KEY) &&
+    Boolean(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY),
 
   /**
    * Google Sheets as product/event data source.
