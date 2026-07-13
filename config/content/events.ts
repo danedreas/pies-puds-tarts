@@ -636,6 +636,19 @@ function toIsoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
 }
 
+/** Minimum notice before a market day so there is time to bake and pack. */
+export const PREORDER_MIN_LEAD_MS = 48 * 60 * 60 * 1000;
+
+/** Treat market days as starting at 9am UTC for the 48-hour lead check. */
+function getMarketStart(isoDate: string): Date {
+  return new Date(`${isoDate}T09:00:00.000Z`);
+}
+
+/** Earliest instant a market may start and still be open for pre-order. */
+export function getPreorderWindowStart(from = new Date()): Date {
+  return new Date(from.getTime() + PREORDER_MIN_LEAD_MS);
+}
+
 /** End of the rolling pre-order window (one calendar month from `from`). */
 export function getPreorderWindowEnd(from = new Date()): Date {
   const until = new Date(from);
@@ -651,20 +664,19 @@ export function getUpcomingEvents(from = new Date()): MarketEvent[] {
     .sort((a, b) => a.date.localeCompare(b.date));
 }
 
-/** Markets open for online pre-order - upcoming within a rolling month. */
-export function getPreorderEvents(from = new Date()): MarketEvent[] {
-  const today = toIsoDate(from);
+export function isEventOpenForPreorder(event: MarketEvent, from = new Date()): boolean {
   const until = toIsoDate(getPreorderWindowEnd(from));
-
-  return marketEvents
-    .filter((event) => event.date >= today && event.date <= until)
-    .sort((a, b) => a.date.localeCompare(b.date));
+  return (
+    getMarketStart(event.date).getTime() >= getPreorderWindowStart(from).getTime() &&
+    event.date <= until
+  );
 }
 
-export function isEventOpenForPreorder(event: MarketEvent, from = new Date()): boolean {
-  const today = toIsoDate(from);
-  const until = toIsoDate(getPreorderWindowEnd(from));
-  return event.date >= today && event.date <= until;
+/** Markets open for online pre-order - 48h lead time through a rolling month. */
+export function getPreorderEvents(from = new Date()): MarketEvent[] {
+  return marketEvents
+    .filter((event) => isEventOpenForPreorder(event, from))
+    .sort((a, b) => a.date.localeCompare(b.date));
 }
 
 export function getEventById(id: string): MarketEvent | undefined {

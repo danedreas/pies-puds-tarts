@@ -22,12 +22,12 @@ export const orderContent = {
     "Add your items from the menu, then choose a [market](/events) for pre-order and online payment, or select unit pickup at Colkirk and [get in touch](/contact) to arrange collection.",
   collectionMarketTitle: "Collect from",
   collectionMarketDescription:
-    "Pre-orders are open for markets in the next month. Choose where you're collecting - you can add items first.",
+    "Pre-orders are open for markets in the next month, with at least 48 hours' notice so we have time to pack. Choose where you're collecting - you can add items first.",
   collectionRequiredMessage: "Please choose where you're collecting from.",
   noEventsMessage:
     "No market dates open for pre-orders right now. You can still arrange collection from our Colkirk unit, or check the events page for updates.",
   collectionNote:
-    "Please order at least 48 hours before the market. Ask if you need allergen info.",
+    "Orders need at least 48 hours before the market so we have time to pack. Ask if you need allergen info.",
   summaryTitle: "Your order",
   checkoutLabel: "Pay and pre-order",
   emptyCartMessage: "Add something from the menu to continue.",
