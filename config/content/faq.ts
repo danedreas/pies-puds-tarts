@@ -23,7 +23,12 @@ export const faqContent = {
     {
       question: "When do I collect my order?",
       answer:
-        "On the market day you selected at checkout. Head to the Pies, Puds & Tarts stall and give your name.",
+        "On the market day you selected at checkout. Head to the Pies, Puds & Tarts stall and quote the collection code from your confirmation email.",
+    },
+    {
+      question: "What is my collection code?",
+      answer:
+        "After you pay, you'll get a confirmation email with a unique collection code. Quote that code at the stall so we can match your order. We receive the same code, so we can verify it.",
     },
     {
       question: "How far in advance should I order?",

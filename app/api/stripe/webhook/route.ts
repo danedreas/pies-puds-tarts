@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { modules } from "@/config/modules";
-import { sendPaymentNotificationEmail } from "@/lib/resend";
+import { COLLECTION_CODE_METADATA_KEY } from "@/lib/collection-code";
+import { sendPreorderConfirmationEmails } from "@/lib/resend";
 import { getStripe, getStripeWebhookSecret } from "@/lib/stripe";
 
 export async function POST(request: Request) {
@@ -29,10 +30,11 @@ export async function POST(request: Request) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
+    const collectionCode = session.metadata?.[COLLECTION_CODE_METADATA_KEY];
 
-    if (process.env.RESEND_API_KEY && session.customer_details?.email) {
+    if (process.env.RESEND_API_KEY && session.customer_details?.email && collectionCode) {
       try {
-        await sendPaymentNotificationEmail({
+        await sendPreorderConfirmationEmails({
           customerEmail: session.customer_details.email,
           customerName: session.customer_details.name ?? undefined,
           orderSummary: session.metadata?.orderSummary ?? "Order details unavailable",
@@ -40,12 +42,15 @@ export async function POST(request: Request) {
             session.metadata?.collectionSummary ??
             session.metadata?.eventName ??
             "Collection market not recorded",
+          collectionCode,
           amountTotal: session.amount_total ?? 0,
           currency: session.currency ?? "gbp",
         });
       } catch (error) {
-        console.error("Payment notification email failed:", error);
+        console.error("Pre-order confirmation email failed:", error);
       }
+    } else if (!collectionCode) {
+      console.error("Checkout session completed without collection code metadata:", session.id);
     }
   }
 

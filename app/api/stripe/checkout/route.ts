@@ -8,6 +8,10 @@ import {
 } from "@/lib/content-data";
 import { modules } from "@/config/modules";
 import { siteConfig } from "@/config/site";
+import {
+  COLLECTION_CODE_METADATA_KEY,
+  generateCollectionCode,
+} from "@/lib/collection-code";
 import { absoluteUrl } from "@/lib/seo";
 import { getStripe } from "@/lib/stripe";
 
@@ -95,6 +99,7 @@ export async function POST(request: Request) {
       .map((item) => `${item.quantity}x ${item.name}`)
       .join(", ");
     const collectionSummary = `${event.name} on ${event.dateDisplay}`;
+    const collectionCode = generateCollectionCode();
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -116,6 +121,7 @@ export async function POST(request: Request) {
         eventDate: event.dateDisplay,
         eventLocation: event.location,
         collectionSummary: collectionSummary.slice(0, 500),
+        [COLLECTION_CODE_METADATA_KEY]: collectionCode,
         productIds: lineItems.map((item) => item.id).join(","),
         orderSummary: orderSummary.slice(0, 500),
         siteName: siteConfig.name,
