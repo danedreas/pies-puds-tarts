@@ -35,6 +35,10 @@ export function EventSelector({ events, value, onChange, invalid = false }: Even
           *
         </span>
       </Label>
+      <InlineText
+        text={orderContent.collectionMarketDescription}
+        className="text-xs leading-relaxed text-muted-foreground"
+      />
       <select
         id="collection-location"
         value={value}

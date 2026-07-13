@@ -64,14 +64,38 @@ export const siteContentSchema = z.object({
 export type PreorderBox = z.infer<typeof preorderBoxSchema>;
 export type SiteContent = z.infer<typeof siteContentSchema>;
 
+function toIsoDate(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
+
+/** End of the rolling pre-order window (one calendar month from `from`). */
+export function getPreorderWindowEnd(from = new Date()): Date {
+  const until = new Date(from);
+  until.setMonth(until.getMonth() + 1);
+  return until;
+}
+
 export function getUpcomingEventsFromList(
   events: MarketEvent[],
   from = new Date(),
 ): MarketEvent[] {
-  const today = from.toISOString().slice(0, 10);
+  const today = toIsoDate(from);
 
   return events
     .filter((event) => event.date >= today)
+    .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+/** Upcoming markets within a rolling month - used by the pre-order picker. */
+export function getPreorderEventsFromList(
+  events: MarketEvent[],
+  from = new Date(),
+): MarketEvent[] {
+  const today = toIsoDate(from);
+  const until = toIsoDate(getPreorderWindowEnd(from));
+
+  return events
+    .filter((event) => event.date >= today && event.date <= until)
     .sort((a, b) => a.date.localeCompare(b.date));
 }
 

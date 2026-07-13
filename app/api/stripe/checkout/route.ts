@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import {
   getMarketEventById,
-  getUpcomingMarketEvents,
+  getPreorderMarketEvents,
   resolveCheckoutProduct,
   type CheckoutLineItem,
 } from "@/lib/content-data";
@@ -55,8 +55,8 @@ async function validateCollectionEvent(eventId: string) {
     return null;
   }
 
-  const isUpcoming = (await getUpcomingMarketEvents()).some((item) => item.id === eventId);
-  if (!isUpcoming) {
+  const isPreorderOpen = (await getPreorderMarketEvents()).some((item) => item.id === eventId);
+  if (!isPreorderOpen) {
     return null;
   }
 

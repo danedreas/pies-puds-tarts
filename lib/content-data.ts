@@ -2,7 +2,11 @@ import type { MarketEvent } from "@/config/content/events";
 import type { MenuItem } from "@/config/content/products";
 import { parseDisplayPrice } from "@/config/content/products";
 import { readSiteContent } from "@/lib/site-content";
-import { getUpcomingEventsFromList, type PreorderBox } from "@/lib/site-content-shared";
+import {
+  getPreorderEventsFromList,
+  getUpcomingEventsFromList,
+  type PreorderBox,
+} from "@/lib/site-content-shared";
 
 export async function getSiteContent() {
   return readSiteContent();
@@ -26,6 +30,12 @@ export async function getMarketEvents(): Promise<MarketEvent[]> {
 export async function getUpcomingMarketEvents(from = new Date()): Promise<MarketEvent[]> {
   const events = await getMarketEvents();
   return getUpcomingEventsFromList(events, from);
+}
+
+/** Markets available in the order form picker (rolling month window). */
+export async function getPreorderMarketEvents(from = new Date()): Promise<MarketEvent[]> {
+  const events = await getMarketEvents();
+  return getPreorderEventsFromList(events, from);
 }
 
 export async function getMarketEventById(id: string): Promise<MarketEvent | undefined> {

@@ -21,7 +21,8 @@ export const orderContent = {
   description:
     "Add your items from the menu, then choose a [market](/events) for pre-order and online payment, or select unit pickup at Colkirk and [get in touch](/contact) to arrange collection.",
   collectionMarketTitle: "Collect from",
-  collectionMarketDescription: "Choose where you're collecting - you can add items first.",
+  collectionMarketDescription:
+    "Pre-orders are open for markets in the next month. Choose where you're collecting - you can add items first.",
   collectionRequiredMessage: "Please choose where you're collecting from.",
   noEventsMessage:
     "No market dates open for pre-orders right now. You can still arrange collection from our Colkirk unit, or check the events page for updates.",

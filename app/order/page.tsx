@@ -7,7 +7,7 @@ import { breadcrumbJsonLd, menuJsonLd, webPageJsonLd } from "@/lib/json-ld";
 import {
   getMenuItems,
   getPreorderBoxes,
-  getUpcomingMarketEvents,
+  getPreorderMarketEvents,
 } from "@/lib/content-data";
 import { SectionHeading, SectionShell } from "@/components/ui/section-shell";
 import { createMetadata } from "@/lib/seo";
@@ -20,7 +20,7 @@ export const metadata = createMetadata({
 
 export default async function OrderPage() {
   const [events, menuItems, boxes] = await Promise.all([
-    getUpcomingMarketEvents(),
+    getPreorderMarketEvents(),
     getMenuItems(),
     getPreorderBoxes(),
   ]);
