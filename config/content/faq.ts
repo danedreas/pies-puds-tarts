@@ -23,7 +23,7 @@ export const faqContent = {
     {
       question: "When do I collect my order?",
       answer:
-        "On the market day you selected at checkout. Times vary by market  -  see the [events schedule](/events) for start and finish times. Head to the Pies, Puds & Tarts stall and give your name.",
+        "On the market day you selected at checkout. Head to the Pies, Puds & Tarts stall and give your name.",
     },
     {
       question: "How far in advance should I order?",
