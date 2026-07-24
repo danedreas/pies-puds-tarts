@@ -45,7 +45,7 @@ export const modules = {
   fullLegalSuite: process.env.NEXT_PUBLIC_ENABLE_FULL_LEGAL === "true",
 
   /**
-   * Admin editor + Blob-backed content. Off by default — edit config/content/* directly.
+   * Admin editor + Blob-backed content. Off by default - edit config/content/* directly.
    * Set NEXT_PUBLIC_ENABLE_ADMIN=true to re-enable /admin.
    */
   admin: process.env.NEXT_PUBLIC_ENABLE_ADMIN === "true",

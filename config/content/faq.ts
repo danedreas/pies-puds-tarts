@@ -23,7 +23,7 @@ export const faqContent = {
     {
       question: "When do I collect my order?",
       answer:
-        "On the market day you arranged with us. Head to the Pies, Puds & Tarts stall — we'll confirm the details when you place your order.",
+        "On the market day you arranged with us. Head to the Pies, Puds & Tarts stall - we'll confirm the details when you place your order.",
     },
     {
       question: "How far in advance should I order?",
