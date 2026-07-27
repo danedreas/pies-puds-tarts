@@ -40,8 +40,8 @@ export const siteConfig = {
     /** Human-readable - helps local customers and SEO */
     serviceArea: "Farmers markets around Norfolk",
     address: {
-      line1: "Unit 2B, Orchard Park, Dereham Road",
-      city: "Colkirk",
+      line1: "Unit 2B, Orchard Park, Dereham Rd",
+      city: "Colkirk, Fakenham",
       region: "Norfolk",
       postcode: "NR21 7JQ",
       country: "United Kingdom",
@@ -80,7 +80,7 @@ export const siteConfig = {
 
   /** Legal entity details for policy templates */
   legal: {
-    registeredOffice: "Colkirk, Norfolk, United Kingdom",
+    registeredOffice: "Unit 2B, Orchard Park, Dereham Rd, Colkirk, Fakenham, Norfolk, NR21 7JQ, United Kingdom",
     companyNumber: "",
     dataController: "Pies, Puds & Tarts",
     dpoEmail: "hello@piespudstarts.co.uk",

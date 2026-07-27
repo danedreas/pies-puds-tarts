@@ -10,7 +10,7 @@ export const unitCollectionId = "unit-pickup" as const;
 export const unitCollection = {
   id: unitCollectionId,
   label: "Our unit - Colkirk (NR21)",
-  location: "Unit 2B, Orchard Park, Dereham Road, Colkirk, NR21 7JQ",
+  location: "Unit 2B, Orchard Park, Dereham Rd, Colkirk, Fakenham NR21 7JQ",
   notice:
     "Collection from our unit needs to be arranged in advance. Add your items below, then get in touch and we'll confirm a time.",
   contactButtonLabel: "Get in touch to arrange collection",

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { FacebookIcon, InstagramIcon } from "@/components/icons/social-icons";
 import { siteConfig } from "@/config/site";
-import { whatsappUrl } from "@/lib/contact";
+import { formatAddress, whatsappUrl } from "@/lib/contact";
 import { Button } from "@/components/ui/button";
 
 function OpeningHoursText() {
@@ -53,9 +53,9 @@ export function ContactDetails({ showWhatsAppButton = false }: { showWhatsAppBut
         <div>
           <dt className="inline-flex items-center gap-1.5 font-medium">
             <MapPin className="size-3.5" aria-hidden />
-            Based in
+            Address
           </dt>
-          <dd className="text-muted-foreground">{contact.address.region}, {contact.address.country}</dd>
+          <dd className="text-muted-foreground">{formatAddress()}</dd>
         </div>
         <div>
           <dt className="inline-flex items-center gap-1.5 font-medium">
