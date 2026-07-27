@@ -84,24 +84,27 @@ Rate limiting: 5 requests/minute per IP. Configure Upstash Redis for production 
 
 ## Stripe Embedded Checkout
 
+Online checkout is **paused** for now — market pre-orders and unit pickup both go through the [contact form](/contact) with a prefilled basket.
+
+To re-enable Stripe later:
+
 1. Create a Stripe account (or sandbox) and copy **test** keys while developing
 2. Set in `.env.local`:
    - `NEXT_PUBLIC_ENABLE_STRIPE=true`
    - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...`
    - `STRIPE_SECRET_KEY=sk_test_...` (or a restricted key with Checkout permissions)
    - `STRIPE_WEBHOOK_SECRET=whsec_...`
-3. Forward webhooks locally:
+3. Restore the order-page checkout CTA (currently a contact redirect for all collections)
+4. Forward webhooks locally:
    ```bash
    stripe listen --forward-to localhost:3000/api/stripe/webhook
    ```
    Subscribe to `checkout.session.completed`
-4. On Vercel, add the same env vars and create a Dashboard webhook endpoint:
+5. On Vercel, add the same env vars and create a Dashboard webhook endpoint:
    `https://your-domain/api/stripe/webhook` for `checkout.session.completed`
-5. Also set `RESEND_API_KEY` + `CONTACT_TO_EMAIL` so customer and owner confirmation emails send with the collection code
+6. Also set `RESEND_API_KEY` + `CONTACT_TO_EMAIL` so customer and owner confirmation emails send with the collection code
 
-Checkout stays on `/checkout` (embedded Stripe form). Failed/declined cards stay on the page; successful payments return to `/checkout/success` with the collection code.
-
-Payments & refunds policy: `/payments`
+Checkout routes remain under `/checkout` when the module flag is on. Payments & refunds policy: `/payments`
 
 ## Deploy on Vercel
 

@@ -8,7 +8,7 @@ export const homeContent = {
   hero: {
     headline: "Award-winning pies, puds & tarts",
     subheadline:
-      "Award-winning pies, sausage rolls, quiche and more  -  at [markets around Norfolk](/events). [Order ahead online](/order) for collection, or [get in touch](/contact) about pickup.",
+      "Award-winning pies, sausage rolls, quiche and more  -  at [markets around Norfolk](/events). [Choose your order](/order) for collection, then [get in touch](/contact) to confirm — or ask about pickup.",
     primaryCta: { label: "Pre-order for collection", href: "/order" },
     secondaryCta: { label: "Market dates", href: "/events" },
     highlights: ["Baked fresh", "Pre-order & collect", "Pickup available"],
@@ -33,7 +33,7 @@ export const homeContent = {
       items: [
         "Pick the [market you're collecting from](/events)",
         "Choose what you want from the [menu](/order)",
-        "Pay online",
+        "Get in touch to confirm your order",
         "Collect from the stall on the day",
       ],
     },
@@ -62,7 +62,7 @@ export const homeContent = {
       {
         title: "Order ahead",
         description:
-          "Busy market day? Pre-order online and your order will be ready to pick up.",
+          "Busy market day? Choose your items ahead, get in touch to confirm, and your order will be ready to pick up.",
         href: "/order",
         imageIndex: 2,
       },

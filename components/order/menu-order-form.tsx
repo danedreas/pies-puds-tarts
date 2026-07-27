@@ -2,9 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Check, Loader2, Minus, Plus, ShoppingBag } from "lucide-react";
-import { toast } from "sonner";
+import { useSearchParams } from "next/navigation";
+import { Check, Minus, Plus, ShoppingBag } from "lucide-react";
 import type { MarketEvent } from "@/config/content/events";
 import {
   formatDisplayPrice,
@@ -13,10 +12,14 @@ import {
   parseDisplayPrice,
   type MenuItem,
 } from "@/config/content/products";
-import { orderContent, isUnitCollection, buildUnitCollectionContactHref, unitCollection } from "@/config/content/order";
-import { modules } from "@/config/modules";
+import {
+  orderContent,
+  isUnitCollection,
+  buildPreorderContactHref,
+  unitCollection,
+} from "@/config/content/order";
 import type { PreorderBox } from "@/lib/site-content-shared";
-import { writePendingPreorder, readPendingPreorder } from "@/lib/pending-preorder";
+import { readPendingPreorder } from "@/lib/pending-preorder";
 import { cn } from "@/lib/utils";
 import { EventSelector } from "@/components/order/event-selector";
 import { InlineText } from "@/components/content/inline-text";
@@ -73,7 +76,7 @@ export function OrderPageClient({ events, menuItems, boxes, showBoxes }: OrderPa
       return;
     }
 
-    if (events.some((event) => event.id === pending.eventId)) {
+    if (events.some((event) => event.id === pending.eventId) || isUnitCollection(pending.eventId)) {
       setSelectedEventId(pending.eventId);
       setEventError(false);
     }
@@ -109,7 +112,6 @@ export function OrderPageClient({ events, menuItems, boxes, showBoxes }: OrderPa
       selectedEvent={selectedEvent}
       onEventChange={handleEventChange}
       eventError={eventError}
-      onEventError={() => setEventError(true)}
       showBoxes={showBoxes}
       quantities={quantities}
       onQuantitiesChange={setQuantities}
@@ -117,77 +119,12 @@ export function OrderPageClient({ events, menuItems, boxes, showBoxes }: OrderPa
   );
 }
 
-type CheckoutProps = {
-  selectedEventId: string;
-  selectedEvent: MarketEvent | undefined;
-  onEventError: () => void;
-};
-
-function useCheckout({ selectedEventId, selectedEvent, onEventError }: CheckoutProps) {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  async function startCheckout(body: Record<string, unknown>) {
-    if (!selectedEventId) {
-      onEventError();
-      toast.message(orderContent.collectionRequiredMessage);
-      return;
-    }
-
-    if (isUnitCollection(selectedEventId)) {
-      return;
-    }
-
-    if (!selectedEvent) {
-      onEventError();
-      toast.message(orderContent.collectionRequiredMessage);
-      return;
-    }
-
-    const checkoutEnabled = modules.stripe;
-
-    if (!checkoutEnabled) {
-      toast.warning("Checkout is not set up yet.", {
-        description: "Configure Stripe in .env.local to enable pre-order payments.",
-        duration: 4000,
-      });
-      return;
-    }
-
-    const items = Array.isArray(body.items)
-      ? (body.items as { productId: string; quantity: number }[])
-      : body.productId
-        ? [{ productId: String(body.productId), quantity: 1 }]
-        : [];
-
-    if (items.length === 0) {
-      toast.message(orderContent.emptyCartMessage);
-      return;
-    }
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      writePendingPreorder({
-        eventId: selectedEventId,
-        items,
-      });
-      router.push("/checkout");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unable to start checkout");
-      setLoading(false);
-    }
-  }
-
-  return { loading, error, startCheckout };
-}
-
-type MenuOrderFormProps = CheckoutProps & {
+type MenuOrderFormProps = {
   events: MarketEvent[];
   menuItems: MenuItem[];
   boxes: PreorderBox[];
+  selectedEventId: string;
+  selectedEvent: MarketEvent | undefined;
   onEventChange: (eventId: string) => void;
   eventError: boolean;
   showBoxes: boolean;
@@ -203,17 +140,10 @@ function MenuOrderForm({
   selectedEvent,
   onEventChange,
   eventError,
-  onEventError,
   showBoxes,
   quantities,
   onQuantitiesChange,
 }: MenuOrderFormProps) {
-  const { loading, error, startCheckout } = useCheckout({
-    selectedEventId,
-    selectedEvent,
-    onEventError,
-  });
-
   const lineItems = useMemo(() => {
     const menuLines = menuItems
       .filter((item) => (quantities[item.id] ?? 0) > 0)
@@ -241,6 +171,16 @@ function MenuOrderForm({
   const orderTotal = lineItems.reduce((sum, line) => sum + line.lineTotal, 0);
   const itemCount = lineItems.reduce((sum, line) => sum + line.quantity, 0);
   const unitSelected = isUnitCollection(selectedEventId);
+  const canContinue = itemCount > 0 && Boolean(selectedEventId) && (unitSelected || Boolean(selectedEvent));
+  const contactHref = canContinue
+    ? buildPreorderContactHref(lineItems, {
+        unit: unitSelected,
+        event: selectedEvent,
+      })
+    : "/contact";
+  const contactLabel = unitSelected
+    ? unitCollection.contactButtonLabel
+    : orderContent.contactButtonLabel;
   const summaryRef = useRef<HTMLElement>(null);
   const [summaryInView, setSummaryInView] = useState(false);
 
@@ -268,20 +208,6 @@ function MenuOrderForm({
       ...current,
       [id]: Math.max(0, Math.min(MAX_QUANTITY, next)),
     }));
-  }
-
-  async function handleCheckout() {
-    const items = lineItems.map(({ id, quantity }) => ({
-      productId: id,
-      quantity,
-    }));
-
-    if (items.length === 0) {
-      toast.message(orderContent.emptyCartMessage);
-      return;
-    }
-
-    await startCheckout({ items });
   }
 
   return (
@@ -346,51 +272,18 @@ function MenuOrderForm({
               className="text-xs leading-relaxed text-muted-foreground"
             />
 
-            {error && (
-              <p className="text-sm text-destructive" role="alert">
-                {error}
-              </p>
-            )}
-
-            {unitSelected ? (
-              <Button
-                asChild={itemCount > 0 && Boolean(selectedEventId)}
-                disabled={itemCount === 0 || !selectedEventId}
-                className="w-full rounded-full"
-                size="lg"
-              >
-                {itemCount > 0 && selectedEventId ? (
-                  <Link href={buildUnitCollectionContactHref(lineItems)}>
-                    {unitCollection.contactButtonLabel}
-                  </Link>
-                ) : (
-                  <span>{unitCollection.contactButtonLabel}</span>
-                )}
-              </Button>
-            ) : (
-              <Button
-                onClick={handleCheckout}
-                disabled={loading || itemCount === 0 || !selectedEventId}
-                className="w-full rounded-full"
-                size="lg"
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="size-4 animate-spin" aria-hidden />
-                    Continuing…
-                  </>
-                ) : (
-                  orderContent.checkoutLabel
-                )}
-              </Button>
-            )}
-
-            {!modules.stripe && (
-              <p className="text-center text-xs text-muted-foreground">
-                Demo mode - connect Stripe in{" "}
-                <code className="rounded bg-muted px-1 py-0.5">.env.local</code>
-              </p>
-            )}
+            <Button
+              asChild={canContinue}
+              disabled={!canContinue}
+              className="w-full rounded-full"
+              size="lg"
+            >
+              {canContinue ? (
+                <Link href={contactHref}>{contactLabel}</Link>
+              ) : (
+                <span>{contactLabel}</span>
+              )}
+            </Button>
 
             <Button asChild variant="outline" className="w-full rounded-full">
               <Link href="/events">View market dates</Link>

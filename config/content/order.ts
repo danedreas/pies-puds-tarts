@@ -2,6 +2,8 @@
  * Order page copy - edit per client build.
  */
 
+import type { MarketEvent } from "@/config/content/events";
+
 /** Synthetic collection option id — not a market event */
 export const unitCollectionId = "unit-pickup" as const;
 
@@ -19,7 +21,7 @@ export const orderContent = {
   eyebrow: "Pre-order",
   title: "What would you like?",
   description:
-    "Add your items from the menu, then choose a [market](/events) for pre-order and online payment, or select unit pickup at Colkirk and [get in touch](/contact) to arrange collection.",
+    "Add your items from the menu, choose a [market](/events) or unit pickup at Colkirk, then [get in touch](/contact) so we can confirm your order.",
   collectionMarketTitle: "Collect from",
   collectionMarketDescription:
     "Pre-orders are open for markets in the next month, with at least 48 hours' notice so we have time to pack. Choose where you're collecting - you can add items first.",
@@ -27,9 +29,10 @@ export const orderContent = {
   noEventsMessage:
     "No market dates open for pre-orders right now. You can still arrange collection from our Colkirk unit, or check the events page for updates.",
   collectionNote:
-    "Orders need at least 48 hours before the market so we have time to pack. Ask if you need allergen info. See our [payments & refunds](/payments) policy.",
+    "Orders need at least 48 hours before the market so we have time to pack. Ask if you need allergen info. We'll confirm payment and collection when you get in touch.",
   summaryTitle: "Your order",
-  checkoutLabel: "Pay and pre-order",
+  /** Shared CTA for market pre-orders and unit pickup (contact redirect). */
+  contactButtonLabel: "Get in touch to arrange your order",
   emptyCartMessage: "Add something from the menu to continue.",
   boxesTitle: "Mixed boxes",
   boxesDescription:
@@ -40,18 +43,47 @@ export function isUnitCollection(collectionId: string): boolean {
   return collectionId === unitCollectionId;
 }
 
-export function buildUnitCollectionContactHref(
-  lineItems: { name: string; quantity: number }[],
+type PreorderContactLine = { name: string; quantity: number };
+
+type BuildPreorderContactHrefOptions = {
+  /** Unit pickup at Colkirk */
+  unit?: boolean;
+  /** Selected market event (ignored when unit is true) */
+  event?: Pick<MarketEvent, "name" | "dateDisplay">;
+};
+
+/**
+ * Contact form href with prefilled enquiry type and basket summary.
+ * Used for both market pre-orders and unit collection while online checkout is paused.
+ */
+export function buildPreorderContactHref(
+  lineItems: PreorderContactLine[],
+  options: BuildPreorderContactHrefOptions = {},
 ): string {
   const items = lineItems.map((line) => `${line.quantity}x ${line.name}`).join(", ");
-  const message = items
-    ? `I'd like to collect from your Colkirk unit:\n\n${items}\n\nPlease let me know when I can collect.`
-    : "I'd like to arrange collection from your Colkirk unit.";
+  const isUnit = Boolean(options.unit) || !options.event;
 
-  const params = new URLSearchParams({
-    type: "Pickup enquiry",
-    message,
-  });
+  let message: string;
+  let type: "Pickup enquiry" | "Pre-order";
 
+  if (isUnit) {
+    type = "Pickup enquiry";
+    message = items
+      ? `I'd like to collect from your Colkirk unit:\n\n${items}\n\nPlease let me know when I can collect.`
+      : "I'd like to arrange collection from your Colkirk unit.";
+  } else {
+    type = "Pre-order";
+    const event = options.event!;
+    message = items
+      ? `I'd like to pre-order for ${event.name} on ${event.dateDisplay}:\n\n${items}\n\nPlease confirm availability and how to pay.`
+      : `I'd like to pre-order for ${event.name} on ${event.dateDisplay}.`;
+  }
+
+  const params = new URLSearchParams({ type, message });
   return `/contact?${params.toString()}`;
+}
+
+/** @deprecated Prefer buildPreorderContactHref — kept for callers that only handle unit pickup */
+export function buildUnitCollectionContactHref(lineItems: PreorderContactLine[]): string {
+  return buildPreorderContactHref(lineItems, { unit: true });
 }

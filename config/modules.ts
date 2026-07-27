@@ -10,7 +10,11 @@ export const modules = {
    */
   pricing: process.env.NEXT_PUBLIC_SHOW_PRICING !== "false",
 
-  /** Stripe Embedded Checkout - requires secret + publishable keys */
+  /**
+   * Stripe Embedded Checkout - requires secret + publishable keys.
+   * Currently paused: market pre-orders use the contact form instead.
+   * Re-enable with NEXT_PUBLIC_ENABLE_STRIPE=true and valid keys when ready.
+   */
   stripe:
     process.env.NEXT_PUBLIC_ENABLE_STRIPE === "true" &&
     Boolean(process.env.STRIPE_SECRET_KEY) &&

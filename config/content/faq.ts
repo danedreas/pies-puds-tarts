@@ -18,17 +18,12 @@ export const faqContent = {
     {
       question: "How does pre-order work?",
       answer:
-        "Choose the [market you're collecting from](/events), add items from the [menu](/order), and pay online. Your order is baked for that market day and ready at the stall.",
+        "Choose the [market you're collecting from](/events), add items from the [menu](/order), then [get in touch](/contact) with your selection. We'll confirm availability, payment, and collection details by email or phone.",
     },
     {
       question: "When do I collect my order?",
       answer:
-        "On the market day you selected at checkout. Head to the Pies, Puds & Tarts stall and quote the collection code from your confirmation email.",
-    },
-    {
-      question: "What is my collection code?",
-      answer:
-        "After you pay, you'll get a confirmation email with a unique collection code. Quote that code at the stall so we can match your order. We receive the same code, so we can verify it.",
+        "On the market day you arranged with us. Head to the Pies, Puds & Tarts stall — we'll confirm the details when you place your order.",
     },
     {
       question: "How far in advance should I order?",
@@ -58,7 +53,7 @@ export const faqContent = {
     {
       question: "How do I pay?",
       answer:
-        "Pre-orders are paid online by card at checkout. On market day you can also buy from the stall if something is still available.",
+        "We'll confirm payment details when you [get in touch](/contact) about your pre-order. On market day you can also buy from the stall if something is still available.",
     },
   ] satisfies FaqItem[],
 } as const;

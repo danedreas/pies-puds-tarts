@@ -33,7 +33,7 @@ const documents: Record<LegalPageKey, LegalDocument> = {
         heading: "Information we collect",
         paragraphs: [
           "When you contact us, we may collect your name, email address, phone number, company name, and the details you provide in your message.",
-          "When you place a pre-order, we collect the order details you choose and payment confirmation from our payment provider. Card details are handled by Stripe and are not stored on our servers.",
+          "When you pre-order, we collect the order details you share with us (including through the contact form) so we can confirm availability and collection. If online card payment is enabled again, card details would be handled by our payment provider and not stored on our servers.",
           "We may collect technical data such as IP address and browser type for security and analytics when you consent to cookies.",
         ],
       },
@@ -41,7 +41,7 @@ const documents: Record<LegalPageKey, LegalDocument> = {
         heading: "How we use your data",
         paragraphs: [
           "We use contact form data to respond to enquiries and provide services you request.",
-          "We use pre-order and payment data to fulfil your order, send confirmation emails (including your collection code), and verify collection at the market.",
+          "We use pre-order details to fulfil your order, confirm collection arrangements, and respond about payment.",
           "We process data on the lawful bases of consent, contract, and legitimate interests where appropriate under UK GDPR.",
         ],
       },
@@ -49,7 +49,7 @@ const documents: Record<LegalPageKey, LegalDocument> = {
         heading: "Retention and sharing",
         paragraphs: [
           "We retain enquiry and order data only as long as needed for the purpose collected, unless a longer period is required by law.",
-          "We use trusted processors such as hosting, email (Resend), and payment (Stripe) providers. Data may be processed in the UK, EEA, or other countries with appropriate safeguards.",
+          "We use trusted processors such as hosting and email (Resend) providers. If online payments are enabled, a payment provider may also process data. Data may be processed in the UK, EEA, or other countries with appropriate safeguards.",
         ],
       },
       {
@@ -116,41 +116,34 @@ const documents: Record<LegalPageKey, LegalDocument> = {
   payments: {
     title: "Payments & refunds",
     intro:
-      "This page explains how online pre-order payments work for {siteName}, including collection and refunds.",
+      "This page explains how pre-order payments and collection work for {siteName}.",
     sections: [
       {
         heading: "How payment works",
         paragraphs: [
-          "Pre-orders are paid online by card through Stripe Checkout, embedded on our website. You choose a market collection date, select your items, and pay before collection.",
-          "After a successful payment you receive a confirmation email with a unique collection code. Quote that code at the stall so we can match your order. We receive the same code for verification.",
+          "Online card checkout is paused for now. Choose a market (or unit pickup), select your items on the order page, then contact us with your selection. We'll confirm availability, payment, and collection details by email or phone.",
+          "On market day you can also buy from the stall if something is still available.",
         ],
       },
       {
         heading: "Pricing and availability",
         paragraphs: [
-          "Prices are shown in pounds sterling (GBP) on the order page. We bake to the pre-orders received for each market, so items are reserved for the market date you select.",
+          "Prices are shown in pounds sterling (GBP) on the order page. We bake to the pre-orders arranged for each market, so items are reserved for the market date you select.",
           "Please order at least 48 hours before the market so we have time to pack. Pre-order options only show markets inside that window.",
         ],
       },
       {
         heading: "Collection",
         paragraphs: [
-          "Orders are for collection only at the market (or other location) you choose at checkout. Bring your collection code. If you cannot collect as planned, contact us as soon as possible at {contactEmail}.",
+          "Orders are for collection only at the market (or other location) you arrange with us. If you cannot collect as planned, contact us as soon as possible at {contactEmail}.",
         ],
       },
       {
         heading: "Cancellations and refunds",
         paragraphs: [
-          "Because pre-orders are perishable food prepared for a specific market day, we generally cannot offer refunds for change of mind after payment.",
-          "If we cancel a market, cannot fulfil your order, or take payment in error, we will refund you in full to the original payment method or offer an alternative collection where practical.",
-          "If your card payment fails or is declined, no charge is taken and you can try again from checkout.",
-          "For refund requests or payment problems, email {contactEmail} with your name, collection code (if you have one), and market date.",
-        ],
-      },
-      {
-        heading: "Payment provider",
-        paragraphs: [
-          "Card payments are processed by Stripe. We do not store full card numbers on our servers. Stripe's terms and privacy notices also apply to the payment step.",
+          "Because pre-orders are perishable food prepared for a specific market day, we generally cannot offer refunds for change of mind after payment has been taken.",
+          "If we cancel a market, cannot fulfil your order, or take payment in error, we will refund you in full or offer an alternative collection where practical.",
+          "For refund requests or payment problems, email {contactEmail} with your name and market date.",
         ],
       },
     ],
