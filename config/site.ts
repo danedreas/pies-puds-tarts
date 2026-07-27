@@ -8,7 +8,7 @@ export const siteConfig = {
   legalName: "Pies, Puds & Tarts",
   tagline: "Award-winning pies, savoury bakes, sweet tarts and more.",
   description:
-    "Award-winning pies, savoury bakes, sweet tarts and more from Norfolk farmers markets. Pre-order online for collection, or contact us about pickup.",
+    "Award-winning pies, savoury bakes, sweet tarts and more from Norfolk farmers markets. Pre-order for collection at a market, or contact us about pickup.",
 
   /** Production URL - set NEXT_PUBLIC_SITE_URL in env for deploys */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
