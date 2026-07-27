@@ -9,6 +9,6 @@ export function whatsappUrl(phone = siteConfig.contact.whatsapp): string {
 }
 
 export function formatAddress(): string {
-  const { line1, city, region, postcode, country } = siteConfig.contact.address;
-  return [line1, city, region, postcode, country].filter(Boolean).join(", ");
+  const { line1, city, postcode } = siteConfig.contact.address;
+  return [line1, city, postcode].filter(Boolean).join(", ");
 }
