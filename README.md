@@ -84,7 +84,7 @@ Rate limiting: 5 requests/minute per IP. Configure Upstash Redis for production 
 
 ## Stripe Embedded Checkout
 
-Online checkout is **paused** for now — market pre-orders and unit pickup both go through the [contact form](/contact) with a prefilled basket.
+Online checkout is **paused** for now - market pre-orders and unit pickup both go through the [contact form](/contact) with a prefilled basket.
 
 To re-enable Stripe later:
 

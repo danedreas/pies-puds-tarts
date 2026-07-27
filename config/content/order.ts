@@ -4,7 +4,7 @@
 
 import type { MarketEvent } from "@/config/content/events";
 
-/** Synthetic collection option id — not a market event */
+/** Synthetic collection option id - not a market event */
 export const unitCollectionId = "unit-pickup" as const;
 
 export const unitCollection = {
@@ -83,7 +83,7 @@ export function buildPreorderContactHref(
   return `/contact?${params.toString()}`;
 }
 
-/** @deprecated Prefer buildPreorderContactHref — kept for callers that only handle unit pickup */
+/** @deprecated Prefer buildPreorderContactHref - kept for callers that only handle unit pickup */
 export function buildUnitCollectionContactHref(lineItems: PreorderContactLine[]): string {
   return buildPreorderContactHref(lineItems, { unit: true });
 }

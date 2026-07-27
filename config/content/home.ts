@@ -8,7 +8,7 @@ export const homeContent = {
   hero: {
     headline: "Award-winning pies, puds & tarts",
     subheadline:
-      "Award-winning pies, sausage rolls, quiche and more  -  at [markets around Norfolk](/events). [Choose your order](/order) for collection, then [get in touch](/contact) to confirm — or ask about pickup.",
+      "Award-winning pies, sausage rolls, quiche and more  -  at [markets around Norfolk](/events). [Choose your order](/order) for collection, then [get in touch](/contact) to confirm - or ask about pickup.",
     primaryCta: { label: "Pre-order for collection", href: "/order" },
     secondaryCta: { label: "Market dates", href: "/events" },
     highlights: ["Baked fresh", "Pre-order & collect", "Pickup available"],
