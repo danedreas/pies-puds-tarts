@@ -64,7 +64,7 @@ export function buildPreorderContactHref(
   const isUnit = Boolean(options.unit) || !options.event;
 
   let message: string;
-  let type: "Pickup enquiry" | "Pre-order help";
+  let type: "Pickup enquiry" | "Pre-order";
 
   if (isUnit) {
     type = "Pickup enquiry";
@@ -72,7 +72,7 @@ export function buildPreorderContactHref(
       ? `I'd like to collect from your Colkirk unit:\n\n${items}\n\nPlease let me know when I can collect.`
       : "I'd like to arrange collection from your Colkirk unit.";
   } else {
-    type = "Pre-order help";
+    type = "Pre-order";
     const event = options.event!;
     message = items
       ? `I'd like to pre-order for ${event.name} on ${event.dateDisplay}:\n\n${items}\n\nPlease confirm availability and how to pay.`

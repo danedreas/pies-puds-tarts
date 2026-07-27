@@ -108,7 +108,7 @@ export const siteConfig = {
   /** Contact form enquiry types */
   projectTypes: [
     "General question",
-    "Pre-order help",
+    "Pre-order",
     "Pickup enquiry",
     "Wholesale or catering",
     "Something else",
