@@ -17,8 +17,15 @@ export const siteConfig = {
   logo: {
     src: "/images/brand-logo.png",
     alt: "Pies, Puds & Tarts logo",
-    width: 578,
-    height: 300,
+    width: 287,
+    height: 150,
+  },
+
+  footerLogo: {
+    src: "/images/brand-logo-footer.png",
+    alt: "Pies, Puds & Tarts logo",
+    width: 287,
+    height: 150,
   },
 
   owner: {

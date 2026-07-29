@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { FooterContactList } from "@/components/contact/contact-details";
@@ -15,7 +16,13 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           <div className="space-y-3">
-            <p className="font-heading text-lg font-semibold">{siteConfig.name}</p>
+            <Image
+              src={siteConfig.footerLogo.src}
+              alt={siteConfig.footerLogo.alt}
+              width={siteConfig.footerLogo.width}
+              height={siteConfig.footerLogo.height}
+              className="h-10 w-auto"
+            />
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
               {siteConfig.tagline}
             </p>
