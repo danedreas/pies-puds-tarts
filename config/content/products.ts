@@ -2,7 +2,7 @@
  * Default menu items for pre-order. Edit here while admin is disabled.
  */
 
-export type MenuCategoryId = "pies" | "puds" | "tarts" | "other";
+export type MenuCategoryId = "pies" | "puds" | "tarts" | "sausage-rolls";
 
 export type MenuItem = {
   id: string;
@@ -19,7 +19,7 @@ export const menuCategories: { id: MenuCategoryId; label: string }[] = [
   { id: "pies", label: "Pies" },
   { id: "puds", label: "Puds" },
   { id: "tarts", label: "Tarts" },
-  { id: "other", label: "Other" },
+  { id: "sausage-rolls", label: "Sausage rolls" },
 ];
 
 export const menuItems: MenuItem[] = [
@@ -52,6 +52,13 @@ export const menuItems: MenuItem[] = [
     displayPrice: "5.00",
   },
   {
+    id: "roast-chicken-smoked-pancetta-mushroom-pie",
+    category: "pies",
+    name: "Roast Chicken Smoked Pancetta & Mushroom Pie",
+    description: "",
+    displayPrice: "5.00",
+  },
+  {
     id: "feta-mozzarella-olive-spinach-tart",
     category: "tarts",
     name: "Feta, Mozzarella, Olive, Red Onion, Tomato & Spinach Tart",
@@ -74,24 +81,10 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: "sausage-roll",
-    category: "other",
+    category: "sausage-rolls",
     name: "Sausage Roll",
     description: "",
     displayPrice: "4.50",
-  },
-  {
-    id: "quiche-1",
-    category: "other",
-    name: "Quiche 1 (placeholder)",
-    description: "Flavour to be confirmed.",
-    displayPrice: "5.00",
-  },
-  {
-    id: "quiche-2",
-    category: "other",
-    name: "Quiche 2 (placeholder)",
-    description: "Flavour to be confirmed.",
-    displayPrice: "5.00",
   },
 ];
 
