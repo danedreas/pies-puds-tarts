@@ -27,7 +27,7 @@ export const menuItems: MenuItem[] = [
     id: "hog-roast-pie",
     category: "pies",
     name: "Hog Roast Pie",
-    description: "Roast pork, apple & sage onion stuffing.",
+    description: "Roast pork, apple, sage & onion stuffing.",
     displayPrice: "5.00",
   },
   {
@@ -75,7 +75,7 @@ export const menuItems: MenuItem[] = [
   {
     id: "goats-cheese-tomato-onion-marmalade-pesto-tart",
     category: "tarts",
-    name: "Goats Cheese, Tomato, Onion Marmalade & Pesto Tart",
+    name: "Goat's Cheese, Tomato, Onion Marmalade & Pesto Tart",
     description: "",
     displayPrice: "5.00",
   },
