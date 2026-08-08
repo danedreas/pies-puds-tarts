@@ -467,7 +467,7 @@ function MenuRow({
   return (
     <li className="flex flex-col gap-4 py-5 sm:flex-row sm:items-center sm:justify-between">
       <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <div className="flex flex-col items-start gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-3 sm:gap-y-1">
           <h3 className="font-heading text-lg font-semibold">{item.name}</h3>
           <span className="font-heading text-lg font-bold text-primary">
             {formatDisplayPrice(item.displayPrice)}
