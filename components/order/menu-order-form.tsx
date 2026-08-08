@@ -465,14 +465,9 @@ function MenuRow({
   onQuantityChange: (quantity: number) => void;
 }) {
   return (
-    <li className="flex flex-col gap-4 py-5 sm:flex-row sm:items-center sm:justify-between">
-      <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h3 className="font-heading text-lg font-semibold">{item.name}</h3>
-          <span className="font-heading text-lg font-bold text-primary">
-            {formatDisplayPrice(item.displayPrice)}
-          </span>
-        </div>
+    <li className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-3 py-5 sm:flex sm:gap-6">
+      <div className="col-span-2 min-w-0 sm:col-auto sm:flex-1">
+        <h3 className="font-heading text-lg font-semibold text-pretty">{item.name}</h3>
         {item.description ? (
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
             {item.description}
@@ -484,6 +479,10 @@ function MenuRow({
           </p>
         ) : null}
       </div>
+
+      <span className="font-heading text-lg font-bold tabular-nums text-primary">
+        {formatDisplayPrice(item.displayPrice)}
+      </span>
 
       <QuantityControl quantity={quantity} onChange={onQuantityChange} label={item.name} />
     </li>
