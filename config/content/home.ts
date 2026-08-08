@@ -8,7 +8,7 @@ export const homeContent = {
   hero: {
     headline: "Award-winning pies, puds & tarts",
     subheadline:
-      "Award-winning pies, sausage rolls, quiche and more  -  at [markets around Norfolk](/events). [Choose your order](/order) for collection, then [get in touch](/contact) to confirm - or ask about pickup.",
+      "Award-winning pies, tarts and sausage rolls  -  at [markets around Norfolk](/events). [Choose your order](/order) for collection, then [get in touch](/contact) to confirm - or ask about pickup.",
     primaryCta: { label: "Pre-order for collection", href: "/order" },
     secondaryCta: { label: "Market dates", href: "/events" },
     highlights: ["Baked fresh", "Pre-order & collect", "Pickup available"],
@@ -23,7 +23,7 @@ export const homeContent = {
       title: "What's on the stall",
       items: [
         "Award-winning savoury pies",
-        "Sausage rolls and quiche",
+        "Savoury tarts and sausage rolls",
         "Proper portions  -  nothing dainty",
         "Limited batches  -  when it's gone, it's gone",
       ],

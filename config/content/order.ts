@@ -29,7 +29,9 @@ export const orderContent = {
   noEventsMessage:
     "No market dates open for pre-orders right now. You can still arrange collection from our Colkirk unit, or check the events page for updates.",
   collectionNote:
-    "Orders need at least 48 hours before the market so we have time to pack. Ask if you need allergen info. We'll confirm payment and collection when you get in touch.",
+    "Orders need at least 48 hours before the market so we have time to pack. We'll confirm payment and collection when you get in touch.",
+  allergenNotice:
+    "Allergens: coming online soon  -  [get in touch](/contact) for now.",
   summaryTitle: "Your order",
   /** Shared CTA for market pre-orders and unit pickup (contact redirect). */
   contactButtonLabel: "Get in touch to arrange your order",

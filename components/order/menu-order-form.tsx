@@ -214,23 +214,36 @@ function MenuOrderForm({
     <SectionShell tone="muted" className={cn("pt-8", showMobileCartBar && "pb-28")}>
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] lg:items-start lg:gap-12">
         <div className="space-y-10">
-          {menuCategories.map((category) => (
-            <MenuCategorySection
-              key={category.id}
-              label={category.label}
-              items={menuItems.filter((item) => item.category === category.id)}
-              quantities={quantities}
-              onQuantityChange={setQuantity}
-            />
-          ))}
+          {menuCategories.map((category) => {
+            const items = menuItems.filter((item) => item.category === category.id);
+            if (items.length === 0) {
+              return null;
+            }
 
-          {showBoxes && (
+            return (
+              <MenuCategorySection
+                key={category.id}
+                id={category.id}
+                label={category.label}
+                items={items}
+                quantities={quantities}
+                onQuantityChange={setQuantity}
+              />
+            );
+          })}
+
+          {showBoxes && boxes.length > 0 && (
             <BoxesCategorySection
               boxes={boxes}
               quantities={quantities}
               onQuantityChange={setQuantity}
             />
           )}
+
+          <InlineText
+            text={orderContent.allergenNotice}
+            className="text-sm leading-relaxed text-muted-foreground"
+          />
         </div>
 
         <aside ref={summaryRef} className="scroll-mt-24 lg:sticky lg:top-24">
@@ -408,20 +421,22 @@ function BoxMenuRow({
 }
 
 function MenuCategorySection({
+  id,
   label,
   items,
   quantities,
   onQuantityChange,
 }: {
+  id: string;
   label: string;
   items: MenuItem[];
   quantities: Quantities;
   onQuantityChange: (id: string, quantity: number) => void;
 }) {
   return (
-    <section aria-labelledby={`menu-${label.toLowerCase()}`}>
+    <section aria-labelledby={`menu-${id}`}>
       <h2
-        id={`menu-${label.toLowerCase()}`}
+        id={`menu-${id}`}
         className="font-heading border-b border-primary/20 pb-2 text-2xl font-semibold tracking-tight"
       >
         {label}
@@ -458,14 +473,16 @@ function MenuRow({
             {formatDisplayPrice(item.displayPrice)}
           </span>
         </div>
-        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-          {item.description}
-        </p>
-        {item.allergens && (
+        {item.description ? (
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+            {item.description}
+          </p>
+        ) : null}
+        {item.allergens ? (
           <p className="mt-1.5 text-xs text-muted-foreground/80">
             <span className="font-medium">Allergens:</span> {item.allergens}
           </p>
-        )}
+        ) : null}
       </div>
 
       <QuantityControl quantity={quantity} onChange={onQuantityChange} label={item.name} />
