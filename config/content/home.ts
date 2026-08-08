@@ -23,7 +23,7 @@ export const homeContent = {
       title: "What's on the stall",
       items: [
         "Award-winning savoury pies",
-        "Savoury tarts and sausage rolls",
+        "Savoury tarts, sausage rolls and quiche",
         "Proper portions  -  nothing dainty",
         "Limited batches  -  when it's gone, it's gone",
       ],

@@ -223,6 +223,7 @@ function MenuOrderForm({
             return (
               <MenuCategorySection
                 key={category.id}
+                id={category.id}
                 label={category.label}
                 items={items}
                 quantities={quantities}
@@ -420,20 +421,22 @@ function BoxMenuRow({
 }
 
 function MenuCategorySection({
+  id,
   label,
   items,
   quantities,
   onQuantityChange,
 }: {
+  id: string;
   label: string;
   items: MenuItem[];
   quantities: Quantities;
   onQuantityChange: (id: string, quantity: number) => void;
 }) {
   return (
-    <section aria-labelledby={`menu-${label.toLowerCase()}`}>
+    <section aria-labelledby={`menu-${id}`}>
       <h2
-        id={`menu-${label.toLowerCase()}`}
+        id={`menu-${id}`}
         className="font-heading border-b border-primary/20 pb-2 text-2xl font-semibold tracking-tight"
       >
         {label}

@@ -2,7 +2,7 @@
  * Default menu items for pre-order. Edit here while admin is disabled.
  */
 
-export type MenuCategoryId = "pies" | "puds" | "tarts";
+export type MenuCategoryId = "pies" | "puds" | "tarts" | "sausage-rolls" | "quiches";
 
 export type MenuItem = {
   id: string;
@@ -19,6 +19,8 @@ export const menuCategories: { id: MenuCategoryId; label: string }[] = [
   { id: "pies", label: "Pies" },
   { id: "puds", label: "Puds" },
   { id: "tarts", label: "Tarts" },
+  { id: "sausage-rolls", label: "Sausage rolls" },
+  { id: "quiches", label: "Quiches" },
 ];
 
 export const menuItems: MenuItem[] = [
@@ -51,13 +53,6 @@ export const menuItems: MenuItem[] = [
     displayPrice: "5.00",
   },
   {
-    id: "sausage-roll",
-    category: "pies",
-    name: "Sausage Roll",
-    description: "",
-    displayPrice: "4.50",
-  },
-  {
     id: "feta-mozzarella-olive-spinach-tart",
     category: "tarts",
     name: "Feta, Mozzarella, Olive, Red Onion, Tomato & Spinach Tart",
@@ -76,6 +71,27 @@ export const menuItems: MenuItem[] = [
     category: "tarts",
     name: "Goats Cheese, Tomato, Onion Marmalade & Pesto Tart",
     description: "",
+    displayPrice: "5.00",
+  },
+  {
+    id: "sausage-roll",
+    category: "sausage-rolls",
+    name: "Sausage Roll",
+    description: "",
+    displayPrice: "4.50",
+  },
+  {
+    id: "quiche-1",
+    category: "quiches",
+    name: "Quiche 1 (placeholder)",
+    description: "Flavour to be confirmed.",
+    displayPrice: "5.00",
+  },
+  {
+    id: "quiche-2",
+    category: "quiches",
+    name: "Quiche 2 (placeholder)",
+    description: "Flavour to be confirmed.",
     displayPrice: "5.00",
   },
 ];
