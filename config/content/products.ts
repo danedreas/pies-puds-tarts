@@ -2,7 +2,7 @@
  * Default menu items for pre-order. Edit here while admin is disabled.
  */
 
-export type MenuCategoryId = "pies" | "puds" | "tarts" | "sausage-rolls" | "quiches";
+export type MenuCategoryId = "pies" | "puds" | "tarts" | "other";
 
 export type MenuItem = {
   id: string;
@@ -19,8 +19,7 @@ export const menuCategories: { id: MenuCategoryId; label: string }[] = [
   { id: "pies", label: "Pies" },
   { id: "puds", label: "Puds" },
   { id: "tarts", label: "Tarts" },
-  { id: "sausage-rolls", label: "Sausage rolls" },
-  { id: "quiches", label: "Quiches" },
+  { id: "other", label: "Other" },
 ];
 
 export const menuItems: MenuItem[] = [
@@ -75,21 +74,21 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: "sausage-roll",
-    category: "sausage-rolls",
+    category: "other",
     name: "Sausage Roll",
     description: "",
     displayPrice: "4.50",
   },
   {
     id: "quiche-1",
-    category: "quiches",
+    category: "other",
     name: "Quiche 1 (placeholder)",
     description: "Flavour to be confirmed.",
     displayPrice: "5.00",
   },
   {
     id: "quiche-2",
-    category: "quiches",
+    category: "other",
     name: "Quiche 2 (placeholder)",
     description: "Flavour to be confirmed.",
     displayPrice: "5.00",

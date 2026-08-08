@@ -9,7 +9,7 @@ export function isBlobConfigured(): boolean {
 export const SITE_CONTENT_BLOB_PATH = "site-content.json";
 export const SITE_CONTENT_CACHE_TAG = "site-content";
 
-const menuCategorySchema = z.enum(["pies", "puds", "tarts", "sausage-rolls", "quiches"]);
+const menuCategorySchema = z.enum(["pies", "puds", "tarts", "other"]);
 
 const storedPriceSchema = z
   .string()
