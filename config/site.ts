@@ -36,7 +36,9 @@ export const siteConfig = {
   },
 
   contact: {
-    email: "hello@piespudstarts.co.uk",
+    email: "nisapaulesmemay@hotmail.com",
+    /** CC'd on contact form submissions */
+    formCc: ["hello@andreaslaust.com", "hello@piespudstarts.co.uk"],
     phone: "07595 953542",
     whatsapp: "",
     /** Human-readable - shown on contact page and footer */
@@ -90,7 +92,7 @@ export const siteConfig = {
     registeredOffice: "Unit 2B, Orchard Park, Dereham Rd, Colkirk, Fakenham, Norfolk, NR21 7JQ, United Kingdom",
     companyNumber: "",
     dataController: "Pies, Puds & Tarts",
-    dpoEmail: "hello@piespudstarts.co.uk",
+    dpoEmail: "nisapaulesmemay@hotmail.com",
     lastUpdated: "2026-06-15",
   },
 

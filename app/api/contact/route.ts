@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { siteConfig } from "@/config/site";
 import { getClientIp, rateLimit } from "@/lib/rate-limit";
-import { sendContactEmail } from "@/lib/resend";
+import { sendContactEmail, isEmailConfigured } from "@/lib/email";
 
 const contactSchema = z.object({
   name: z.string().min(2).max(100),
@@ -38,8 +38,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid form data." }, { status: 400 });
     }
 
-    if (!process.env.RESEND_API_KEY) {
-      console.error("RESEND_API_KEY is not configured");
+    if (!isEmailConfigured()) {
+      console.error("BREVO_API_KEY is not configured");
       return NextResponse.json(
         { error: "Contact form is not configured yet." },
         { status: 503 },

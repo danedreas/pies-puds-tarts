@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { modules } from "@/config/modules";
 import { COLLECTION_CODE_METADATA_KEY } from "@/lib/collection-code";
-import { sendPreorderConfirmationEmails } from "@/lib/resend";
+import { sendPreorderConfirmationEmails, isEmailConfigured } from "@/lib/email";
 import { getStripe, getStripeWebhookSecret } from "@/lib/stripe";
 
 export async function POST(request: Request) {
@@ -32,7 +32,7 @@ export async function POST(request: Request) {
     const session = event.data.object as Stripe.Checkout.Session;
     const collectionCode = session.metadata?.[COLLECTION_CODE_METADATA_KEY];
 
-    if (process.env.RESEND_API_KEY && session.customer_details?.email && collectionCode) {
+    if (isEmailConfigured() && session.customer_details?.email && collectionCode) {
       try {
         await sendPreorderConfirmationEmails({
           customerEmail: session.customer_details.email,

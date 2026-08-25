@@ -7,7 +7,7 @@ Next.js starter sites - fast two-page builds on Vercel, domain email via Zoho, o
 - **Next.js 16** (App Router) + TypeScript
 - **Tailwind CSS v4** + **shadcn/ui** + **Lucide**
 - **Space Grotesk** typography
-- **Resend** contact form
+- **Brevo** contact form
 - **Vercel** deployment
 
 ## What's included
@@ -34,7 +34,7 @@ Enable via environment variables (see `.env.example`):
 ```bash
 npm install
 cp .env.example .env.local
-# Add RESEND_API_KEY and edit config/site.ts
+# Add BREVO_API_KEY and edit config/site.ts
 npm run dev
 ```
 
@@ -46,7 +46,7 @@ Open [http://localhost:3000](http://localhost:3000).
 2. **`config/theme.ts`** - brand colours and radius
 3. **`config/content/home.ts`** - home page copy
 4. **`config/content/images.ts`** - hero, about, service, and OG image paths
-5. **`.env.local`** - `NEXT_PUBLIC_SITE_URL`, Resend keys, optional modules
+5. **`.env.local`** - `NEXT_PUBLIC_SITE_URL`, Brevo keys, optional modules
 6. Replace **`public/images/*.svg`** with real photography (or update paths in `images.ts`)
 7. Enable Stripe / full legal as needed
 
@@ -67,7 +67,7 @@ app/
   contact/page.tsx     # Contact
   privacy/ cookies/    # Minimal legal (always available)
   legal/[slug]/        # Full legal suite (optional)
-  api/contact/         # Resend + rate limit
+  api/contact/         # Brevo + rate limit
   api/stripe/          # Checkout + webhook (optional)
 
 components/
@@ -78,7 +78,7 @@ components/
 
 ## Contact form
 
-Requires `RESEND_API_KEY`. Set `CONTACT_TO_EMAIL` and verify your sending domain in Resend before production.
+Requires `BREVO_API_KEY`. Set `CONTACT_TO_EMAIL`, `CONTACT_CC_EMAILS`, and verify your sender in Brevo before production.
 
 Rate limiting: 5 requests/minute per IP. Configure Upstash Redis for production (`UPSTASH_REDIS_REST_*`); falls back to in-memory in development.
 
@@ -102,7 +102,7 @@ To re-enable Stripe later:
    Subscribe to `checkout.session.completed`
 5. On Vercel, add the same env vars and create a Dashboard webhook endpoint:
    `https://your-domain/api/stripe/webhook` for `checkout.session.completed`
-6. Also set `RESEND_API_KEY` + `CONTACT_TO_EMAIL` so customer and owner confirmation emails send with the collection code
+6. Also set `BREVO_API_KEY` + `CONTACT_TO_EMAIL` so customer and owner confirmation emails send with the collection code
 
 Checkout routes remain under `/checkout` when the module flag is on. Payments & refunds policy: `/payments`
 

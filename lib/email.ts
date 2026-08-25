@@ -1,17 +1,71 @@
-import { Resend } from "resend";
 import { siteConfig } from "@/config/site";
 
-let resendClient: Resend | null = null;
+type EmailRecipient = {
+  email: string;
+  name?: string;
+};
 
-function getResend(): Resend {
-  if (!resendClient) {
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) {
-      throw new Error("RESEND_API_KEY is not configured");
-    }
-    resendClient = new Resend(apiKey);
+type SendEmailOptions = {
+  from: string;
+  to: string;
+  cc?: string[];
+  replyTo?: string;
+  subject: string;
+  text: string;
+};
+
+function getBrevoApiKey(): string {
+  const apiKey = process.env.BREVO_API_KEY;
+  if (!apiKey) {
+    throw new Error("BREVO_API_KEY is not configured");
   }
-  return resendClient;
+  return apiKey;
+}
+
+export function isEmailConfigured(): boolean {
+  return Boolean(process.env.BREVO_API_KEY);
+}
+
+function parseEmailAddress(value: string): EmailRecipient {
+  const match = value.match(/^(.+?)\s*<([^>]+)>$/);
+  if (match) {
+    return {
+      name: match[1].trim().replace(/^"|"$/g, ""),
+      email: match[2].trim(),
+    };
+  }
+
+  return { email: value.trim() };
+}
+
+function toRecipients(emails: string[]): EmailRecipient[] {
+  return emails.map((email) => ({ email }));
+}
+
+async function sendEmail(options: SendEmailOptions) {
+  const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "content-type": "application/json",
+      "api-key": getBrevoApiKey(),
+    },
+    body: JSON.stringify({
+      sender: parseEmailAddress(options.from),
+      to: toRecipients([options.to]),
+      cc: options.cc?.length ? toRecipients(options.cc) : undefined,
+      replyTo: options.replyTo ? { email: options.replyTo } : undefined,
+      subject: options.subject,
+      textContent: options.text,
+    }),
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`Brevo email failed (${response.status}): ${body}`);
+  }
+
+  return response.json();
 }
 
 export type ContactEmailPayload = {
@@ -23,10 +77,38 @@ export type ContactEmailPayload = {
   message: string;
 };
 
+function getContactToEmail(): string {
+  return process.env.CONTACT_TO_EMAIL ?? siteConfig.contact.email;
+}
+
+function getContactCcEmails(): string[] {
+  const fromEnv = process.env.CONTACT_CC_EMAILS?.split(",")
+    .map((email) => email.trim())
+    .filter(Boolean);
+
+  if (fromEnv?.length) {
+    return fromEnv;
+  }
+
+  return [...siteConfig.contact.formCc];
+}
+
+function getContactFromEmail(): string {
+  return (
+    process.env.CONTACT_FROM_EMAIL ??
+    `${siteConfig.name} <noreply@andreaslaust.com>`
+  );
+}
+
+/** Replies to outbound emails (pre-order confirmations, etc.) when not set per message */
+function getContactReplyToEmail(): string {
+  return process.env.CONTACT_REPLY_TO_EMAIL ?? siteConfig.contact.email;
+}
+
 export async function sendContactEmail(payload: ContactEmailPayload) {
-  const resend = getResend();
-  const to = process.env.CONTACT_TO_EMAIL ?? siteConfig.contact.email;
-  const from = process.env.CONTACT_FROM_EMAIL ?? `Contact Form <onboarding@resend.dev>`;
+  const to = getContactToEmail();
+  const cc = getContactCcEmails();
+  const from = getContactFromEmail();
 
   const lines = [
     `Name: ${payload.name}`,
@@ -38,9 +120,10 @@ export async function sendContactEmail(payload: ContactEmailPayload) {
     payload.message,
   ].filter(Boolean);
 
-  return resend.emails.send({
+  return sendEmail({
     from,
     to,
+    cc,
     replyTo: payload.email,
     subject: `[${siteConfig.name}] New enquiry from ${payload.name}`,
     text: lines.join("\n"),
@@ -62,14 +145,14 @@ function formatOrderAmount(amountTotal: number, currency: string): string {
 }
 
 async function sendOwnerPreorderEmail(payload: PreorderConfirmationEmailPayload) {
-  const resend = getResend();
-  const to = process.env.CONTACT_TO_EMAIL ?? siteConfig.contact.email;
-  const from = process.env.CONTACT_FROM_EMAIL ?? `Payments <onboarding@resend.dev>`;
+  const to = getContactToEmail();
+  const from = getContactFromEmail();
   const amount = formatOrderAmount(payload.amountTotal, payload.currency);
 
-  return resend.emails.send({
+  return sendEmail({
     from,
     to,
+    replyTo: payload.customerEmail,
     subject: `[${siteConfig.name}] Pre-order ${payload.collectionCode} · ${payload.collectionSummary}`,
     text: [
       `Collection code: ${payload.collectionCode}`,
@@ -90,14 +173,14 @@ async function sendOwnerPreorderEmail(payload: PreorderConfirmationEmailPayload)
 }
 
 async function sendCustomerPreorderEmail(payload: PreorderConfirmationEmailPayload) {
-  const resend = getResend();
-  const from = process.env.CONTACT_FROM_EMAIL ?? `Payments <onboarding@resend.dev>`;
+  const from = getContactFromEmail();
   const amount = formatOrderAmount(payload.amountTotal, payload.currency);
   const greeting = payload.customerName ? `Hi ${payload.customerName},` : "Hi,";
 
-  return resend.emails.send({
+  return sendEmail({
     from,
     to: payload.customerEmail,
+    replyTo: getContactReplyToEmail(),
     subject: `Your ${siteConfig.name} pre-order · code ${payload.collectionCode}`,
     text: [
       greeting,

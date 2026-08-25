@@ -49,7 +49,7 @@ const documents: Record<LegalPageKey, LegalDocument> = {
         heading: "Retention and sharing",
         paragraphs: [
           "We retain enquiry and order data only as long as needed for the purpose collected, unless a longer period is required by law.",
-          "We use trusted processors such as hosting and email (Resend) providers. If online payments are enabled, a payment provider may also process data. Data may be processed in the UK, EEA, or other countries with appropriate safeguards.",
+          "We use trusted processors such as hosting and email (Brevo) providers. If online payments are enabled, a payment provider may also process data. Data may be processed in the UK, EEA, or other countries with appropriate safeguards.",
         ],
       },
       {
