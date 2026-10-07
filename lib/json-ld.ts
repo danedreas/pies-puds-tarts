@@ -116,7 +116,9 @@ export function productJsonLd(product: {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    description: product.description,
+    description:
+      product.description ||
+      `${product.name}, handmade by ${siteConfig.name}. Pre-order for collection at Norfolk farmers markets.`,
     image: absoluteUrl(product.image),
     url: orderUrl,
     brand: {
@@ -129,6 +131,12 @@ export function productJsonLd(product: {
       price: product.displayPrice.replace(/[^\d.]/g, "") || product.displayPrice,
       availability: "https://schema.org/InStock",
       url: orderUrl,
+      /** Perishable, collection-only pre-orders - see /payments */
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "GB",
+        returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+      },
       seller: {
         "@type": "Organization",
         name: siteConfig.name,
