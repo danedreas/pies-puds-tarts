@@ -13,12 +13,12 @@ export const faqContent = {
   eyebrow: "Help",
   title: "Frequently asked questions",
   description:
-    "Everything you need to know about pre-ordering and collecting at a [Norfolk farmers market](/events).",
+    "Everything you need to know about pre-ordering and collecting at a [Norfolk farmers market](/markets).",
   items: [
     {
       question: "How does pre-order work?",
       answer:
-        "Choose the [market you're collecting from](/events), add items from the [menu](/order), then [get in touch](/contact) with your selection. We'll confirm availability, payment, and collection details by email or phone.",
+        "Choose the [market you're collecting from](/markets), add items from the [menu](/order), then [get in touch](/contact) with your selection. We'll confirm availability, payment, and collection details by email or phone.",
     },
     {
       question: "When do I collect my order?",
@@ -38,7 +38,7 @@ export const faqContent = {
     {
       question: "What if a market is cancelled or the date changes?",
       answer:
-        "Outdoor markets can shift because of weather or organiser changes. Check the [events page](/events) before you travel, or [contact us](/contact) if you're unsure.",
+        "Outdoor markets can shift because of weather or organiser changes. Check the [market dates](/markets) before you travel, or [contact us](/contact) if you're unsure.",
     },
     {
       question: "Do you deliver?",

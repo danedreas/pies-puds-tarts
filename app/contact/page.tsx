@@ -44,7 +44,7 @@ export default function ContactPage() {
           </div>
 
           <InlineText
-            text="Not sure which [market to collect from](/events)? Need something for a [big order](/order), or want to ask about pickup? Send a message and we'll get back to you as soon as we can."
+            text="Not sure which [market to collect from](/markets)? Need something for a [big order](/order), or want to ask about pickup? Send a message and we'll get back to you as soon as we can."
             className="text-lg leading-relaxed text-muted-foreground text-pretty lg:col-start-1 lg:row-start-2"
           />
 

@@ -21,7 +21,7 @@ export const orderContent = {
   eyebrow: "Pre-order",
   title: "What would you like?",
   description:
-    "Add your items from the menu, choose a [market](/events) or unit pickup at Colkirk, then [get in touch](/contact) so we can confirm your order.",
+    "Add your items from the menu, choose a [market](/markets) or unit pickup at Colkirk, then [get in touch](/contact) so we can confirm your order.",
   collectionMarketTitle: "Collect from",
   collectionMarketDescription:
     "Pre-orders are open for markets in the next month, with at least 48 hours' notice so we have time to pack. Choose where you're collecting - you can add items first.",

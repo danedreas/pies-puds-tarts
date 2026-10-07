@@ -15,6 +15,9 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: import.meta.dirname,
   },
+  async redirects() {
+    return [{ source: "/events", destination: "/markets", permanent: true }];
+  },
   async headers() {
     return [
       {

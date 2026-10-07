@@ -58,7 +58,7 @@ export default async function CheckoutSuccessPage({ searchParams }: CheckoutSucc
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
         <Button asChild>
-          <Link href="/events">See market dates</Link>
+          <Link href="/markets">See market dates</Link>
         </Button>
         <Button asChild variant="outline">
           <Link href="/order">Order again</Link>

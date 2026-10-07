@@ -8,9 +8,9 @@ export const homeContent = {
   hero: {
     headline: "Award-winning pies, puds & tarts",
     subheadline:
-      "Award-winning pies, tarts and sausage rolls  -  at [markets around Norfolk](/events). [Choose your order](/order) for collection, then [get in touch](/contact) to confirm - or ask about pickup.",
+      "Award-winning pies, tarts and sausage rolls  -  at [markets around Norfolk](/markets). [Choose your order](/order) for collection, then [get in touch](/contact) to confirm - or ask about pickup.",
     primaryCta: { label: "Pre-order for collection", href: "/order" },
-    secondaryCta: { label: "Market dates", href: "/events" },
+    secondaryCta: { label: "Market dates", href: "/markets" },
     highlights: ["Baked fresh", "Pre-order & collect", "Pickup available"],
   },
 
@@ -31,7 +31,7 @@ export const homeContent = {
     infoPanel: {
       title: "How to order",
       items: [
-        "Pick the [market you're collecting from](/events)",
+        "Pick the [market you're collecting from](/markets)",
         "Choose what you want from the [menu](/order)",
         "Get in touch to confirm your order",
         "Collect from the stall on the day",
@@ -43,13 +43,13 @@ export const homeContent = {
     id: "highlights",
     title: "A few good reasons to come back",
     description:
-      "Good ingredients, decent portions, and a warm welcome at the stall. Browse the [full menu](/order) or [see where we're trading](/events).",
+      "Good ingredients, decent portions, and a warm welcome at the stall. Browse the [full menu](/order) or [see where we're trading](/markets).",
     items: [
       {
         title: "At the markets",
         description:
           "Different markets around Norfolk most weeks  -  worth checking the schedule before you set off.",
-        href: "/events",
+        href: "/markets",
         imageIndex: 0,
       },
       {
@@ -73,8 +73,8 @@ export const homeContent = {
     id: "events",
     title: "Where to find us",
     description:
-      "Here's where we're trading over the next few weeks. [See all market dates](/events) before you set off  -  they can change, especially in bad weather.",
+      "Here's where we're trading over the next few weeks. [See all market dates](/markets) before you set off  -  they can change, especially in bad weather.",
     emptyMessage: "Market dates coming soon. [Get in touch](/contact) if you'd like to know more.",
-    cta: { label: "Market dates", href: "/events" },
+    cta: { label: "Market dates", href: "/markets" },
   },
 } as const;

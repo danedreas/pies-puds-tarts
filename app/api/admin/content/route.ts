@@ -11,7 +11,7 @@ import {
 } from "@/lib/site-content-shared";
 import { readSiteContent, writeSiteContent } from "@/lib/site-content";
 
-const REVALIDATED_PATHS = ["/", "/events", "/order"] as const;
+const REVALIDATED_PATHS = ["/", "/markets", "/order"] as const;
 
 function revalidateSiteContent() {
   revalidateTag(SITE_CONTENT_CACHE_TAG, "seconds");

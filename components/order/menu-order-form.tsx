@@ -299,7 +299,7 @@ function MenuOrderForm({
             </Button>
 
             <Button asChild variant="outline" className="w-full rounded-full">
-              <Link href="/events">View market dates</Link>
+              <Link href="/markets">View market dates</Link>
             </Button>
           </SoftPanel>
         </aside>

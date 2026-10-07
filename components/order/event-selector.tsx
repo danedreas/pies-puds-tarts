@@ -86,7 +86,7 @@ export function EventSelector({ events, value, onChange, invalid = false }: Even
 
       {events.length === 0 && (
         <Link
-          href="/events"
+          href="/markets"
           className="inline-block text-xs font-medium text-foreground underline-offset-4 hover:underline"
         >
           View market schedule

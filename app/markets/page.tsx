@@ -9,7 +9,7 @@ import { createMetadata } from "@/lib/seo";
 export const metadata = createMetadata({
   title: "Market dates",
   description: `See where Pies, Puds & Tarts is trading at farmers markets across Norfolk.`,
-  path: "/events",
+  path: "/markets",
 });
 
 export default async function EventsPage() {
@@ -22,11 +22,11 @@ export default async function EventsPage() {
           webPageJsonLd({
             title: "Market dates",
             description: `Where ${siteConfig.name} is trading in Norfolk`,
-            path: "/events",
+            path: "/markets",
           }),
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
-            { name: "Events", path: "/events" },
+            { name: "Markets", path: "/markets" },
           ]),
           ...eventsPageJsonLd(events),
         ]}

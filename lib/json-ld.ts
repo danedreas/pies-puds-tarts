@@ -170,7 +170,7 @@ export function eventJsonLd(event: MarketEvent) {
       url: siteConfig.url,
     },
     performer: personJsonLd(siteConfig.owner.name, siteConfig.owner.bio),
-    url: absoluteUrl("/events"),
+    url: absoluteUrl("/markets"),
   };
 }
 

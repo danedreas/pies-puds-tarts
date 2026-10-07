@@ -137,7 +137,7 @@ export function FooterContactList() {
         <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
           Markets -{" "}
-          <Link href="/events" className="text-foreground underline-offset-4 hover:underline">
+          <Link href="/markets" className="text-foreground underline-offset-4 hover:underline">
             {contact.serviceArea}
           </Link>
         </span>
