@@ -57,6 +57,12 @@ export const siteConfig = {
     },
   },
 
+  /** FSA food hygiene rating badge - ratings.food.gov.uk */
+  foodHygiene: {
+    businessId: "1560968",
+    ratingStyle: "3",
+  },
+
   social: {
     instagram: {
       handle: "@stretton_paul",

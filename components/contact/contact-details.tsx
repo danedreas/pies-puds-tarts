@@ -127,13 +127,13 @@ export function FooterContactList() {
           </a>
         </li>
       )}
-      <li className="inline-flex items-start gap-2">
+      <li className="flex items-start gap-2">
         <Clock className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
           <OpeningHoursText />
         </span>
       </li>
-      <li className="inline-flex items-start gap-2">
+      <li className="flex items-start gap-2">
         <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
           Markets -{" "}

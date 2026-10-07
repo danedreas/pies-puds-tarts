@@ -5,6 +5,7 @@ import { FooterContactList } from "@/components/contact/contact-details";
 import { getVisibleLegalPages } from "@/config/legal-pages";
 import { modules } from "@/config/modules";
 import { Separator } from "@/components/ui/separator";
+import { FoodHygieneBadge } from "@/components/layout/food-hygiene-badge";
 
 export function SiteFooter() {
   const legalLinks = getVisibleLegalPages();
@@ -14,7 +15,7 @@ export function SiteFooter() {
   return (
     <footer className="mt-auto border-t border-border/50 bg-footer text-footer-foreground">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-10 md:grid-cols-3 md:gap-y-5">
           <div className="space-y-3">
             <Image
               src={siteConfig.footerLogo.src}
@@ -28,12 +29,12 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 md:row-span-2">
             <p className="text-sm font-semibold">Contact</p>
             <FooterContactList />
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 md:row-span-2">
             <p className="text-sm font-semibold">Legal &amp; resources</p>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
@@ -60,6 +61,11 @@ export function SiteFooter() {
                 </li>
               )}
             </ul>
+          </div>
+
+          {/* After the nav lists on mobile; under the logo from md up */}
+          <div className="md:col-start-1 md:row-start-2">
+            <FoodHygieneBadge />
           </div>
         </div>
 

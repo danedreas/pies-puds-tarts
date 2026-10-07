@@ -56,6 +56,7 @@ const documents: Record<LegalPageKey, LegalDocument> = {
           "We only share data with service providers who help us run the business and act on our instructions:",
           "Vercel (website hosting and analytics), Brevo (sends contact form messages to us by email), and our email providers (Microsoft Outlook and Zoho Mail).",
           "Our website administrator receives copies of contact form messages to check that they are being delivered correctly. They do not use this information for any other purpose.",
+          "Our food hygiene rating badge is loaded from the Food Standards Agency (ratings.food.gov.uk), so your browser connects to their website to display it. The badge does not set cookies.",
           "Some of these providers are based outside the UK, including in the US and EU. Where data leaves the UK, it is protected by appropriate safeguards such as UK adequacy regulations, the UK Extension to the EU-US Data Privacy Framework, or standard contractual clauses.",
         ],
       },
