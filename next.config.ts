@@ -16,20 +16,29 @@ const nextConfig: NextConfig = {
     root: import.meta.dirname,
   },
   async redirects() {
+    return [{ source: "/events", destination: "/markets", permanent: true }];
+  },
+  /**
+   * Business card QR target. Rewrite (not redirect) so the order page renders
+   * at /QR and Vercel Analytics logs it as its own page view. The card prints
+   * uppercase so the QR fits 25x25; both spellings are covered.
+   */
+  async rewrites() {
     return [
-      { source: "/events", destination: "/markets", permanent: true },
-      // Short QR code target - temporary so the destination can change later.
-      // Uppercase variant lets the QR use compact alphanumeric mode (25x25).
-      { source: "/qr", destination: "/order", permanent: false },
-      { source: "/QR", destination: "/order", permanent: false },
+      { source: "/qr", destination: "/order" },
+      { source: "/QR", destination: "/order" },
     ];
   },
   async headers() {
+    const noIndex = [{ key: "X-Robots-Tag", value: "noindex" }];
     return [
       {
         source: "/(.*)",
         headers: securityHeaders,
       },
+      // Canonical already points to /order; keep the QR alias out of search
+      { source: "/qr", headers: noIndex },
+      { source: "/QR", headers: noIndex },
     ];
   },
 };
