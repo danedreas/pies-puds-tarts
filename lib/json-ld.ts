@@ -118,7 +118,7 @@ export function productJsonLd(product: {
     name: product.name,
     description:
       product.description ||
-      `${product.name}, handmade by ${siteConfig.name}. Pre-order for collection at Norfolk farmers markets.`,
+      `${product.name}, handmade by ${siteConfig.name}. Pre-order for collection at local farmers markets.`,
     image: absoluteUrl(product.image),
     url: orderUrl,
     brand: {
