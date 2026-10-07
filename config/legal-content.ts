@@ -4,6 +4,8 @@ import { legalVariables } from "@/config/legal-pages";
 type LegalSection = {
   heading: string;
   paragraphs: string[];
+  /** Optional table shown after the paragraphs */
+  table?: { columns: string[]; rows: string[][] };
 };
 
 type LegalDocument = {
@@ -20,43 +22,63 @@ const documents: Record<LegalPageKey, LegalDocument> = {
   privacy: {
     title: "Privacy policy",
     intro:
-      "This policy explains how {siteName} ({legalName}) collects, uses, and protects personal data when you use {siteUrl}.",
+      "This policy explains how {siteName} ({legalName}) collects, uses, and protects personal data when you use {siteUrl} or contact us.",
     sections: [
       {
-        heading: "Data controller",
+        heading: "Who we are",
         paragraphs: [
           "The data controller is {dataController}. For privacy enquiries, contact {dpoEmail}.",
-          "Registered office: {registeredOffice}.",
+          "Address: {registeredOffice}.",
         ],
       },
       {
         heading: "Information we collect",
         paragraphs: [
-          "When you contact us, we may collect your name, email address, phone number, company name, and the details you provide in your message.",
-          "When you pre-order, we collect the order details you share with us (including through the contact form) so we can confirm availability and collection. If online card payment is enabled again, card details would be handled by our payment provider and not stored on our servers.",
-          "We may collect technical data such as IP address and browser type for security and analytics when you consent to cookies.",
+          "Contact form: your name, email address, and message, plus your phone number, company name, and enquiry type if you choose to give them. If you pre-order, this includes the items, market, and collection details you send us.",
+          "Email and phone: anything you send us directly, such as order details or questions.",
+          "Website analytics: we use Vercel Web Analytics to count page views and see which pages are popular. It does not use cookies, does not store anything on your device, and does not identify you personally.",
+          "Server logs: our hosting provider keeps short-lived technical logs (such as IP address, browser type, and the page requested) to keep the site secure and working.",
+          "Online card payment is currently paused. If we turn it back on, card details will be handled by our payment provider, Stripe, and never stored on our servers.",
         ],
       },
       {
-        heading: "How we use your data",
+        heading: "How and why we use it",
         paragraphs: [
-          "We use contact form data to respond to enquiries and provide services you request.",
-          "We use pre-order details to fulfil your order, confirm collection arrangements, and respond about payment.",
-          "We process data on the lawful bases of consent, contract, and legitimate interests where appropriate under UK GDPR.",
+          "To reply to enquiries and arrange pre-orders and collection. Our lawful basis is taking steps at your request before entering into a contract, and performing that contract.",
+          "To keep records of orders and payments. Our lawful basis is legal obligation (for example, tax and accounting rules).",
+          "To understand how the website is used and keep it secure. Our lawful basis is our legitimate interest in running a working, secure website.",
+          "We do not sell your data, send marketing emails without your permission, or use your data for automated decision-making.",
         ],
       },
       {
-        heading: "Retention and sharing",
+        heading: "Who we share it with",
         paragraphs: [
-          "We retain enquiry and order data only as long as needed for the purpose collected, unless a longer period is required by law.",
-          "We use trusted processors such as hosting and email (Brevo) providers. If online payments are enabled, a payment provider may also process data. Data may be processed in the UK, EEA, or other countries with appropriate safeguards.",
+          "We only share data with service providers who help us run the business and act on our instructions:",
+          "Vercel (website hosting and analytics), Brevo (sends contact form messages to us by email), and our email providers (Microsoft Outlook and Zoho Mail).",
+          "Our website administrator receives copies of contact form messages to check that they are being delivered correctly. They do not use this information for any other purpose.",
+          "Some of these providers are based outside the UK, including in the US and EU. Where data leaves the UK, it is protected by appropriate safeguards such as UK adequacy regulations, the UK Extension to the EU-US Data Privacy Framework, or standard contractual clauses.",
+        ],
+      },
+      {
+        heading: "How long we keep it",
+        paragraphs: [
+          "Enquiries that do not lead to an order: up to 2 years after we last hear from you.",
+          "Order and payment records: 6 years, as required for tax purposes.",
+          "Server logs are deleted automatically by our hosting provider, usually within a few days.",
         ],
       },
       {
         heading: "Your rights",
         paragraphs: [
-          "You may request access, correction, deletion, restriction, or portability of your personal data, and object to certain processing.",
-          "Contact {dpoEmail} to exercise your rights. You may also complain to the ICO if you believe your data has been handled unlawfully.",
+          "Under UK GDPR, you can ask to see, correct, or delete your personal data, ask us to restrict or stop using it, or ask for a copy to take elsewhere.",
+          "Email {dpoEmail} to make a request. We will reply within one month.",
+          "If you are unhappy with how we have handled your data, you can complain to the Information Commissioner's Office (ICO) at ico.org.uk or on 0303 123 1113.",
+        ],
+      },
+      {
+        heading: "Changes to this policy",
+        paragraphs: [
+          "We may update this policy from time to time. The date at the top of the page shows when it was last changed.",
         ],
       },
     ],
@@ -94,21 +116,44 @@ const documents: Record<LegalPageKey, LegalDocument> = {
     intro: "This policy explains how {siteName} uses cookies and similar technologies on {siteUrl}.",
     sections: [
       {
-        heading: "Essential cookies",
+        heading: "Our approach",
         paragraphs: [
-          "Essential cookies are required for basic site functionality, such as security and remembering cookie preferences.",
+          "We keep things simple. We do not use advertising or tracking cookies, and we do not set any cookies for normal visitors to this website.",
         ],
       },
       {
-        heading: "Analytics cookies",
+        heading: "What we store on your device",
         paragraphs: [
-          "With your consent, we may use analytics cookies to understand how visitors use the site. You can change your preference at any time via Cookie preferences in the footer.",
+          "When you choose an option in our cookie banner, we save your choice in your browser's local storage so we don't ask you again. This is strictly necessary and contains no personal information.",
+        ],
+        table: {
+          columns: ["Name", "Type", "Purpose", "Duration"],
+          rows: [
+            [
+              "cookie-consent",
+              "Local storage (strictly necessary)",
+              "Remembers whether you accepted or rejected optional cookies",
+              "Until you clear your browser data",
+            ],
+          ],
+        },
+      },
+      {
+        heading: "Analytics",
+        paragraphs: [
+          "We use Vercel Web Analytics to count visits and see which pages are popular. It does not use cookies or store anything on your device, and it does not track you across other websites.",
+        ],
+      },
+      {
+        heading: "If this changes",
+        paragraphs: [
+          "If we ever add tools that use non-essential cookies, we will ask for your consent first through the cookie banner and update this policy. You can change your choice at any time via Cookie preferences in the footer.",
         ],
       },
       {
         heading: "Managing cookies",
         paragraphs: [
-          "You can also manage cookies through your browser settings. Blocking essential cookies may affect site functionality.",
+          "You can also clear or block cookies and local storage through your browser settings.",
         ],
       },
     ],
@@ -262,6 +307,7 @@ export function getLegalDocument(key: LegalPageKey): LegalDocument {
     sections: doc.sections.map((section) => ({
       heading: section.heading,
       paragraphs: section.paragraphs.map(interpolate),
+      table: section.table,
     })),
   };
 }

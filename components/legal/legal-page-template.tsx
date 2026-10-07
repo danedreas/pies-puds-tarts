@@ -59,6 +59,51 @@ export function LegalPageContent({ pageKey }: { pageKey: LegalPageKey }) {
                     {paragraph}
                   </p>
                 ))}
+                {section.table && (
+                  <>
+                    <div className="space-y-3 sm:hidden">
+                      {section.table.rows.map((row) => (
+                        <dl
+                          key={row.join("|")}
+                          className="space-y-2 rounded-md border border-border p-4 text-sm"
+                        >
+                          {row.map((cell, index) => (
+                            <div key={index}>
+                              <dt className="font-semibold text-foreground">
+                                {section.table?.columns[index]}
+                              </dt>
+                              <dd>{index === 0 ? <code>{cell}</code> : cell}</dd>
+                            </div>
+                          ))}
+                        </dl>
+                      ))}
+                    </div>
+                    <div className="hidden rounded-md border border-border sm:block">
+                      <table className="w-full text-left text-sm">
+                        <thead className="bg-muted/50 text-foreground">
+                          <tr>
+                            {section.table.columns.map((column) => (
+                              <th key={column} scope="col" className="px-4 py-2 font-semibold">
+                                {column}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {section.table.rows.map((row) => (
+                            <tr key={row.join("|")} className="border-t border-border">
+                              {row.map((cell, index) => (
+                                <td key={index} className="px-4 py-2 align-top">
+                                  {index === 0 ? <code>{cell}</code> : cell}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </>
+                )}
               </div>
             </section>
           ))}

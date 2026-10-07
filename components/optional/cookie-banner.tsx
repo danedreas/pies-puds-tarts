@@ -83,23 +83,23 @@ export function CookieBanner() {
             Cookie preferences
           </p>
           <p className="text-sm text-muted-foreground">
-            We use essential cookies for site functionality. With your consent, we may also use
-            analytics cookies to understand how the site is used.{" "}
+            We don&apos;t use tracking or advertising cookies, and our visitor stats are
+            cookie-free. Optional cookies will only ever load if you accept them.{" "}
             <Link href="/cookies" className="underline-offset-4 hover:underline">
               Cookie policy
             </Link>
           </p>
           {consent !== "pending" && (
             <p className="text-xs text-muted-foreground">
-              Current preference: {consent === "accepted" ? "Analytics accepted" : "Analytics rejected"}
+              Current preference: {consent === "accepted" ? "Optional cookies accepted" : "Optional cookies rejected"}
             </p>
           )}
         </div>
         <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
           <Button variant="outline" onClick={reject}>
-            Reject analytics
+            Reject optional cookies
           </Button>
-          <Button onClick={accept}>Accept analytics</Button>
+          <Button onClick={accept}>Accept optional cookies</Button>
         </div>
       </div>
     </div>

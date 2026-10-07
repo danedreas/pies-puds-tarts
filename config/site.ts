@@ -93,7 +93,7 @@ export const siteConfig = {
     companyNumber: "",
     dataController: "Pies, Puds & Tarts",
     dpoEmail: "nisapaulesmemay@hotmail.com",
-    lastUpdated: "2026-06-15",
+    lastUpdated: "2026-10-07",
   },
 
   seo: {
