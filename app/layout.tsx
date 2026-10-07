@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Libre_Bodoni, Source_Sans_3 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { siteConfig } from "@/config/site";
 import { themeTokens, themeTokensToCssVars } from "@/config/theme";
 import { SiteShell } from "@/components/layout/site-shell";
@@ -56,6 +57,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans">
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
         <SiteShell>{children}</SiteShell>
+        <Analytics />
       </body>
     </html>
   );
