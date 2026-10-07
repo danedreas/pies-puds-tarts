@@ -16,7 +16,13 @@ const nextConfig: NextConfig = {
     root: import.meta.dirname,
   },
   async redirects() {
-    return [{ source: "/events", destination: "/markets", permanent: true }];
+    return [
+      { source: "/events", destination: "/markets", permanent: true },
+      // Short QR code target - temporary so the destination can change later.
+      // Uppercase variant lets the QR use compact alphanumeric mode (25x25).
+      { source: "/qr", destination: "/order", permanent: false },
+      { source: "/QR", destination: "/order", permanent: false },
+    ];
   },
   async headers() {
     return [
