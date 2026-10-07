@@ -6,9 +6,9 @@
 export const siteConfig = {
   name: "Pies, Puds & Tarts",
   legalName: "Pies, Puds & Tarts",
-  tagline: "Award-winning pies, savoury bakes, sweet tarts and more.",
+  tagline: "Award-winning pies, savoury tarts, sausage rolls and more.",
   description:
-    "Award-winning pies, savoury bakes, sweet tarts and more from Norfolk farmers markets. Pre-order for collection at a market, or contact us about pickup.",
+    "Award-winning pies, savoury tarts and sausage rolls from farmers markets across Norfolk and the rest of East Anglia. Pre-order for market collection.",
 
   /** Production URL - set NEXT_PUBLIC_SITE_URL in env for deploys */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
@@ -47,7 +47,7 @@ export const siteConfig = {
       link: { label: "contact us for details", href: "/contact" },
     },
     /** Human-readable - helps local customers and SEO */
-    serviceArea: "Farmers markets around Norfolk",
+    serviceArea: "Farmers markets across East Anglia",
     address: {
       line1: "Unit 2B, Orchard Park, Dereham Rd",
       city: "Colkirk, Fakenham",
@@ -115,7 +115,7 @@ export const siteConfig = {
       "artisan pies",
       "market stall Norfolk",
       "savoury bakes Norfolk",
-      "sweet tarts Norfolk",
+      "savoury tarts Norfolk",
     ],
     ogImage: "/images/og.jpg",
   },

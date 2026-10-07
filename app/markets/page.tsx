@@ -8,7 +8,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Market dates",
-  description: `See where Pies, Puds & Tarts is trading at farmers markets across Norfolk.`,
+  description: `See where Pies, Puds & Tarts is trading at farmers markets across East Anglia.`,
   path: "/markets",
 });
 
@@ -21,7 +21,7 @@ export default async function EventsPage() {
         data={[
           webPageJsonLd({
             title: "Market dates",
-            description: `Where ${siteConfig.name} is trading in Norfolk`,
+            description: `Where ${siteConfig.name} is trading across East Anglia`,
             path: "/markets",
           }),
           breadcrumbJsonLd([

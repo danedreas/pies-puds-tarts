@@ -13,7 +13,7 @@ export const faqContent = {
   eyebrow: "Help",
   title: "Frequently asked questions",
   description:
-    "Everything you need to know about pre-ordering and collecting at a [Norfolk farmers market](/markets).",
+    "Everything you need to know about pre-ordering and collecting at one of [our farmers markets](/markets).",
   items: [
     {
       question: "How does pre-order work?",
