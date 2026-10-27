@@ -33,7 +33,7 @@ export const faqContent = {
     {
       question: "Can you help with allergen information?",
       answer:
-        "Allergen details are coming online soon. For now, [get in touch](/contact) or ask at the stall on market day and we'll help.",
+        "Allergens are listed under each item on the [order page](/order) where we have them. For anything else, [get in touch](/contact) or ask at the stall on market day and we'll help.",
     },
     {
       question: "What if a market is cancelled or the date changes?",

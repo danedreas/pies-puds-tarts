@@ -29,6 +29,7 @@ export const menuItems: MenuItem[] = [
     name: "Hog Roast Pie",
     description: "Roast pork, apple, sage & onion stuffing.",
     displayPrice: "5.00",
+    allergens: "Wheat (gluten), milk, eggs, celery, mustard, sulphites",
   },
   {
     id: "venison-blackcurrant-port-pie",
@@ -36,6 +37,7 @@ export const menuItems: MenuItem[] = [
     name: "Venison, Blackcurrant & Port Pie",
     description: "",
     displayPrice: "5.00",
+    allergens: "Wheat (gluten), soya, eggs, celery, sulphites",
   },
   {
     id: "beef-brisket-smoked-cheddar-dauphinoise-pie",
@@ -43,6 +45,7 @@ export const menuItems: MenuItem[] = [
     name: "Beef Brisket, Smoked Cheddar & Dauphinoise Potato Pie",
     description: "",
     displayPrice: "5.00",
+    allergens: "Wheat, barley, rye and oats (gluten), milk, eggs, celery, sulphites",
   },
   {
     id: "beef-steak-ale-kidney-pie",
@@ -57,6 +60,7 @@ export const menuItems: MenuItem[] = [
     name: "Roast Chicken, Smoked Pancetta & Mushroom Pie",
     description: "",
     displayPrice: "5.00",
+    allergens: "Wheat (gluten), milk, eggs, celery, mustard, sulphites",
   },
   {
     id: "feta-mozzarella-olive-spinach-tart",
