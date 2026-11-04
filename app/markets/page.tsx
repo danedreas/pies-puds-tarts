@@ -6,6 +6,9 @@ import { getUpcomingMarketEvents } from "@/lib/content-data";
 import { siteConfig } from "@/config/site";
 import { createMetadata } from "@/lib/seo";
 
+/** Market dates and the pre-order window depend on today, so re-render hourly. */
+export const revalidate = 3600;
+
 export const metadata = createMetadata({
   title: "Market dates",
   description: `See where Pies, Puds & Tarts is trading at farmers markets across East Anglia.`,
