@@ -12,6 +12,9 @@ import {
 import { SectionHeading, SectionShell } from "@/components/ui/section-shell";
 import { createMetadata } from "@/lib/seo";
 
+/** Market dates and the pre-order window depend on today, so re-render hourly. */
+export const revalidate = 3600;
+
 export const metadata = createMetadata({
   title: "Pre-order menu",
   description: `Order award-winning pies, puds and tarts for collection at a local farmers market.`,

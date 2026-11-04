@@ -12,6 +12,9 @@ import { webPageJsonLd } from "@/lib/json-ld";
 import { getUpcomingMarketEvents } from "@/lib/content-data";
 import { createMetadata } from "@/lib/seo";
 
+/** Market dates and the pre-order window depend on today, so re-render hourly. */
+export const revalidate = 3600;
+
 export const metadata = createMetadata({
   title: siteConfig.seo.defaultTitle,
   description: siteConfig.description,
