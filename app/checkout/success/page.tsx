@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ClearPendingPreorder } from "@/components/order/clear-pending-preorder";
 import { formatGbp } from "@/config/content/products";
+import { modules } from "@/config/modules";
 import { createMetadata } from "@/lib/seo";
 import { getPaidCheckoutSummary } from "@/lib/stripe";
 
@@ -18,6 +20,10 @@ type CheckoutSuccessPageProps = {
 };
 
 export default async function CheckoutSuccessPage({ searchParams }: CheckoutSuccessPageProps) {
+  if (!modules.stripe) {
+    redirect("/order");
+  }
+
   const { session_id: sessionId } = await searchParams;
   const summary = sessionId ? await getPaidCheckoutSummary(sessionId) : null;
 

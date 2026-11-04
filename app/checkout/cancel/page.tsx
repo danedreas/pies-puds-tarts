@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { modules } from "@/config/modules";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
@@ -10,6 +12,10 @@ export const metadata = createMetadata({
 });
 
 export default function CheckoutCancelPage() {
+  if (!modules.stripe) {
+    redirect("/order");
+  }
+
   return (
     <div className="mx-auto flex min-h-[50vh] max-w-xl flex-col items-center justify-center px-4 py-16 text-center">
       <h1 className="font-heading text-3xl font-bold">Checkout cancelled</h1>
